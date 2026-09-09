@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { Search, Sparkles, SlidersHorizontal, X, Moon, Sun, Menu } from "lucide-react";
+import { Search, Sparkles, SlidersHorizontal, X, Moon, Sun } from "lucide-react";
 import { Link, Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 import { tools } from "@/data/tools";
 import { categories } from "@/data/categories";
 import { ToolCard } from "@/components/ToolCard";
-import { ToolLogo } from "@/components/ToolLogo";
 import { SEO } from "@/components/SEO";
 import { AdSense } from "@/components/AdSense";
 import { trackPageView } from "@/lib/analytics";
@@ -16,10 +15,10 @@ import Claim from "@/pages/Claim";
 import Go from "@/pages/Go";
 
 function Shell({ children }: { children: React.ReactNode }) {
-  const { dark, toggle } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   useEffect(() => { trackPageView(); }, [location.pathname]);
-  return <div className="min-h-screen"><header className="sticky top-0 z-30 border-b border-line bg-porcelain/95 backdrop-blur dark:border-line-dark dark:bg-ink/95"><div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3"><Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal text-xs font-bold text-white">AI</span>Anjal AI</Link><nav className="hidden items-center gap-5 text-sm text-slate md:flex"><Link to="/finder" className="hover:text-teal">AI Finder</Link><Link to="/submit" className="hover:text-teal">Submit tool</Link></nav><button onClick={toggle} className="rounded-lg border border-line p-2 dark:border-line-dark" aria-label="Toggle theme">{dark ? <Sun className="h-4 w-4"/> : <Moon className="h-4 w-4"/>}</button></div></header>{children}<footer className="mt-16 border-t border-line px-4 py-8 dark:border-line-dark"><div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm text-slate sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Anjal AI Directory</span><div className="flex gap-4"><Link to="/finder" className="hover:text-teal">Finder</Link><Link to="/submit" className="hover:text-teal">Submit</Link></div></div></footer></div>;
+  return <div className="min-h-screen"><header className="sticky top-0 z-30 border-b border-line bg-porcelain/95 backdrop-blur dark:border-line-dark dark:bg-ink/95"><div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3"><Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal text-xs font-bold text-white">AI</span>Anjal AI</Link><nav className="hidden items-center gap-5 text-sm text-slate md:flex"><Link to="/finder" className="hover:text-teal">AI Finder</Link><Link to="/submit" className="hover:text-teal">Submit tool</Link></nav><button onClick={toggleTheme} className="rounded-lg border border-line p-2 dark:border-line-dark" aria-label="Toggle theme">{theme === "dark" ? <Sun className="h-4 w-4"/> : <Moon className="h-4 w-4"/>}</button></div></header>{children}<footer className="mt-16 border-t border-line px-4 py-8 dark:border-line-dark"><div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm text-slate sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Anjal AI Directory</span><div className="flex gap-4"><Link to="/finder" className="hover:text-teal">Finder</Link><Link to="/submit" className="hover:text-teal">Submit</Link></div></div></footer></div>;
 }
 
 function Home(){
