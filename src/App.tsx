@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Search, Sparkles, SlidersHorizontal, X, Moon, Sun } from "lucide-react";
 import { Link, Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 import { tools } from "@/data/tools";
@@ -14,7 +14,7 @@ import Submit from "@/pages/Submit";
 import Claim from "@/pages/Claim";
 import Go from "@/pages/Go";
 
-function Shell({ children }: { children: React.ReactNode }) {
+function Shell({ children }: { children: ReactNode }) {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   useEffect(() => { trackPageView(); }, [location.pathname]);
