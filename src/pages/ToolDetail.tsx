@@ -13,7 +13,8 @@ export default function ToolDetail() {
   useEffect(() => { if (tool) trackToolView(tool.slug); }, [tool]);
   if (!tool) return <div className="mx-auto max-w-5xl px-4 py-20"><h1 className="text-3xl font-semibold">Tool not found</h1><Link to="/" className="mt-4 inline-block text-teal">Back to directory</Link></div>;
   const canonical = `${window.location.origin}/tool/${tool.slug}`;
-  const jsonLd = { "@context": "https://schema.org", "@type": "SoftwareApplication", name: tool.name, description: tool.description, url: tool.website, applicationCategory: tool.categories[0], operatingSystem: tool.platforms.join(", "), offers: tool.pricingType !== "Unknown" ? { "@type": "Offer", price: "0", priceCurrency: "USD", description: tool.pricingType } : undefined };
+  const offers = tool.pricingType === "Free" ? { "@type": "Offer", price: "0", priceCurrency: "USD", description: "Free" } : undefined;
+  const jsonLd = { "@context": "https://schema.org", "@type": "SoftwareApplication", name: tool.name, description: tool.description, url: tool.website, applicationCategory: tool.categories[0], operatingSystem: tool.platforms.join(", "), offers };
   return <div className="mx-auto max-w-5xl px-4 py-10">
     <SEO title={`${tool.name} — AI Tool | Anjal AI`} description={`${tool.name}: ${tool.description} Explore pricing, category, platform information and the official website.`} canonical={canonical} jsonLd={jsonLd} />
     <Link to="/" className="inline-flex items-center gap-2 text-sm text-slate hover:text-teal"><ArrowLeft className="h-4 w-4" /> All AI tools</Link>
