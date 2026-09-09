@@ -4,7 +4,7 @@ A production-oriented AI tools discovery directory with a curated 500-tool catal
 
 ## Status
 - 500 unique AI tools in the catalog
-- Catalog validation script included
-- Search, categories, comparison and saved-tool architecture
-- Real official website links; ratings and pricing are not fabricated
-- Ad monetization architecture is prepared for Google AdSense configuration
+- Search and category filtering
+- Official website links
+- Ratings/pricing are not fabricated
+- Ad monetization configuration is prepared for production setup
