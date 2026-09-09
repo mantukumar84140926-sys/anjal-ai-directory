@@ -18,7 +18,7 @@ export function SEO({ title, description, canonical, noindex = false, jsonLd }: 
       if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); }
       link.href = canonical;
     }
-    let script = document.getElementById("anjal-jsonld");
+    let script = document.getElementById("anjal-jsonld") as HTMLScriptElement | null;
     if (jsonLd) {
       if (!script) { script = document.createElement("script"); script.id = "anjal-jsonld"; script.type = "application/ld+json"; document.head.appendChild(script); }
       script.textContent = JSON.stringify(jsonLd);
