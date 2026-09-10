@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: /sitemap.xml
+Sitemap: https://anjal-ai-directory-ekf07eek8-mantukumar84140926-7931.vercel.app/sitemap.xml
