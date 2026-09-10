@@ -9,9 +9,11 @@ for (const file of files) {
   const text = fs.readFileSync(path.join(catalogDir, file), "utf8");
   for (const match of text.matchAll(/slug:\s*[\"']([^\"']+)[\"']/g)) slugs.push(match[1]);
 }
-const origin = process.env.VITE_SITE_URL || "https://anjal-ai-directory.vercel.app";
-const urls = ["/", "/finder", "/submit", ...[...new Set(slugs)].map(slug => `/tool/${slug}`)];
-const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url><loc>${origin.replace(/\/$/, "")}${url}</loc></url>`).join("\n")}\n</urlset>\n`;
+const uniqueSlugs = [...new Set(slugs)];
+if (uniqueSlugs.length !== 500) throw new Error(`Expected 500 unique catalog slugs, found ${uniqueSlugs.length}`);
+const origin = (process.env.VITE_SITE_URL || "https://anjal-ai-directory-ekf07eek8-mantukumar84140926-7931.vercel.app").replace(/\/$/, "");
+const urls = ["/", "/finder", "/submit", ...uniqueSlugs.map(slug => `/tool/${slug}`)];
+const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url><loc>${origin}${url}</loc></url>`).join("\n")}\n</urlset>\n`;
 fs.mkdirSync(path.join(root, "public"), { recursive: true });
 fs.writeFileSync(path.join(root, "public", "sitemap.xml"), xml);
 console.log(`Generated sitemap with ${urls.length} URLs`);
