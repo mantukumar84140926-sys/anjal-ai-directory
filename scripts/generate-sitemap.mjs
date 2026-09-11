@@ -7,7 +7,7 @@ const files = fs.readdirSync(catalogDir).filter(f => f.endsWith(".ts")).sort();
 const slugs = [];
 for (const file of files) {
   const text = fs.readFileSync(path.join(catalogDir, file), "utf8");
-  for (const match of text.matchAll(/slug:\s*[\"']([^\"']+)[\"']/g)) slugs.push(match[1]);
+  for (const match of text.matchAll(/(?:["']slug["']|\bslug)\s*:\s*["']([^"']+)["']/g)) slugs.push(match[1]);
 }
 const uniqueSlugs = [...new Set(slugs)];
 if (uniqueSlugs.length !== 500) throw new Error(`Expected 500 unique catalog slugs, found ${uniqueSlugs.length}`);
