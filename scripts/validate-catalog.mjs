@@ -6,7 +6,7 @@ const files = fs.readdirSync(dir).filter(f => f.endsWith(".ts")).sort();
 const entries = [];
 for (const file of files) {
   const text = fs.readFileSync(path.join(dir, file), "utf8");
-  const re = /\{\s*id:\s*[\"']([^\"']+)[\"'],\s*name:\s*[\"']([^\"']+)[\"'],\s*slug:\s*[\"']([^\"']+)[\"'],\s*website:\s*[\"']([^\"']+)[\"'],\s*category:\s*[\"']([^\"']+)[\"']\s*\}/g;
+  const re = /\{\s*["']?id["']?\s*:\s*["']([^"']+)["']\s*,\s*["']?name["']?\s*:\s*["']([^"']+)["']\s*,\s*["']?slug["']?\s*:\s*["']([^"']+)["']\s*,\s*["']?website["']?\s*:\s*["']([^"']+)["']\s*,\s*["']?category["']?\s*:\s*["']([^"']+)["']\s*\}/g;
   for (const m of text.matchAll(re)) entries.push({ id:m[1], name:m[2], slug:m[3], website:m[4], category:m[5] });
 }
 const errors = [];
