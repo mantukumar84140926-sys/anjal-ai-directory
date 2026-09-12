@@ -19,7 +19,7 @@ export default function ToolDetail() {
   const canonical = `${SITE_URL}/tool/${tool.slug}`;
   const related = useMemo(() => tools.filter(t => t.id !== tool.id && t.categories.some(c => tool.categories.includes(c))).slice(0, 6), [tool]);
   const pricingLabel = tool.pricingType === "Unknown" ? "Not verified" : tool.pricingType;
-  const description = `${tool.name} is listed in Anjal AI's ${category} collection. Explore its official website, platform information, tags and available directory metadata.`;
+  const description = `${tool.name} is an AI ${category.toLowerCase()} tool listed in Anjal AI. Discover what it is, explore directory information, and visit the official website.`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -44,7 +44,7 @@ export default function ToolDetail() {
       </div>
       <AdSense />
       <div className="mt-8 grid gap-4 sm:grid-cols-3"><div className="rounded-2xl bg-line/40 p-4 dark:bg-white/5"><p className="text-xs text-slate">Pricing</p><p className="mt-1 font-semibold">{pricingLabel}</p></div><div className="rounded-2xl bg-line/40 p-4 dark:bg-white/5"><p className="text-xs text-slate">Platforms</p><p className="mt-1 font-semibold">{tool.platforms.join(", ")}</p></div><div className="rounded-2xl bg-line/40 p-4 dark:bg-white/5"><p className="text-xs text-slate">Verification</p><p className="mt-1 flex items-center gap-1 font-semibold"><ShieldCheck className="h-4 w-4 text-teal" /> {tool.verificationStatus === "link-only" ? "Website link checked" : tool.verificationStatus}</p></div></div>
-      <div className="mt-8"><h2 className="text-xl font-semibold">About {tool.name}</h2><p className="mt-3 text-sm leading-7 text-slate">Anjal AI is an independent AI tools directory. This listing helps visitors discover {tool.name} and reach its official website. Pricing and product capabilities are only presented as verified when reliable data is available.</p>{tool.tags.length>0&&<div className="mt-4 flex flex-wrap gap-2">{tool.tags.map(tag=><span key={tag} className="inline-flex items-center gap-1 rounded-full border border-line px-3 py-1 text-xs dark:border-line-dark"><Tag className="h-3 w-3"/>{tag}</span>)}</div>}</div>
+      <div className="mt-8"><h2 className="text-xl font-semibold">About {tool.name}</h2><p className="mt-3 text-sm leading-7 text-slate">Anjal AI is an independent AI tools directory. This listing helps visitors discover {tool.name}, understand its directory category, and reach its official website. Pricing and product capabilities are only presented as verified when reliable data is available.</p>{tool.tags.length>0&&<div className="mt-4 flex flex-wrap gap-2">{tool.tags.map(tag=><span key={tag} className="inline-flex items-center gap-1 rounded-full border border-line px-3 py-1 text-xs dark:border-line-dark"><Tag className="h-3 w-3"/>{tag}</span>)}</div>}</div>
       {related.length > 0 && <section className="mt-10 border-t border-line pt-8 dark:border-line-dark"><h2 className="text-xl font-semibold">More {category} AI tools</h2><p className="mt-2 text-sm text-slate">Explore related tools in the same category.</p><div className="mt-4 grid gap-3 sm:grid-cols-2">{related.map(t=><Link key={t.id} to={`/tool/${t.slug}`} className="rounded-2xl border border-line p-4 transition hover:border-teal dark:border-line-dark"><span className="font-semibold">{t.name}</span><span className="mt-1 block text-xs text-slate">{t.categories[0] || "AI Tool"}</span></Link>)}</div></section>}
     </section>
   </div>;
