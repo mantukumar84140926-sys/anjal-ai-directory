@@ -12,33 +12,71 @@ const SITE_URL = (import.meta.env.VITE_SITE_URL || "https://anjal-ai-directory.v
 export default function ToolDetail() {
   const { slug } = useParams();
   const tool = tools.find(t => t.slug === slug);
+
   useEffect(() => { if (tool) trackToolView(tool.slug); }, [tool]);
+
+  const related = useMemo(() => {
+    if (!tool) return [];
+    return tools
+      .filter(t => t.id !== tool.id)
+      .map(t => {
+        const sharedCategories = t.categories.filter(c => tool.categories.includes(c)).length;
+        const sharedTags = t.tags.filter(tag => tool.tags.includes(tag)).length;
+        const sharedPlatforms = t.platforms.filter(p => tool.platforms.includes(p)).length;
+        const samePricing = tool.pricingType !== "Unknown" && t.pricingType === tool.pricingType ? 1 : 0;
+        return { tool: t, score: sharedCategories * 6 + sharedTags * 3 + sharedPlatforms * 2 + samePricing };
+      })
+      .filter(x => x.score > 0)
+      .sort((a, b) => b.score - a.score || a.tool.name.localeCompare(b.tool.name))
+      .slice(0, 8)
+      .map(x => x.tool);
+  }, [tool]);
+
   if (!tool) return <div className="mx-auto max-w-5xl px-4 py-20"><SEO title="AI tool not found — Anjal AI" description="The requested AI tool listing was not found." noindex/><h1 className="text-3xl font-semibold">Tool not found</h1><Link to="/" className="mt-4 inline-block text-teal">Back to AI tools directory</Link></div>;
 
   const category = tool.categories[0] || "AI Tools";
   const canonical = `${SITE_URL}/tool/${tool.slug}`;
-  const related = useMemo(() => tools.filter(t => t.id !== tool.id && t.categories.some(c => tool.categories.includes(c))).slice(0, 6), [tool]);
   const pricingLabel = tool.pricingType === "Unknown" ? "Not verified" : tool.pricingType;
   const description = `${tool.name} is an AI ${category.toLowerCase()} tool listed in Anjal AI. Discover what it is, explore directory information, and visit the official website.`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: tool.name,
-    description,
-    url: tool.website,
-    applicationCategory: category,
-    operatingSystem: tool.platforms.join(", "),
-    isPartOf: { "@type": "WebSite", name: "Anjal AI", url: SITE_URL },
-    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        name: tool.name,
+        description,
+        url: tool.website,
+        applicationCategory: category,
+        operatingSystem: tool.platforms.join(", "),
+        isPartOf: { "@type": "WebSite", name: "Anjal AI", url: SITE_URL },
+        mainEntityOfPage: { "@type": "WebPage", "@id": canonical }
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "AI Tools", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: category, item: `${SITE_URL}/?category=${encodeURIComponent(category)}` },
+          { "@type": "ListItem", position: 3, name: tool.name, item: canonical }
+        ]
+      }
+    ]
   };
 
   return <div className="mx-auto max-w-5xl px-4 py-10">
     <SEO title={`${tool.name} — ${category} AI Tool | Anjal AI`} description={description} canonical={canonical} jsonLd={jsonLd} />
-    <Link to="/" className="inline-flex items-center gap-2 text-sm text-slate hover:text-teal"><ArrowLeft className="h-4 w-4" /> All AI tools</Link>
+    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-slate">
+      <Link to="/" className="hover:text-teal">AI Tools</Link><span>›</span>
+      <Link to={`/?category=${encodeURIComponent(category)}`} className="hover:text-teal">{category}</Link><span>›</span>
+      <span className="font-medium text-ink dark:text-white">{tool.name}</span>
+    </nav>
+    <Link to="/" className="mt-4 inline-flex items-center gap-2 text-sm text-slate hover:text-teal"><ArrowLeft className="h-4 w-4" /> All AI tools</Link>
     <section className="mt-6 rounded-3xl border border-line bg-white p-6 shadow-card dark:border-line-dark dark:bg-surface-dark sm:p-10">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
         <ToolLogo name={tool.name} website={tool.website} size="lg" />
-        <div className="min-w-0 flex-1"><div className="flex flex-wrap gap-2"><span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800">{category}</span><span className="rounded-full bg-line/70 px-3 py-1 text-xs dark:bg-white/10">{pricingLabel}</span></div><h1 className="mt-4 break-words text-4xl font-semibold">{tool.name}</h1><p className="mt-4 max-w-3xl text-slate">{description}</p>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap gap-2"><span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800">{category}</span><span className="rounded-full bg-line/70 px-3 py-1 text-xs dark:bg-white/10">{pricingLabel}</span></div>
+          <h1 className="mt-4 break-words text-4xl font-semibold">{tool.name}</h1>
+          <p className="mt-4 max-w-3xl text-slate">{description}</p>
           <div className="mt-6 flex flex-wrap gap-3"><Link to={`/go/${tool.slug}`} className="inline-flex items-center gap-2 rounded-xl bg-teal px-5 py-3 font-semibold text-white hover:opacity-90">Visit official website <ExternalLink className="h-4 w-4" /></Link><Link to={`/claim/${tool.slug}`} className="inline-flex items-center gap-2 rounded-xl border border-line px-5 py-3 font-semibold hover:border-teal dark:border-line-dark">Claim this listing</Link></div>
         </div>
       </div>
