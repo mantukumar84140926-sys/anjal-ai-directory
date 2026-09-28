@@ -1,52 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
-
-const dir = path.join(process.cwd(), "src", "data", "catalog");
-const files = fs.readdirSync(dir).filter(f => f.endsWith(".ts")).sort();
-const entries = [];
-
-for (const file of files) {
-  const text = fs.readFileSync(path.join(dir, file), "utf8");
-  const ids = [...text.matchAll(/(?:["']id["']|\bid)\s*:\s*["']([^"']+)["']/g)].map(m => m[1]);
-  const names = [...text.matchAll(/(?:["']name["']|\bname)\s*:\s*["']([^"']+)["']/g)].map(m => m[1]);
-  const slugs = [...text.matchAll(/(?:["']slug["']|\bslug)\s*:\s*["']([^"']+)["']/g)].map(m => m[1]);
-  const websites = [...text.matchAll(/(?:["']website["']|\bwebsite)\s*:\s*["']([^"']+)["']/g)].map(m => m[1]);
-  const categories = [...text.matchAll(/(?:["']category["']|\bcategory)\s*:\s*["']([^"']+)["']/g)].map(m => m[1]);
-  const count = Math.max(ids.length, names.length, slugs.length, websites.length, categories.length);
-  for (let i = 0; i < count; i++) entries.push({ id: ids[i], name: names[i], slug: slugs[i], website: websites[i], category: categories[i] });
-}
-
-const errors = [];
-const ids = new Set();
-const slugs = new Set();
-const names = new Set();
-
-for (const e of entries) {
-  if (!e.id || !e.name || !e.slug || !e.website || !e.category) {
-    errors.push(`incomplete catalog entry: ${JSON.stringify(e)}`);
-    continue;
-  }
-  if (ids.has(e.id)) errors.push(`duplicate id: ${e.id}`);
-  ids.add(e.id);
-  if (slugs.has(e.slug)) errors.push(`duplicate slug: ${e.slug}`);
-  slugs.add(e.slug);
-  if (names.has(e.name.toLowerCase())) errors.push(`duplicate name: ${e.name}`);
-  names.add(e.name.toLowerCase());
-  if (!/^https:\/\//.test(e.website)) errors.push(`non-HTTPS website: ${e.name}`);
-  if (!e.category.trim()) errors.push(`missing category: ${e.name}`);
-}
-
-console.log(`Catalog entries: ${entries.length}`);
-console.log(`Unique IDs: ${ids.size}`);
-console.log(`Unique slugs: ${slugs.size}`);
-console.log(`Unique names: ${names.size}`);
-
-if (entries.length !== 500 || ids.size !== 500 || slugs.size !== 500) errors.push("catalog must contain exactly 500 unique entries, IDs and slugs");
-
-if (errors.length) {
-  console.error(`Catalog validation failed with ${errors.length} issue(s):`);
-  for (const error of errors.slice(0, 50)) console.error(`- ${error}`);
-  process.exit(1);
-}
-
-console.log("Catalog validation passed.");
+const dir=path.join(process.cwd(),"src","data","catalog");
+const files=fs.readdirSync(dir).filter(f=>f.endsWith(".ts")).sort();
+const entries=[];
+for(const file of files){const text=fs.readFileSync(path.join(dir,file),"utf8");const ids=[...text.matchAll(/(?:["']id["']|\bid)\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);const names=[...text.matchAll(/(?:["']name["']|\bname)\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);const slugs=[...text.matchAll(/(?:["']slug["']|\bslug)\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);const websites=[...text.matchAll(/(?:["']website["']|\bwebsite)\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);const categories=[...text.matchAll(/(?:["']category["']|\bcategory)\s*:\s*["']([^"']+)["']/g)].map(m=>m[1]);const count=Math.max(ids.length,names.length,slugs.length,websites.length,categories.length);for(let i=0;i<count;i++)entries.push({id:ids[i],name:names[i],slug:slugs[i],website:websites[i],category:categories[i]});}
+const errors=[];const ids=new Set(),slugs=new Set(),names=new Set(),websites=new Set();
+const normUrl=u=>{try{const x=new URL(u);return (x.hostname+x.pathname).toLowerCase().replace(/\/+$/,"")}catch{return u.toLowerCase().trim()}};
+for(const e of entries){if(!e.id||!e.name||!e.slug||!e.website||!e.category){errors.push(`incomplete catalog entry: ${JSON.stringify(e)}`);continue;}if(ids.has(e.id))errors.push(`duplicate id: ${e.id}`);ids.add(e.id);if(slugs.has(e.slug))errors.push(`duplicate slug: ${e.slug}`);slugs.add(e.slug);const nk=e.name.toLowerCase().trim();if(names.has(nk))errors.push(`duplicate name: ${e.name}`);names.add(nk);const uk=normUrl(e.website);if(websites.has(uk))errors.push(`duplicate website: ${e.website}`);websites.add(uk);if(!/^https:\/\//.test(e.website))errors.push(`non-HTTPS website: ${e.name}`);if(!e.category.trim())errors.push(`missing category: ${e.name}`);}
+console.log(`Catalog entries: ${entries.length}`);console.log(`Unique IDs: ${ids.size}`);console.log(`Unique slugs: ${slugs.size}`);console.log(`Unique names: ${names.size}`);console.log(`Unique websites: ${websites.size}`);
+if(entries.length!==1000||ids.size!==1000||slugs.size!==1000||names.size!==1000)errors.push("catalog must contain exactly 1000 unique entries, IDs, slugs and names");
+if(errors.length){console.error(`Catalog validation failed with ${errors.length} issue(s):`);for(const error of errors.slice(0,50))console.error(`- ${error}`);process.exit(1);}console.log("Catalog validation passed.");
