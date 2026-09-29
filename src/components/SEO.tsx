@@ -28,7 +28,7 @@ export function SEO({ title, description, canonical, noindex = false, jsonLd }: 
     setMeta("og:title", title, "property");
     setMeta("og:description", description, "property");
     setMeta("og:type", "website", "property");
-    setMeta("og:site_name", "Anjal AI", "property");
+    setMeta("og:site_name", "Anjal AI", "property");\n    setMeta("og:locale", "en_GB", "property");\n    setMeta("application-name", "Anjal AI");\n    setMeta("author", "Anjal AI");
     setMeta("og:url", canonicalUrl, "property");
     setMeta("twitter:card", "summary", "name");
     setMeta("twitter:title", title, "name");
