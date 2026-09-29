@@ -52,7 +52,7 @@ export default function ToolDetail() {
         operatingSystem: tool.platforms.join(", "),
         applicationSubCategory: tool.categories.join(", "),
         isPartOf: { "@type": "WebSite", name: "Anjal AI", url: SITE_URL },
-        mainEntityOfPage: { "@type": "WebPage", "@id": canonical }
+        mainEntityOfPage: { "@type": "WebPage", "@id": canonical },\n        sameAs: [tool.website],\n        ...(tool.lastVerified ? { dateModified: tool.lastVerified } : {})
       },
       {
         "@type": "BreadcrumbList",
