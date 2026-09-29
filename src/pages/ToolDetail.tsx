@@ -37,9 +37,7 @@ export default function ToolDetail() {
   const category = tool.categories[0] || "AI Tools";
   const canonical = `${SITE_URL}/tool/${tool.slug}`;
   const pricingLabel = tool.pricingType === "Unknown" ? "Not verified" : tool.pricingType;
-  const rawTitle = `${tool.name} — ${category} AI Tool | Anjal AI`;
-  const title = rawTitle.length <= 60 ? rawTitle : `${tool.name} — AI Tool | Anjal AI`;
-  const description = `${tool.name} is an AI ${category.toLowerCase()} tool in the Anjal AI directory. Explore its official website, platform details, tags and verified listing information.`;
+  const description = `${tool.name} is an AI ${category.toLowerCase()} tool listed in Anjal AI. Discover what it is, explore directory information, and visit the official website.`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -50,7 +48,6 @@ export default function ToolDetail() {
         url: tool.website,
         applicationCategory: category,
         operatingSystem: tool.platforms.join(", "),
-        applicationSubCategory: tool.categories.join(", "),
         isPartOf: { "@type": "WebSite", name: "Anjal AI", url: SITE_URL },
         mainEntityOfPage: { "@type": "WebPage", "@id": canonical },\n        sameAs: [tool.website],\n        ...(tool.lastVerified ? { dateModified: tool.lastVerified } : {})
       },
