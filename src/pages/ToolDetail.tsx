@@ -49,7 +49,9 @@ export default function ToolDetail() {
         applicationCategory: category,
         operatingSystem: tool.platforms.join(", "),
         isPartOf: { "@type": "WebSite", name: "Anjal AI", url: SITE_URL },
-        mainEntityOfPage: { "@type": "WebPage", "@id": canonical },\n        sameAs: [tool.website],\n        ...(tool.lastVerified ? { dateModified: tool.lastVerified } : {})
+        mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+        sameAs: [tool.website],
+        ...(tool.lastVerified ? { dateModified: tool.lastVerified } : {})
       },
       {
         "@type": "BreadcrumbList",
