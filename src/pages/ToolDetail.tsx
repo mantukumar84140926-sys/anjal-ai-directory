@@ -37,7 +37,10 @@ export default function ToolDetail() {
   const category = tool.categories[0] || "AI Tools";
   const canonical = `${SITE_URL}/tool/${tool.slug}`;
   const pricingLabel = tool.pricingType === "Unknown" ? "Not verified" : tool.pricingType;
-  const description = `${tool.name} is an AI ${category.toLowerCase()} tool listed in Anjal AI. Discover what it is, explore directory information, and visit the official website.`;
+  const rawTitle = `${tool.name} — ${category} AI Tool | Anjal AI`;
+  const title = rawTitle.length <= 60 ? rawTitle : `${tool.name} — AI Tool | Anjal AI`;
+  const rawDescription = `${tool.name} is an AI ${category.toLowerCase()} tool listed in Anjal AI. Discover what it is, explore directory information, and visit the official website.`;
+  const description = rawDescription.length <= 160 ? rawDescription : `${tool.name} is an AI ${category.toLowerCase()} tool in the Anjal AI directory. Explore its official website and listing information.`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -65,7 +68,7 @@ export default function ToolDetail() {
   };
 
   return <div className="mx-auto max-w-5xl px-4 py-10">
-    <SEO title={`${tool.name} — ${category} AI Tool | Anjal AI`} description={description} canonical={canonical} jsonLd={jsonLd} />
+    <SEO title={title} description={description} canonical={canonical} jsonLd={jsonLd} />
     <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-slate">
       <Link to="/" className="hover:text-teal">AI Tools</Link><span>›</span>
       <Link to={`/?category=${encodeURIComponent(category)}`} className="hover:text-teal">{category}</Link><span>›</span>
