@@ -60,7 +60,7 @@ export default function ToolDetail() {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "AI Tools", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: category, item: `${SITE_URL}/?category=${encodeURIComponent(category)}` },
+          { "@type": "ListItem", position: 2, name: category, item: `${SITE_URL}/category/${tool.categories[0] || "other"}` },
           { "@type": "ListItem", position: 3, name: tool.name, item: canonical }
         ]
       }
