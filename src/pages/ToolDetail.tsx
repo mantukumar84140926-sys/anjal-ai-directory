@@ -71,7 +71,7 @@ export default function ToolDetail() {
     <SEO title={title} description={description} canonical={canonical} jsonLd={jsonLd} />
     <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-slate">
       <Link to="/" className="hover:text-teal">AI Tools</Link><span>›</span>
-      <Link to={`/?category=${encodeURIComponent(category)}`} className="hover:text-teal">{category}</Link><span>›</span>
+      <Link to={`/category/${tool.categories[0] || "other"}`} className="hover:text-teal">{category}</Link><span>›</span>
       <span className="font-medium text-ink dark:text-white">{tool.name}</span>
     </nav>
     <div className="mt-4 flex flex-wrap items-center gap-3 text-sm"><Link to="/" className="inline-flex items-center gap-2 text-slate hover:text-teal"><ArrowLeft className="h-4 w-4" /> All AI tools</Link><span className="text-slate">•</span><Link to="/finder" className="text-slate hover:text-teal">AI Tool Finder</Link></div>
