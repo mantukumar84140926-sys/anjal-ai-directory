@@ -22,7 +22,7 @@ export default function CategoryDetail() {
   }
 
   const canonical = `${SITE_URL}/category/${category.slug}`;
-  const description = `Explore ${matches.length} ${category.name} AI tools in the Anjal AI directory. Browse independent listings and visit official tool websites.`;
+  const description = `Explore ${matches.length} ${category.name} AI tools in the Anjal AI directory. Browse independent listings, compare related tools and visit official tool websites.`;
   const itemList = matches.slice(0, 50).map((tool, index) => ({
     "@type": "ListItem",
     position: index + 1,
@@ -64,7 +64,7 @@ export default function CategoryDetail() {
       <Link to="/" className="inline-flex items-center gap-2 text-sm text-slate hover:text-teal"><ArrowLeft className="h-4 w-4" /> All AI tools</Link>
       <h1 className="mt-5 text-4xl font-semibold sm:text-5xl">{category.name} AI Tools</h1>
       <p className="mt-4 max-w-3xl text-slate">{description}</p>
-      <div className="mt-4 text-sm text-slate">{matches.length} tools in this category</div>
+      <div className="mt-4 flex flex-wrap gap-2 text-sm text-slate"><span>{matches.length} tools in this category</span><Link to="/finder" className="text-teal hover:underline">Find a tool</Link><Link to="/" className="text-teal hover:underline">Browse all tools</Link></div>
     </section>
     <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {matches.map(tool => <ToolCard key={tool.id} tool={tool} />)}
