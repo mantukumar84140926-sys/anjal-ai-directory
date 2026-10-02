@@ -23,6 +23,12 @@ export default function CategoryDetail() {
 
   const canonical = `${SITE_URL}/category/${category.slug}`;
   const description = `Explore ${matches.length} ${category.name} AI tools in the Anjal AI directory. Browse independent listings and visit official tool websites.`;
+  const itemList = matches.slice(0, 50).map((tool, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: tool.name,
+    url: `${SITE_URL}/tool/${tool.slug}`
+  }));
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -32,6 +38,12 @@ export default function CategoryDetail() {
         description,
         url: canonical,
         isPartOf: { "@type": "WebSite", name: "Anjal AI", url: SITE_URL }
+      },
+      {
+        "@type": "ItemList",
+        name: `${category.name} AI tools`,
+        numberOfItems: matches.length,
+        itemListElement: itemList
       },
       {
         "@type": "BreadcrumbList",
