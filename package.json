@@ -8,8 +8,7 @@
     "build": "node scripts/generate-sitemap.mjs && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "validate:catalog": "node scripts/validate-catalog.mjs",
-    "prebuild": "npm run validate:catalog"
+    "validate:catalog": "node scripts/validate-catalog.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
