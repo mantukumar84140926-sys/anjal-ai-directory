@@ -26,33 +26,38 @@ const normalize = (value: string) => value.toLowerCase().normalize("NFKC").repla
 function buildGeneratedPrompts(): Prompt[] {
   const result: Prompt[] = [];
   const seen = new Set<string>();
+  const offsets = recipes.map(() => 0);
   let id = 1;
-  for (const recipe of recipes) {
-    outer: for (const task of recipe.tasks) {
-      for (const audience of recipe.audiences) {
-        for (const deliverable of recipe.deliverables) {
-          for (const approach of recipe.approaches) {
-            for (const guardrail of recipe.guardrails) {
-              const prompt = `Act as a thoughtful ${recipe.category.toLowerCase()} specialist. Help me ${task} for ${audience}. Deliver ${deliverable}. Use ${approach}. Include practical next steps, clarify assumptions, and organize the result so it is immediately usable. Quality check: ${guardrail}. Context or materials: [ADD DETAILS]. Constraints, deadline, or preferred tools: [ADD CONSTRAINTS].`;
-              const key = normalize(prompt);
-              if (seen.has(key)) continue;
-              seen.add(key);
-              result.push({
-                command: `/prompt-${String(id).padStart(4, "0")}`,
-                title: `${recipe.category}: ${task.charAt(0).toUpperCase() + task.slice(1)} #${String(id).padStart(4, "0")}`,
-                category: recipe.category,
-                description: `${deliverable.charAt(0).toUpperCase() + deliverable.slice(1)} for ${audience}.`,
-                prompt,
-                tags: [recipe.category.toLowerCase(), task.split(" ")[0], "ready-to-use"]
-              });
-              id += 1;
-              if (result.length === 4970) break outer;
-            }
-          }
-        }
-      }
+  // Round-robin across categories so the catalog is balanced instead of filling
+  // the first category before reaching the others.
+  while (result.length < 4970) {
+    let addedInRound = false;
+    for (let recipeIndex = 0; recipeIndex < recipes.length && result.length < 4970; recipeIndex += 1) {
+      const recipe = recipes[recipeIndex];
+      const offset = offsets[recipeIndex]++;
+      const task = recipe.tasks[offset % recipe.tasks.length];
+      const audience = recipe.audiences[Math.floor(offset / recipe.tasks.length) % recipe.audiences.length];
+      const deliverable = recipe.deliverables[Math.floor(offset / (recipe.tasks.length * recipe.audiences.length)) % recipe.deliverables.length];
+      const approach = recipe.approaches[Math.floor(offset / (recipe.tasks.length * recipe.audiences.length * recipe.deliverables.length)) % recipe.approaches.length];
+      const guardrail = recipe.guardrails[Math.floor(offset / (recipe.tasks.length * recipe.audiences.length * recipe.deliverables.length * recipe.approaches.length)) % recipe.guardrails.length];
+      const prompt = `Act as a thoughtful ${recipe.category.toLowerCase()} specialist. Help me ${task} for ${audience}. Deliver ${deliverable}. Use ${approach}. Include practical next steps, clarify assumptions, and organize the result so it is immediately usable. Quality check: ${guardrail}. Context or materials: [ADD DETAILS]. Constraints, deadline, or preferred tools: [ADD CONSTRAINTS].`;
+      const key = normalize(prompt);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      result.push({
+        command: `/prompt-${String(id).padStart(4, "0")}`,
+        title: `${recipe.category}: ${task.charAt(0).toUpperCase() + task.slice(1)} #${String(id).padStart(4, "0")}`,
+        category: recipe.category,
+        description: `${deliverable.charAt(0).toUpperCase() + deliverable.slice(1)} for ${audience}.`,
+        prompt,
+        tags: [recipe.category.toLowerCase(), task.split(" ")[0], "ready-to-use"]
+      });
+      id += 1;
+      addedInRound = true;
     }
-    if (result.length === 4970) break;
+    if (!addedInRound) {
+      throw new Error(`Unable to reach 4,970 unique generated prompts; received ${result.length}`);
+    }
   }
   if (result.length !== 4970) {
     throw new Error(`Expected 4970 unique generated prompts, received ${result.length}`);
