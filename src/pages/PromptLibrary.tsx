@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import { Check, Copy, Search, Sparkles } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import type { Prompt } from "@/data/promptTypes";
+import { generatedPrompts } from "@/data/generatedPrompts";
 
-type Prompt = { command: string; title: string; category: string; description: string; prompt: string; tags: string[] };
-
-const prompts: Prompt[] = [
+const featuredPrompts: Prompt[] = [
   { command: "/enhance", title: "Photo Enhance", category: "Image", description: "Improve clarity and details while keeping the original person recognizable.", tags: ["photo", "quality", "portrait"], prompt: "Enhance this image to high resolution with natural sharp details, balanced exposure, realistic skin texture, accurate colors, reduced noise, and clean lighting. Preserve the subject's identity, facial features, pose, clothing, and composition. Do not add objects or change the scene." },
   { command: "/cinematic", title: "Cinematic Look", category: "Image", description: "Give a photo a polished cinematic color grade and atmosphere.", tags: ["film", "color grade", "portrait"], prompt: "Transform this image into a cinematic still with motivated lighting, rich but natural contrast, subtle film grain, atmospheric depth, refined color grading, and realistic highlights and shadows. Preserve the original subject, identity, and composition. Avoid oversaturation and artificial-looking skin." },
   { command: "/danger", title: "Dark Villain Portrait", category: "Image", description: "Create a dramatic, intense villain-style portrait without changing identity.", tags: ["dark", "villain", "portrait"], prompt: "Give this portrait a dark, powerful cinematic villain aesthetic: moody low-key lighting, deep shadows, controlled rim light, subtle haze, confident expression, detailed realistic textures, and a dramatic dark background. Keep the person's identity, face shape, and natural features unchanged. Photorealistic, no text, no watermark." },
@@ -37,16 +37,22 @@ const prompts: Prompt[] = [
   { command: "/resume", title: "Resume Bullet Improver", category: "Career", description: "Make resume bullets clearer without inventing achievements.", tags: ["resume", "career", "job"], prompt: "Improve these resume bullets for a [ROLE] application. Start with strong action verbs, clarify scope and outcome, and quantify impact only where the supplied facts support it. Do not invent employers, metrics, skills, or credentials. Keep each bullet concise and ATS-readable. Existing bullets: [PASTE HERE]" }
 ];
 
+// Keep the original hand-written prompts first, then add 4,970 unique generated entries.
+const prompts: Prompt[] = [...featuredPrompts, ...generatedPrompts];
+const PAGE_SIZE = 30;
+
 const categories = ["All", ...Array.from(new Set(prompts.map((p) => p.category)))];
 
 export default function PromptLibrary() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [copied, setCopied] = useState("");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const filtered = useMemo(() => prompts.filter((p) =>
     (category === "All" || p.category === category) &&
     [p.command, p.title, p.description, p.category, ...p.tags, p.prompt].join(" ").toLowerCase().includes(query.toLowerCase())
   ), [query, category]);
+  const visiblePrompts = filtered.slice(0, visibleCount);
 
   async function copyPrompt(prompt: Prompt) {
     try {
@@ -64,16 +70,17 @@ export default function PromptLibrary() {
       <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1 text-xs font-medium text-teal-700 dark:border-line-dark dark:bg-surface-dark"><Sparkles className="h-3.5 w-3.5"/> Free prompt collection</span>
       <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-6xl">AI Prompt Library</h1>
       <p className="mt-4 text-slate">Ready-to-use prompts for images, cinematic videos, writing, coding, study and more. Search, copy, and customize them for your favorite AI tool.</p>
-      <div className="mt-7 flex items-center gap-2 rounded-2xl border border-line bg-white p-2 shadow-card dark:border-line-dark dark:bg-surface-dark"><Search className="ml-2 h-5 w-5 shrink-0 text-slate"/><input aria-label="Search prompts" className="w-full bg-transparent px-2 py-3 outline-none" placeholder="Search /enhance, cinematic, reels, coding..." value={query} onChange={(e) => setQuery(e.target.value)}/></div>
+      <div className="mt-7 flex items-center gap-2 rounded-2xl border border-line bg-white p-2 shadow-card dark:border-line-dark dark:bg-surface-dark"><Search className="ml-2 h-5 w-5 shrink-0 text-slate"/><input aria-label="Search prompts" className="w-full bg-transparent px-2 py-3 outline-none" placeholder="Search /enhance, cinematic, reels, coding..." value={query} onChange={(e) => { setQuery(e.target.value); setVisibleCount(PAGE_SIZE); }}/></div>
     </section>
-    <div className="mt-8 flex flex-wrap gap-2">{categories.map((item) => <button key={item} onClick={() => setCategory(item)} className={`rounded-full border px-3 py-2 text-sm transition ${category === item ? "border-teal bg-teal text-white" : "border-line bg-white text-slate hover:border-teal dark:border-line-dark dark:bg-surface-dark"}`}>{item}</button>)}</div>
-    <div className="mt-6 flex items-center justify-between"><p className="text-sm text-slate">{filtered.length} prompts</p><p className="text-xs text-slate">Tap Copy Prompt to use one</p></div>
-    <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{filtered.map((p) => <article key={p.command} className="flex flex-col rounded-2xl border border-line bg-white p-5 shadow-card dark:border-line-dark dark:bg-surface-dark">
+    <div className="mt-8 flex flex-wrap gap-2">{categories.map((item) => <button key={item} onClick={() => { setCategory(item); setVisibleCount(PAGE_SIZE); }} className={`rounded-full border px-3 py-2 text-sm transition ${category === item ? "border-teal bg-teal text-white" : "border-line bg-white text-slate hover:border-teal dark:border-line-dark dark:bg-surface-dark"}`}>{item}</button>)}</div>
+    <div className="mt-6 flex items-center justify-between"><p className="text-sm text-slate">{filtered.length.toLocaleString()} prompts</p><p className="text-xs text-slate">Tap Copy Prompt to use one</p></div>
+    <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{visiblePrompts.map((p) => <article key={p.command} className="flex flex-col rounded-2xl border border-line bg-white p-5 shadow-card dark:border-line-dark dark:bg-surface-dark">
       <div className="flex items-start justify-between gap-3"><div><span className="inline-flex rounded-lg bg-teal-50 px-2.5 py-1 font-mono text-sm font-semibold text-teal-800 dark:bg-teal/15 dark:text-teal-300">{p.command}</span><h2 className="mt-3 text-lg font-semibold">{p.title}</h2></div><span className="rounded-full border border-line px-2 py-1 text-xs text-slate dark:border-line-dark">{p.category}</span></div>
       <p className="mt-2 text-sm text-slate">{p.description}</p>
       <pre className="mt-4 max-h-44 flex-1 overflow-auto whitespace-pre-wrap rounded-xl bg-porcelain p-3 text-xs leading-5 text-ink dark:bg-ink dark:text-porcelain">{p.prompt}</pre>
       <button onClick={() => void copyPrompt(p)} className="mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-teal-700">{copied === p.command ? <Check className="h-4 w-4"/> : <Copy className="h-4 w-4"/>}{copied === p.command ? "Copied!" : "Copy Prompt"}</button>
     </article>)}</div>
+    {visiblePrompts.length < filtered.length && <div className="mt-8 text-center"><button onClick={() => setVisibleCount((count) => Math.min(count + PAGE_SIZE, filtered.length))} className="rounded-xl border border-line px-5 py-3 text-sm font-semibold transition hover:border-teal dark:border-line-dark">Load 30 more prompts ({(filtered.length - visiblePrompts.length).toLocaleString()} remaining)</button></div>}
     {filtered.length === 0 && <div className="mt-8 rounded-2xl border border-dashed border-line p-10 text-center text-slate dark:border-line-dark">No prompts found. Try a different search or category.</div>}
     <p className="mt-8 text-center text-xs text-slate">Prompts are starting points. Replace bracketed placeholders with your own details and review AI-generated results before publishing.</p>
   </main>;
