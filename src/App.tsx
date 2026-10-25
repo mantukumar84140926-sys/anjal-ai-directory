@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Search, Sparkles, SlidersHorizontal, X, Moon, Sun, Menu } from "lucide-react";
+import { Search, Sparkles, SlidersHorizontal, X, Moon, Sun } from "lucide-react";
 import { Link, Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 import { tools } from "@/data/tools";
 import { categories } from "@/data/categories";
