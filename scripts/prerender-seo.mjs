@@ -90,4 +90,35 @@ for (const tool of catalog) {
   fs.writeFileSync(out, render({title,description,canonical,body,jsonLd}));
 }
 
+
+// Give the Prompt Library a crawlable HTML entry point instead of relying only
+// on client-side React rendering. Keep this page aligned with the live route.
+{
+  const canonical = `${origin}/prompts`;
+  const title = "Free AI Prompts for Images, Video, Reels & More | Anjal AI";
+  const description = "Explore practical AI prompts for image editing, video creation, social media, design, writing, education and coding. Copy a prompt and adapt it to your task.";
+  const promptCategories = [
+    ["Image", "Photo enhancement, cinematic edits, portraits and product photography"],
+    ["Video", "Video scenes, camera movement, storyboards and short-form video"],
+    ["Social Media", "Reel scripts, hooks, captions and content planning"],
+    ["Design", "Thumbnails, logos, posters and visual concepts"],
+    ["Writing", "SEO outlines, rewriting and translation"],
+    ["Education", "Study notes, explanations and revision flashcards"],
+    ["Coding", "Debugging and practical developer workflows"]
+  ];
+  const categoryItems = promptCategories.map(([name, summary]) =>
+    `<li><strong>${escapeHtml(name)}:</strong> ${escapeHtml(summary)}</li>`
+  ).join("");
+  const body = `<main><nav><a href="/">Anjal AI</a> → <strong>Prompt Library</strong></nav>
+    <h1>Free AI Prompt Library</h1>
+    <p>Find practical prompts for common creative, learning and work tasks. Each prompt is a starting point: replace the bracketed details with your own topic, audience or requirements, then review the result before using it.</p>
+    <h2>Explore prompt categories</h2><ul>${categoryItems}</ul>
+    <h2>How to use the prompts</h2><ol><li>Choose a prompt that matches your task.</li><li>Replace placeholders such as [TOPIC], [AUDIENCE] or [DURATION].</li><li>Paste it into your preferred AI tool.</li><li>Check the output and refine the prompt with specific feedback.</li></ol>
+    <p><a href="/prompts">Open the interactive Prompt Library</a> · <a href="/finder">Find an AI tool</a> · <a href="/">Browse all AI tools</a></p></main>`;
+  const jsonLd = {"@context":"https://schema.org","@type":"CollectionPage",name:title,description,url:canonical,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:origin}};
+  const out = path.join(dist, "prompts", "index.html");
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, render({ title, description, canonical, body, jsonLd }));
+}
+
 console.log(`Prerendered ${catalog.length} tool pages and ${categories.length} category pages.`);
