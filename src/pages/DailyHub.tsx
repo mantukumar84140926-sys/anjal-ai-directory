@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { ArrowRight, CalendarDays, CheckCircle2, Copy, Flame, Sparkles, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
+import DailyPushNotifications from "@/components/DailyPushNotifications";
 import { ToolCard } from "@/components/ToolCard";
 import { tools } from "@/data/tools";
 import { generatedPrompts } from "@/data/generatedPrompts";
@@ -85,6 +86,8 @@ export default function DailyHub() {
         <div className="rounded-2xl bg-porcelain p-5 dark:bg-ink"><div className="flex items-center gap-2 text-sm font-semibold"><Sparkles className="h-4 w-4 text-teal" /> Today's AI tip</div><p className="mt-3 text-sm leading-6 text-slate">{tip}</p><p className="mt-4 text-xs text-slate">Tip {index % tips.length + 1} · Rotates daily</p></div>
       </div>
     </section>
+
+    <DailyPushNotifications />
 
     <section className="mt-9">
       <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">Explore something useful</p><h2 className="mt-2 text-2xl font-semibold">Today's AI tool picks</h2><p className="mt-1 text-sm text-slate">Three picks rotate daily from the existing directory catalog.</p></div><Link to="/" className="text-sm font-medium text-teal hover:underline">Browse full directory</Link></div>
