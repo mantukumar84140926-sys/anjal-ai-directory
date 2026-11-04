@@ -8,22 +8,23 @@ const json = (body: unknown, status = 200) => new Response(JSON.stringify(body),
 });
 
 Deno.serve(async (req: Request) => {
-  const expected = Deno.env.get("PUSH_CRON_SECRET");
-  const auth = req.headers.get("authorization");
-  if (!expected || auth !== `Bearer ${expected}`) return json({ error: "Unauthorized" }, 401);
-
   const url = Deno.env.get("SUPABASE_URL");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-  const publicKey = Deno.env.get("VAPID_PUBLIC_KEY");
-  const privateKey = Deno.env.get("VAPID_PRIVATE_KEY");
-  const subject = Deno.env.get("VAPID_SUBJECT") || "mailto:hello@anjal.ai";
-  if (!url || !serviceKey || !publicKey || !privateKey) {
-    return json({ error: "Daily push sender is not configured" }, 503);
-  }
+  if (!url || !serviceKey) return json({ error: "Push sender is not configured" }, 503);
 
   try {
-    webpush.setVapidDetails(subject, publicKey, privateKey);
     const admin = createClient(url, serviceKey, { auth: { persistSession: false } });
+    const { data: secrets, error: secretError } = await admin.rpc("get_push_runtime_config");
+    if (secretError) throw secretError;
+    const expected = secrets?.push_cron_secret;
+    const auth = req.headers.get("authorization");
+    if (!expected || auth !== `Bearer ${expected}`) return json({ error: "Unauthorized" }, 401);
+
+    const publicKey = secrets?.vapid_public_key;
+    const privateKey = secrets?.vapid_private_key;
+    const subject = secrets?.vapid_subject || "mailto:hello@anjal.ai";
+    if (!publicKey || !privateKey) return json({ error: "VAPID keys are missing" }, 503);
+    webpush.setVapidDetails(subject, publicKey, privateKey);
     const { data: subscriptions, error } = await admin
       .from("push_subscriptions").select("id, subscription").eq("enabled", true).limit(5000);
     if (error) throw error;
