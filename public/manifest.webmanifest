@@ -1,0 +1,13 @@
+{
+  "name": "Anjal AI Directory",
+  "short_name": "Anjal AI",
+  "description": "Discover useful AI tools, prompts and creator workflows every day.",
+  "start_url": "/daily",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fbfaf7",
+  "theme_color": "#0f766e",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "any", "type": "image/x-icon" }
+  ]
+}
