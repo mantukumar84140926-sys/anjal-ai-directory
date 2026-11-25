@@ -9,15 +9,15 @@ const files = fs.readdirSync(dir).filter(f => f.endsWith(".ts")).sort();
 const slugs = [];
 for (const file of files) {
   const text = fs.readFileSync(path.join(dir, file), "utf8");
-  const json = text.replace(/^export default /, "").replace(/;\\s*$/, "");
+  const json = text.replace(/^export default /, "").replace(/;\s*$/, "");
   for (const item of JSON.parse(json)) if (item?.slug) slugs.push(item.slug);
 }
 const uniqueSlugs = [...new Set(slugs)];
 if (uniqueSlugs.length !== 1000) throw new Error(`Expected 1000 unique catalog slugs, found ${uniqueSlugs.length}`);
 
-const origin = (process.env.VITE_SITE_URL || "https://anjal-ai-directory.vercel.app").replace(/\\/$/, "");
+const origin = (process.env.VITE_SITE_URL || "https://anjal-ai-directory.vercel.app").replace(/\/$/, "");
 const urls = ["/", "/finder", "/prompts", "/submit", ...categorySlugs.map(slug => `/category/${slug}`), ...uniqueSlugs.map(slug => `/tool/${slug}`), ...curatedPromptSlugs.map(slug => `/prompt/${slug}`)];
-const xml = `<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\\n${urls.map(url => `  <url><loc>${origin}${url}</loc></url>`).join("\\n")}\\n</urlset>\\n`;
+const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url><loc>${origin}${url}</loc></url>`).join("\n")}\n</urlset>\n`;
 fs.mkdirSync(path.join(root, "public"), { recursive: true });
 fs.writeFileSync(path.join(root, "public", "sitemap.xml"), xml);
 console.log(`Generated sitemap with ${urls.length} URLs, including ${curatedPromptSlugs.length} curated prompt pages`);
