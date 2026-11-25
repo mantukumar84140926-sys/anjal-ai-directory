@@ -13,8 +13,9 @@ export default function PromptDetail() {
   if (!prompt) return <main className="mx-auto max-w-3xl px-4 py-16"><h1 className="text-3xl font-semibold">Prompt not found</h1><p className="mt-3 text-slate">This prompt may have moved. Browse the prompt library to find another one.</p><Link className="mt-5 inline-block text-teal underline" to="/prompts">Browse AI prompts</Link></main>;
   const title = `${prompt.title} Prompt — ${prompt.category} AI | Anjal AI`.slice(0, 60);
   const description = `${prompt.description} Copy this free ${prompt.category.toLowerCase()} AI prompt and customize it for your task.`.slice(0, 158);
+  const promptText = prompt.prompt;
   async function copy() {
-    try { await navigator.clipboard.writeText(prompt.prompt); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setCopied(false); }
+    try { await navigator.clipboard.writeText(promptText); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setCopied(false); }
   }
   return <main className="mx-auto max-w-4xl px-4 py-8 sm:py-12">
     <SEO title={title} description={description} canonical={`https://anjal-ai-directory.vercel.app/prompt/${slug}`} noindex={generated} jsonLd={{"@context":"https://schema.org","@type":"CreativeWork",name:prompt.title,description,url:`https://anjal-ai-directory.vercel.app/prompt/${slug}`,genre:prompt.category,keywords:prompt.tags.join(", ")}} />
