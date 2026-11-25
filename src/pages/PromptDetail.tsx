@@ -6,7 +6,7 @@ import { prompts } from "@/pages/PromptLibrary";
 
 export default function PromptDetail() {
   const { slug = "" } = useParams();
-  const prompt = prompts.find(item => item.command.replace(/^\\//, "").toLowerCase() === slug.toLowerCase());
+  const prompt = prompts.find(item => item.command.replace(/^\//, "").toLowerCase() === slug.toLowerCase());
   const [copied, setCopied] = useState(false);
   const generated = prompt?.command.startsWith("/prompt-") ?? true;
   const related = useMemo(() => prompt ? prompts.filter(item => item.command !== prompt.command && item.category === prompt.category && !item.command.startsWith("/prompt-")).slice(0, 6) : [], [prompt]);
@@ -28,7 +28,7 @@ export default function PromptDetail() {
       <p className="mt-3 text-sm text-slate">Tip: replace every bracketed placeholder with your own details before using the prompt.</p>
     </section>
     <section className="mt-8"><h2 className="text-xl font-semibold">Prompt keywords</h2><div className="mt-3 flex flex-wrap gap-2">{prompt.tags.map(tag => <span key={tag} className="rounded-full border border-line px-3 py-1 text-sm text-slate dark:border-line-dark">{tag}</span>)}</div></section>
-    {related.length > 0 && <section className="mt-8"><h2 className="text-xl font-semibold">Related {prompt.category} prompts</h2><ul className="mt-3 grid gap-2 sm:grid-cols-2">{related.map(item => <li key={item.command}><Link className="text-teal hover:underline" to={`/prompt/${item.command.replace(/^\\//, "")}`}>{item.title}</Link></li>)}</ul></section>}
+    {related.length > 0 && <section className="mt-8"><h2 className="text-xl font-semibold">Related {prompt.category} prompts</h2><ul className="mt-3 grid gap-2 sm:grid-cols-2">{related.map(item => <li key={item.command}><Link className="text-teal hover:underline" to={`/prompt/${item.command.replace(/^\//, "")}`}>{item.title}</Link></li>)}</ul></section>}
     <p className="mt-8"><Link className="font-semibold text-teal hover:underline" to="/prompts">← Browse all AI prompts</Link></p>
   </main>;
 }
