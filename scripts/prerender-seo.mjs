@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { build } from "esbuild";
 
 const root = process.cwd();
 const dist = path.join(root, "dist");
@@ -22,7 +24,7 @@ const categoryMap = {
 };
 const mapCategory = raw => categoryMap[String(raw || "").toLowerCase()] || "other";
 const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
-const escapeJson = value => JSON.stringify(value).replace(/</g, "\\u003c");
+const escapeJson = value => JSON.stringify(value).replace(/</g, "\u003c");
 const origin = (process.env.VITE_SITE_URL || "https://anjal-ai-directory.vercel.app").replace(/\/$/, "");
 
 if (!fs.existsSync(path.join(dist, "index.html"))) throw new Error("dist/index.html not found; prerender must run after vite build.");
@@ -90,4 +92,34 @@ for (const tool of catalog) {
   fs.writeFileSync(out, render({title,description,canonical,body,jsonLd}));
 }
 
-console.log(`Prerendered ${catalog.length} tool pages and ${categories.length} category pages.`);
+
+const promptManifestPath = path.join(dist, ".prompt-data.mjs");
+await build({
+  entryPoints: [path.join(root, "scripts", "prompt-data-entry.ts")],
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  packages: "external",
+  alias: { "@": path.join(root, "src") },
+  define: { "import.meta.env": JSON.stringify({ VITE_SITE_URL: origin }) },
+  outfile: promptManifestPath
+});
+const { prompts } = await import(pathToFileURL(promptManifestPath).href);
+const curatedPrompts = prompts.filter(prompt => !prompt.command.startsWith("/prompt-"));
+for (const prompt of curatedPrompts) {
+  const slug = prompt.command.replace(/^\//, "").toLowerCase();
+  const canonical = `${origin}/prompt/${slug}`;
+  const title = `${prompt.title} Prompt — ${prompt.category} AI | Anjal AI`.slice(0, 60);
+  const description = `${prompt.description} Copy this free ${prompt.category.toLowerCase()} AI prompt, customize the placeholders, and use it with your preferred AI tool.`.slice(0, 158);
+  const related = curatedPrompts.filter(item => item.command !== prompt.command && item.category === prompt.category).slice(0, 5);
+  const relatedLinks = related.map(item => `<li><a href="/prompt/${encodeURIComponent(item.command.replace(/^\//, ""))}">${escapeHtml(item.title)}</a></li>`).join("");
+  const tags = prompt.tags.map(tag => `<li>${escapeHtml(tag)}</li>`).join("");
+  const body = `<main><nav><a href="/">Anjal AI</a> → <a href="/prompts">AI Prompt Library</a> → <strong>${escapeHtml(prompt.title)}</strong></nav><h1>${escapeHtml(prompt.title)} Prompt</h1><p>${escapeHtml(description)}</p><p><strong>Category:</strong> ${escapeHtml(prompt.category)}</p><h2>What this AI prompt does</h2><p>${escapeHtml(prompt.description)} Use it as a starting point, replace bracketed placeholders with your own details, and review the AI response before publishing or relying on it.</p><h2>Copy-ready prompt</h2><pre>${escapeHtml(prompt.prompt)}</pre><h2>Related topics</h2><ul>${tags}</ul><h2>Related AI prompts</h2><ul>${relatedLinks}</ul><p><a href="/prompts">Browse the complete AI prompt library</a></p></main>`;
+  const jsonLd = {"@context":"https://schema.org","@type":"CreativeWork",name:prompt.title,description,url:canonical,genre:prompt.category,keywords:prompt.tags.join(", "),isPartOf:{"@type":"CollectionPage",name:"AI Prompt Library",url:`${origin}/prompts`}};
+  const out = path.join(dist, "prompt", slug, "index.html");
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, render({title,description,canonical,body,jsonLd}));
+}
+fs.rmSync(promptManifestPath, { force: true });
+
+console.log(`Prerendered ${catalog.length} tool pages, ${categories.length} category pages and ${curatedPrompts.length} curated prompt pages.`);

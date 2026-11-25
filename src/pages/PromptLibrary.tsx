@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Check, Copy, Search, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import type { Prompt } from "@/data/promptTypes";
 import { generatedPrompts } from "@/data/generatedPrompts";
@@ -38,7 +39,7 @@ const featuredPrompts: Prompt[] = [
 ];
 
 // Keep the original hand-written prompts first, then add 4,970 unique generated entries.
-const prompts: Prompt[] = [...featuredPrompts, ...generatedPrompts];
+export const prompts: Prompt[] = [...featuredPrompts, ...generatedPrompts];
 const PAGE_SIZE = 30;
 
 const categories = ["All", ...Array.from(new Set(prompts.map((p) => p.category)))];
@@ -75,7 +76,7 @@ export default function PromptLibrary() {
     <div className="mt-8 flex flex-wrap gap-2">{categories.map((item) => <button key={item} onClick={() => { setCategory(item); setVisibleCount(PAGE_SIZE); }} className={`rounded-full border px-3 py-2 text-sm transition ${category === item ? "border-teal bg-teal text-white" : "border-line bg-white text-slate hover:border-teal dark:border-line-dark dark:bg-surface-dark"}`}>{item}</button>)}</div>
     <div className="mt-6 flex items-center justify-between"><p className="text-sm text-slate">{filtered.length.toLocaleString()} prompts</p><p className="text-xs text-slate">Tap Copy Prompt to use one</p></div>
     <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{visiblePrompts.map((p) => <article key={p.command} className="flex flex-col rounded-2xl border border-line bg-white p-5 shadow-card dark:border-line-dark dark:bg-surface-dark">
-      <div className="flex items-start justify-between gap-3"><div><span className="inline-flex rounded-lg bg-teal-50 px-2.5 py-1 font-mono text-sm font-semibold text-teal-800 dark:bg-teal/15 dark:text-teal-300">{p.command}</span><h2 className="mt-3 text-lg font-semibold">{p.title}</h2></div><span className="rounded-full border border-line px-2 py-1 text-xs text-slate dark:border-line-dark">{p.category}</span></div>
+      <div className="flex items-start justify-between gap-3"><div><span className="inline-flex rounded-lg bg-teal-50 px-2.5 py-1 font-mono text-sm font-semibold text-teal-800 dark:bg-teal/15 dark:text-teal-300">{p.command}</span><h2 className="mt-3 text-lg font-semibold"><Link className="hover:text-teal" to={`/prompt/${p.command.replace(/^\//, "")}`}>{p.title}</Link></h2></div><span className="rounded-full border border-line px-2 py-1 text-xs text-slate dark:border-line-dark">{p.category}</span></div>
       <p className="mt-2 text-sm text-slate">{p.description}</p>
       <pre className="mt-4 max-h-44 flex-1 overflow-auto whitespace-pre-wrap rounded-xl bg-porcelain p-3 text-xs leading-5 text-ink dark:bg-ink dark:text-porcelain">{p.prompt}</pre>
       <button onClick={() => void copyPrompt(p)} className="mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-teal-700">{copied === p.command ? <Check className="h-4 w-4"/> : <Copy className="h-4 w-4"/>}{copied === p.command ? "Copied!" : "Copy Prompt"}</button>
