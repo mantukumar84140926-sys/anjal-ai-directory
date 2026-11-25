@@ -101,6 +101,7 @@ await build({
   format: "esm",
   packages: "external",
   alias: { "@": path.join(root, "src") },
+  define: { "import.meta.env": JSON.stringify({ VITE_SITE_URL: origin }) },
   outfile: promptManifestPath
 });
 const { prompts } = await import(pathToFileURL(promptManifestPath).href);
