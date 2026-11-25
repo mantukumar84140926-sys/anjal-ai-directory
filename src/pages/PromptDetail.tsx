@@ -9,7 +9,7 @@ export default function PromptDetail() {
   const prompt = prompts.find(item => item.command.replace(/^\//, "").toLowerCase() === slug.toLowerCase());
   const [copied, setCopied] = useState(false);
   const generated = prompt?.command.startsWith("/prompt-") ?? true;
-  const related = useMemo(() => prompt ? prompts.filter(item => item.command !== prompt.command && item.category === prompt.category && !item.command.startsWith("/prompt-")).slice(0, 6) : [], [prompt]);
+  const related = useMemo(() => prompt ? prompts.filter(item => item.command !== prompt.command && item.category === prompt?.category && !item.command.startsWith("/prompt-")).slice(0, 6) : [], [prompt]);
   if (!prompt) return <main className="mx-auto max-w-3xl px-4 py-16"><h1 className="text-3xl font-semibold">Prompt not found</h1><p className="mt-3 text-slate">This prompt may have moved. Browse the prompt library to find another one.</p><Link className="mt-5 inline-block text-teal underline" to="/prompts">Browse AI prompts</Link></main>;
   const title = `${prompt.title} Prompt — ${prompt.category} AI | Anjal AI`.slice(0, 60);
   const description = `${prompt.description} Copy this free ${prompt.category.toLowerCase()} AI prompt and customize it for your task.`.slice(0, 158);
