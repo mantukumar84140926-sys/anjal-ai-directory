@@ -38,38 +38,51 @@ for (const file of fs.readdirSync(catalogDir).filter(f => f.endsWith(".ts")).sor
 const catalog = [...new Map(entries.filter(x => x?.slug).map(x => [x.slug, x])).values()];
 if (catalog.length !== 1000) throw new Error(`Expected 1000 catalog entries, found ${catalog.length}`);
 
-function setHeadTag(html, matcher, tag) {
-  let replaced = false;
-  html = html.replace(matcher, () => {
-    if (replaced) return "";
-    replaced = true;
-    return tag;
-  });
-  return replaced ? html : html.replace("</head>", `${tag}</head>`);
+function setHeadTag(html, tagName, attribute, value, replacement) {
+  const marker = `${attribute}="${value}"`;
+  let firstStart = -1;
+  let firstEnd = -1;
+  let cursor = 0;
+  while (true) {
+    const start = html.indexOf(`<${tagName}`, cursor);
+    if (start < 0) break;
+    const end = html.indexOf(">", start);
+    if (end < 0) break;
+    const currentTag = html.slice(start, end + 1);
+    if (currentTag.includes(marker) || currentTag.includes(`${attribute}='${value}'`)) {
+      if (firstStart < 0) { firstStart = start; firstEnd = end + 1; cursor = end + 1; }
+      else { html = html.slice(0, start) + html.slice(end + 1); cursor = start; }
+    } else cursor = end + 1;
+  }
+  if (firstStart >= 0) return html.slice(0, firstStart) + replacement + html.slice(firstEnd);
+  return html.replace("</head>", `${replacement}</head>`);
 }
 
 function render({ title, description, canonical, body, jsonLd }) {
   let html = template;
-  html = html.replace(/<title>.*?<\\/title>/i, `<title>${escapeHtml(title)}</title>`);
-
-  // Replace the template's homepage metadata instead of appending duplicate tags.
-  // Duplicate canonical tags can cause every prerendered URL to canonicalise to "/".
+  const titleStart = html.indexOf("<title>");
+  const titleEnd = html.indexOf("</title>", titleStart);
+  if (titleStart >= 0 && titleEnd >= 0) {
+    html = html.slice(0, titleStart) + `<title>${escapeHtml(title)}</title>` + html.slice(titleEnd + "</title>".length);
+  }
+  // Replace the template homepage tags; never leave its canonical on route pages.
   const headTags = [
-    [/\<meta\\b(?=[^>]*\\bname=["']description["'])[^>]*>/gi, `<meta name="description" content="${escapeHtml(description)}">`],
-    [/\<meta\\b(?=[^>]*\\bname=["']robots["'])[^>]*>/gi, '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">'],
-    [/\<link\\b(?=[^>]*\\brel=["']canonical["'])[^>]*>/gi, `<link rel="canonical" href="${escapeHtml(canonical)}">`],
-    [/\<meta\\b(?=[^>]*\\bproperty=["']og:title["'])[^>]*>/gi, `<meta property="og:title" content="${escapeHtml(title)}">`],
-    [/\<meta\\b(?=[^>]*\\bproperty=["']og:description["'])[^>]*>/gi, `<meta property="og:description" content="${escapeHtml(description)}">`],
-    [/\<meta\\b(?=[^>]*\\bproperty=["']og:type["'])[^>]*>/gi, '<meta property="og:type" content="website">'],
-    [/\<meta\\b(?=[^>]*\\bproperty=["']og:site_name["'])[^>]*>/gi, '<meta property="og:site_name" content="Anjal AI">'],
-    [/\<meta\\b(?=[^>]*\\bproperty=["']og:url["'])[^>]*>/gi, `<meta property="og:url" content="${escapeHtml(canonical)}">`],
-    [/\<meta\\b(?=[^>]*\\bproperty=["']og:locale["'])[^>]*>/gi, '<meta property="og:locale" content="en_GB">'],
-    [/\<meta\\b(?=[^>]*\\bname=["']twitter:card["'])[^>]*>/gi, '<meta name="twitter:card" content="summary">'],
-    [/\<meta\\b(?=[^>]*\\bname=["']twitter:title["'])[^>]*>/gi, `<meta name="twitter:title" content="${escapeHtml(title)}">`],
-    [/\<meta\\b(?=[^>]*\\bname=["']twitter:description["'])[^>]*>/gi, `<meta name="twitter:description" content="${escapeHtml(description)}">`]
+    ["meta", "name", "description", `<meta name="description" content="${escapeHtml(description)}">`],
+    ["meta", "name", "robots", `<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">`],
+    ["link", "rel", "canonical", `<link rel="canonical" href="${escapeHtml(canonical)}">`],
+    ["meta", "property", "og:title", `<meta property="og:title" content="${escapeHtml(title)}">`],
+    ["meta", "property", "og:description", `<meta property="og:description" content="${escapeHtml(description)}">`],
+    ["meta", "property", "og:type", `<meta property="og:type" content="website">`],
+    ["meta", "property", "og:site_name", `<meta property="og:site_name" content="Anjal AI">`],
+    ["meta", "property", "og:url", `<meta property="og:url" content="${escapeHtml(canonical)}">`],
+    ["meta", "property", "og:locale", `<meta property="og:locale" content="en_GB">`],
+    ["meta", "name", "twitter:card", `<meta name="twitter:card" content="summary">`],
+    ["meta", "name", "twitter:title", `<meta name="twitter:title" content="${escapeHtml(title)}">`],
+    ["meta", "name", "twitter:description", `<meta name="twitter:description" content="${escapeHtml(description)}">`]
   ];
-  for (const [matcher, tag] of headTags) html = setHeadTag(html, matcher, tag);
-
+  for (const [tagName, attribute, value, replacement] of headTags) {
+    html = setHeadTag(html, tagName, attribute, value, replacement);
+  }
   html = html.replace("</head>", `<script type="application/ld+json">${escapeJson(jsonLd)}</script></head>`);
   html = html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
   return html;
