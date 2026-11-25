@@ -38,24 +38,39 @@ for (const file of fs.readdirSync(catalogDir).filter(f => f.endsWith(".ts")).sor
 const catalog = [...new Map(entries.filter(x => x?.slug).map(x => [x.slug, x])).values()];
 if (catalog.length !== 1000) throw new Error(`Expected 1000 catalog entries, found ${catalog.length}`);
 
+function setHeadTag(html, matcher, tag) {
+  let replaced = false;
+  html = html.replace(matcher, () => {
+    if (replaced) return "";
+    replaced = true;
+    return tag;
+  });
+  return replaced ? html : html.replace("</head>", `${tag}</head>`);
+}
+
 function render({ title, description, canonical, body, jsonLd }) {
   let html = template;
-  html = html.replace(/<title>.*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
-  const head = `
-<meta name="description" content="${escapeHtml(description)}">
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-<link rel="canonical" href="${escapeHtml(canonical)}">
-<meta property="og:title" content="${escapeHtml(title)}">
-<meta property="og:description" content="${escapeHtml(description)}">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Anjal AI">
-<meta property="og:url" content="${escapeHtml(canonical)}">
-<meta property="og:locale" content="en_GB">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="${escapeHtml(title)}">
-<meta name="twitter:description" content="${escapeHtml(description)}">
-<script type="application/ld+json">${escapeJson(jsonLd)}</script>`;
-  html = html.replace("</head>", `${head}</head>`);
+  html = html.replace(/<title>.*?<\\/title>/i, `<title>${escapeHtml(title)}</title>`);
+
+  // Replace the template's homepage metadata instead of appending duplicate tags.
+  // Duplicate canonical tags can cause every prerendered URL to canonicalise to "/".
+  const headTags = [
+    [/\<meta\\b(?=[^>]*\\bname=["']description["'])[^>]*>/gi, `<meta name="description" content="${escapeHtml(description)}">`],
+    [/\<meta\\b(?=[^>]*\\bname=["']robots["'])[^>]*>/gi, '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">'],
+    [/\<link\\b(?=[^>]*\\brel=["']canonical["'])[^>]*>/gi, `<link rel="canonical" href="${escapeHtml(canonical)}">`],
+    [/\<meta\\b(?=[^>]*\\bproperty=["']og:title["'])[^>]*>/gi, `<meta property="og:title" content="${escapeHtml(title)}">`],
+    [/\<meta\\b(?=[^>]*\\bproperty=["']og:description["'])[^>]*>/gi, `<meta property="og:description" content="${escapeHtml(description)}">`],
+    [/\<meta\\b(?=[^>]*\\bproperty=["']og:type["'])[^>]*>/gi, '<meta property="og:type" content="website">'],
+    [/\<meta\\b(?=[^>]*\\bproperty=["']og:site_name["'])[^>]*>/gi, '<meta property="og:site_name" content="Anjal AI">'],
+    [/\<meta\\b(?=[^>]*\\bproperty=["']og:url["'])[^>]*>/gi, `<meta property="og:url" content="${escapeHtml(canonical)}">`],
+    [/\<meta\\b(?=[^>]*\\bproperty=["']og:locale["'])[^>]*>/gi, '<meta property="og:locale" content="en_GB">'],
+    [/\<meta\\b(?=[^>]*\\bname=["']twitter:card["'])[^>]*>/gi, '<meta name="twitter:card" content="summary">'],
+    [/\<meta\\b(?=[^>]*\\bname=["']twitter:title["'])[^>]*>/gi, `<meta name="twitter:title" content="${escapeHtml(title)}">`],
+    [/\<meta\\b(?=[^>]*\\bname=["']twitter:description["'])[^>]*>/gi, `<meta name="twitter:description" content="${escapeHtml(description)}">`]
+  ];
+  for (const [matcher, tag] of headTags) html = setHeadTag(html, matcher, tag);
+
+  html = html.replace("</head>", `<script type="application/ld+json">${escapeJson(jsonLd)}</script></head>`);
   html = html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
   return html;
 }
