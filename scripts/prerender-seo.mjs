@@ -83,6 +83,21 @@ function render({ title, description, canonical, body, jsonLd }) {
   for (const [tagName, attribute, value, replacement] of headTags) {
     html = setHeadTag(html, tagName, attribute, value, replacement);
   }
+
+  // Fail the build if a prerendered route ever ships duplicate or incorrect SEO head tags.
+  const canonicalTags = html.match(/<link\\b(?=[^>]*\\brel=["']canonical["'])[^>]*>/gi) || [];
+  const descriptionTags = html.match(/<meta\\b(?=[^>]*\\bname=["']description["'])[^>]*>/gi) || [];
+  const titleTags = html.match(/<title\\b[^>]*>[\\s\\S]*?<\\/title>/gi) || [];
+  if (canonicalTags.length !== 1 || !canonicalTags[0].includes(`href="${escapeHtml(canonical)}"`)) {
+    throw new Error(`Expected exactly one self canonical for ${canonical}`);
+  }
+  if (descriptionTags.length !== 1 || !descriptionTags[0].includes(`content="${escapeHtml(description)}"`)) {
+    throw new Error(`Expected exactly one route-specific meta description for ${canonical}`);
+  }
+  if (titleTags.length !== 1 || !titleTags[0].includes(escapeHtml(title))) {
+    throw new Error(`Expected exactly one route-specific title for ${canonical}`);
+  }
+
   html = html.replace("</head>", `<script type="application/ld+json">${escapeJson(jsonLd)}</script></head>`);
   html = html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
   return html;
