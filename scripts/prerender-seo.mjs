@@ -112,7 +112,49 @@ const homeTitle = "Anjal AI — AI Tools & Ready-to-Use Prompts";
 const homeDescription = "Discover useful AI tools and copy-ready prompts for writing, coding, design, research, education, marketing and productivity.";
 const homeCategoryLinks = categories.map(category => `<li><a href="/category/${category}">${escapeHtml(categoryNames[category] || "Other")}</a></li>`).join("");
 const homeToolLinks = catalog.slice(0, 24).map(tool => `<li><a href="/tool/${encodeURIComponent(tool.slug)}">${escapeHtml(tool.name)}</a></li>`).join("");
-const homeBody = `<main><header><h1>Find the right AI tool and ready-to-use prompt</h1><p>Explore a curated directory of AI tools and practical prompts for everyday work, learning and creativity. Compare categories, visit official tool websites, and copy prompt templates you can customize for your own projects.</p><p><a href="/finder">Find an AI tool</a> · <a href="/prompts">Browse free AI prompts</a></p></header><section><h2>Explore AI tool categories</h2><p>Start with the task you need help with. Browse tools for AI assistants, image and video creation, audio, writing, coding, design, productivity, marketing, education and research. Each listing links to the tool website so you can check its current features and terms directly.</p><ul>${homeCategoryLinks}</ul></section><section><h2>Browse AI tools</h2><p>Use the directory to discover options, then compare them against your actual workflow. Before signing up or paying, verify current pricing, free-plan limits, supported regions, privacy terms and export options on the provider’s own website. Features and plans can change.</p><ul>${homeToolLinks}</ul></section><section><h2>Make better use of AI with practical prompts</h2><p>A useful prompt explains your goal, audience, context, constraints and the format you want back. The Anjal AI prompt library provides editable starting points for common tasks. Replace bracketed placeholders with your own details, test the result, and refine it rather than treating one response as final.</p><p><a href="/prompts">Explore copy-ready AI prompts</a> · <a href="/category/education">Explore education AI tools</a></p></section></main>`;
+const homeBody = `<main>
+<header>
+<h1>Find the right AI tool and ready-to-use prompt</h1>
+<p>Anjal AI is an independent directory for discovering AI software and practical prompt templates. Explore tools for research, writing, coding, design, education, marketing, image and video creation, audio and everyday productivity. Start with the task you want to complete, compare relevant options, and use the provider's official website to confirm current features, pricing and terms.</p>
+<p><a href="/finder">Find an AI tool</a> · <a href="/prompts">Browse the free AI prompt library</a></p>
+</header>
+<section>
+<h2>Explore AI tool categories</h2>
+<p>Different tasks need different kinds of software. Browse a focused category instead of relying on a generic list: AI assistants for conversation and planning; research tools for finding and checking sources; writing and coding tools for drafting or development; design, image, video and audio tools for creative work; and education, marketing and productivity tools for specialized workflows.</p>
+<ul>${homeCategoryLinks}</ul>
+</section>
+<section>
+<h2>Browse AI tools and compare options</h2>
+<p>Use the directory to discover products and open their individual profiles. A profile can help you understand the product's category and find its official website. Before choosing a service, compare it against a real task you need to complete rather than assuming that the most popular product is automatically the best fit.</p>
+<ul>${homeToolLinks}</ul>
+<p>For a more focused shortlist, use the <a href="/finder">AI Tool Finder</a> and narrow your search by the work you want to do. Product features, free-plan limits, supported devices and regional availability can change, so confirm details with the provider before creating an account or paying.</p>
+</section>
+<section>
+<h2>How to choose an AI tool</h2>
+<ol>
+<li><strong>Describe the job.</strong> Write down the output you need, who will use it and how often the task happens.</li>
+<li><strong>Check task fit.</strong> Look for a tool that handles the specific workflow, not just a broad category that sounds relevant.</li>
+<li><strong>Test with your own example.</strong> Try a small, low-risk task and note the quality of the result and the editing it needs.</li>
+<li><strong>Compare practical limits.</strong> Review usage quotas, pricing, export options, language support, device compatibility and cancellation terms.</li>
+<li><strong>Review privacy and reliability.</strong> Read the provider's data practices and test whether the service is dependable enough for your work.</li>
+<li><strong>Verify important outputs.</strong> Check factual claims, code, citations, generated media rights and other consequential details before using the result.</li>
+</ol>
+</section>
+<section>
+<h2>Get better results with copy-ready AI prompts</h2>
+<p>A useful prompt tells an AI assistant what you are trying to achieve, provides the context it needs, explains constraints and specifies the format of the answer. For example, a study prompt can state the subject, class level and topic; a writing prompt can identify the audience and tone; and a coding prompt can include the language, expected behavior and error message.</p>
+<p>The <a href="/prompts">Anjal AI Prompt Library</a> offers editable starting points for common workflows. Replace placeholders with your own details, remove instructions that do not apply, and refine the prompt after reviewing the first response. Do not treat generated information as automatically correct.</p>
+</section>
+<section>
+<h2>Using AI for learning and research</h2>
+<p>AI tools can help explain a difficult concept, organize revision, create practice questions or suggest a research starting point. Use them to support your own thinking: attempt exercises yourself, compare explanations with trusted course material, open cited sources and check whether the evidence actually supports a claim. Students should follow their school's academic-integrity rules and avoid sharing unnecessary personal information.</p>
+<p><a href="/category/education">Explore education AI tools</a> · <a href="/category/research">Explore research AI tools</a></p>
+</section>
+<section>
+<h2>What Anjal AI does—and what it does not promise</h2>
+<p>Anjal AI helps people discover AI products and prompt ideas. A directory listing is not a guarantee of product quality, availability, security, suitability or endorsement. Third-party products are operated by their respective providers. Always check the official product page, privacy policy, terms and current pricing before relying on a service or making a purchase.</p>
+</section>
+</main>`;
 const homeJsonLd = {"@context":"https://schema.org","@graph":[{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`,description:homeDescription,potentialAction:{"@type":"SearchAction",target:{"@type":"EntryPoint",urlTemplate:`${origin}/?q={search_term_string}`},"query-input":"required name=search_term_string"}},{"@type":"Organization",name:"Anjal AI",url:`${origin}/`,logo:{"@type":"ImageObject",url:`${origin}/anjal-ai-mark.svg`,width:512,height:512}}]};
 fs.writeFileSync(path.join(dist, "index.html"), render({title:homeTitle,description:homeDescription,canonical:`${origin}/`,body:homeBody,jsonLd:homeJsonLd}));
 
