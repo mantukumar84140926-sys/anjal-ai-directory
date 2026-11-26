@@ -38,29 +38,81 @@ for (const file of fs.readdirSync(catalogDir).filter(f => f.endsWith(".ts")).sor
 const catalog = [...new Map(entries.filter(x => x?.slug).map(x => [x.slug, x])).values()];
 if (catalog.length !== 1000) throw new Error(`Expected 1000 catalog entries, found ${catalog.length}`);
 
+function setHeadTag(html, tagName, attribute, value, replacement) {
+  const marker = `${attribute}="${value}"`;
+  let firstStart = -1;
+  let firstEnd = -1;
+  let cursor = 0;
+  while (true) {
+    const start = html.indexOf(`<${tagName}`, cursor);
+    if (start < 0) break;
+    const end = html.indexOf(">", start);
+    if (end < 0) break;
+    const currentTag = html.slice(start, end + 1);
+    if (currentTag.includes(marker) || currentTag.includes(`${attribute}='${value}'`)) {
+      if (firstStart < 0) { firstStart = start; firstEnd = end + 1; cursor = end + 1; }
+      else { html = html.slice(0, start) + html.slice(end + 1); cursor = start; }
+    } else cursor = end + 1;
+  }
+  if (firstStart >= 0) return html.slice(0, firstStart) + replacement + html.slice(firstEnd);
+  return html.replace("</head>", `${replacement}</head>`);
+}
+
 function render({ title, description, canonical, body, jsonLd }) {
   let html = template;
-  html = html.replace(/<title>.*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
-  const head = `
-<meta name="description" content="${escapeHtml(description)}">
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-<link rel="canonical" href="${escapeHtml(canonical)}">
-<meta property="og:title" content="${escapeHtml(title)}">
-<meta property="og:description" content="${escapeHtml(description)}">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Anjal AI">
-<meta property="og:url" content="${escapeHtml(canonical)}">
-<meta property="og:locale" content="en_GB">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="${escapeHtml(title)}">
-<meta name="twitter:description" content="${escapeHtml(description)}">
-<script type="application/ld+json">${escapeJson(jsonLd)}</script>`;
-  html = html.replace("</head>", `${head}</head>`);
+  const titleStart = html.indexOf("<title>");
+  const titleEnd = html.indexOf("</title>", titleStart);
+  if (titleStart >= 0 && titleEnd >= 0) {
+    html = html.slice(0, titleStart) + `<title>${escapeHtml(title)}</title>` + html.slice(titleEnd + "</title>".length);
+  }
+  // Replace the template homepage tags; never leave its canonical on route pages.
+  const headTags = [
+    ["meta", "name", "description", `<meta name="description" content="${escapeHtml(description)}">`],
+    ["meta", "name", "robots", `<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">`],
+    ["link", "rel", "canonical", `<link rel="canonical" href="${escapeHtml(canonical)}">`],
+    ["meta", "property", "og:title", `<meta property="og:title" content="${escapeHtml(title)}">`],
+    ["meta", "property", "og:description", `<meta property="og:description" content="${escapeHtml(description)}">`],
+    ["meta", "property", "og:type", `<meta property="og:type" content="website">`],
+    ["meta", "property", "og:site_name", `<meta property="og:site_name" content="Anjal AI">`],
+    ["meta", "property", "og:url", `<meta property="og:url" content="${escapeHtml(canonical)}">`],
+    ["meta", "property", "og:locale", `<meta property="og:locale" content="en_GB">`],
+    ["meta", "name", "twitter:card", `<meta name="twitter:card" content="summary">`],
+    ["meta", "name", "twitter:title", `<meta name="twitter:title" content="${escapeHtml(title)}">`],
+    ["meta", "name", "twitter:description", `<meta name="twitter:description" content="${escapeHtml(description)}">`]
+  ];
+  for (const [tagName, attribute, value, replacement] of headTags) {
+    html = setHeadTag(html, tagName, attribute, value, replacement);
+  }
+
+  // Fail the build if a prerendered route ever ships duplicate or incorrect SEO head tags.
+  const canonicalTags = html.match(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/gi) || [];
+  const descriptionTags = html.match(/<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/gi) || [];
+  const titleTags = html.match(/<title\b[^>]*>[\s\S]*?<\/title>/gi) || [];
+  if (canonicalTags.length !== 1 || !canonicalTags[0].includes(`href="${escapeHtml(canonical)}"`)) {
+    throw new Error(`Expected exactly one self canonical for ${canonical}`);
+  }
+  if (descriptionTags.length !== 1 || !descriptionTags[0].includes(`content="${escapeHtml(description)}"`)) {
+    throw new Error(`Expected exactly one route-specific meta description for ${canonical}`);
+  }
+  if (titleTags.length !== 1 || !titleTags[0].includes(escapeHtml(title))) {
+    throw new Error(`Expected exactly one route-specific title for ${canonical}`);
+  }
+
+  html = html.replace("</head>", `<script type="application/ld+json">${escapeJson(jsonLd)}</script></head>`);
   html = html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
   return html;
 }
 
 const categories = [...new Set(catalog.map(x => mapCategory(x.category)))];
+
+// Prerender the homepage so crawlers receive meaningful HTML before React loads.
+const homeTitle = "Anjal AI — AI Tools & Ready-to-Use Prompts";
+const homeDescription = "Discover useful AI tools and copy-ready prompts for writing, coding, design, research, education, marketing and productivity.";
+const homeCategoryLinks = categories.map(category => `<li><a href="/category/${category}">${escapeHtml(categoryNames[category] || "Other")}</a></li>`).join("");
+const homeToolLinks = catalog.slice(0, 24).map(tool => `<li><a href="/tool/${encodeURIComponent(tool.slug)}">${escapeHtml(tool.name)}</a></li>`).join("");
+const homeBody = `<main><header><h1>Find the right AI tool and ready-to-use prompt</h1><p>Explore a curated directory of AI tools and practical prompts for everyday work, learning and creativity. Compare categories, visit official tool websites, and copy prompt templates you can customize.</p><p><a href="/finder">Find an AI tool</a> · <a href="/prompts">Browse free AI prompts</a></p></header><section><h2>Explore AI tool categories</h2><ul>${homeCategoryLinks}</ul></section><section><h2>Browse AI tools</h2><ul>${homeToolLinks}</ul></section></main>`;
+const homeJsonLd = {"@context":"https://schema.org","@graph":[{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`,description:homeDescription,potentialAction:{"@type":"SearchAction",target:{"@type":"EntryPoint",urlTemplate:`${origin}/?q={search_term_string}`},"query-input":"required name=search_term_string"}},{"@type":"Organization",name:"Anjal AI",url:`${origin}/`}]};
+fs.writeFileSync(path.join(dist, "index.html"), render({title:homeTitle,description:homeDescription,canonical:`${origin}/`,body:homeBody,jsonLd:homeJsonLd}));
 
 for (const category of categories) {
   const name = categoryNames[category] || "Other";
@@ -106,6 +158,22 @@ await build({
 });
 const { prompts } = await import(pathToFileURL(promptManifestPath).href);
 const curatedPrompts = prompts.filter(prompt => !prompt.command.startsWith("/prompt-"));
+
+// Give the prompt-library hub its own crawlable content and internal links.
+const promptHubTitle = "Free AI Prompt Library | Copy-Ready Prompts | Anjal AI";
+const promptHubDescription = "Browse free copy-ready AI prompts for writing, coding, images, productivity, education and more. Customize templates for your favorite AI tools.";
+const promptCategories = [...new Set(curatedPrompts.map(prompt => prompt.category))].sort();
+const promptCategoryList = promptCategories.map(category => `<li>${escapeHtml(category)}</li>`).join("");
+const promptHubLinks = curatedPrompts.map(prompt => {
+  const slug = prompt.command.replace(/^\//, "").toLowerCase();
+  return `<li><a href="/prompt/${encodeURIComponent(slug)}">${escapeHtml(prompt.title)} Prompt</a> — ${escapeHtml(prompt.description)}</li>`;
+}).join("");
+const promptHubBody = `<main><nav><a href="/">Anjal AI</a> → <strong>AI Prompt Library</strong></nav><h1>Free AI Prompt Library</h1><p>Find practical, copy-ready prompts for image editing, video creation, writing, coding, education, business and productivity. Choose a prompt, replace its placeholders with your details, and adapt the result to your preferred AI assistant.</p><section><h2>Browse prompt categories</h2><ul>${promptCategoryList}</ul></section><section><h2>Copy-ready AI prompts</h2><ul>${promptHubLinks}</ul></section><p>New to AI prompts? Start with a clear goal, provide useful context, and review generated results before using them.</p></main>`;
+const promptHubJsonLd = {"@context":"https://schema.org","@type":"CollectionPage",name:promptHubTitle,description:promptHubDescription,url:`${origin}/prompts`,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
+const promptHubOut = path.join(dist, "prompts", "index.html");
+fs.mkdirSync(path.dirname(promptHubOut), { recursive: true });
+fs.writeFileSync(promptHubOut, render({title:promptHubTitle,description:promptHubDescription,canonical:`${origin}/prompts`,body:promptHubBody,jsonLd:promptHubJsonLd}));
+
 for (const prompt of curatedPrompts) {
   const slug = prompt.command.replace(/^\//, "").toLowerCase();
   const canonical = `${origin}/prompt/${slug}`;
