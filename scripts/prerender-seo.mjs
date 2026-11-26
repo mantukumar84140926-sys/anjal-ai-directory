@@ -147,7 +147,7 @@ const finderOut = path.join(dist, "finder", "index.html");
 fs.mkdirSync(path.dirname(finderOut), { recursive: true });
 fs.writeFileSync(finderOut, render({title:finderTitle,description:finderDescription,canonical:`${origin}/finder`,body:finderBody,jsonLd:finderJsonLd}));
 
-const privacyTitle = "Privacy Policy — Anjal AI";
+const privacyTitle = "Privacy Policy: Data, Cookies & Your Choices | Anjal AI";
 const privacyDescription = "Learn what information Anjal AI may process, why it is used, and how analytics, submissions and third-party links are handled.";
 const privacyBody = `<main><article><nav><a href="/">Anjal AI</a> → <strong>Privacy Policy</strong></nav><h1>Privacy Policy</h1><p><strong>Last updated: November 26, 2026</strong></p>
 <p>This policy explains privacy considerations when you visit the Anjal AI directory. The information actually processed can depend on which site features are enabled and which information you choose to submit.</p>
@@ -166,7 +166,7 @@ const privacyOut = path.join(dist, "privacy", "index.html");
 fs.mkdirSync(path.dirname(privacyOut), { recursive: true });
 fs.writeFileSync(privacyOut, render({title:privacyTitle,description:privacyDescription,canonical:`${origin}/privacy`,body:privacyBody,jsonLd:privacyJsonLd}));
 
-const termsTitle = "Terms of Use — Anjal AI";
+const termsTitle = "Terms of Use: Directory Rules & Submissions | Anjal AI";
 const termsDescription = "Read the terms for browsing Anjal AI, using directory listings, submitting tools, and following links to third-party services.";
 const termsBody = `<main><article><nav><a href="/">Anjal AI</a> → <strong>Terms of Use</strong></nav><h1>Terms of Use</h1><p><strong>Last updated: November 26, 2026</strong></p>
 <p>These terms describe basic conditions for accessing and using the Anjal AI directory. By using the website, you agree to use it lawfully and responsibly. If you do not agree, please stop using the website.</p>
