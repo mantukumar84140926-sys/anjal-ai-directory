@@ -207,7 +207,14 @@ const curatedToolProfiles = {
     workflow: ["Write a focused question and include a date range, location or audience when relevant.", "Open the cited pages rather than relying only on the generated summary.", "Check whether the source is primary, current and directly relevant to the claim.", "Ask a follow-up that tests uncertainty or requests a comparison table.", "Save useful source URLs and independently verify important facts."],
     considerations: ["AI summaries can omit context or misread a source; citations still need to be checked.", "A cited page may not support every sentence next to its citation.", "Research depth, model choices, file features and usage limits can depend on the current plan.", "Do not enter confidential data unless the provider's current privacy terms meet your requirements."],
     sourceLabel: "Perplexity official product overview",
-    sourceUrl: "https://www.perplexity.ai/en-GB/hub/products/search"
+    sourceUrl: "https://www.perplexity.ai/hub",
+    faq: [
+      { question: "What is Perplexity AI?", answer: "Perplexity describes itself as an AI answer engine that researches the open web and returns concise answers with citations. It can help you explore a topic, find source material and ask follow-up questions." },
+      { question: "Can I use Perplexity for free?", answer: "Perplexity offers a Free plan for core search. Advanced searches, model access, file features and other capabilities have plan-specific limits that can change, so check the current official plan guide before subscribing." },
+      { question: "Are Perplexity answers always accurate?", answer: "No AI answer should be treated as automatically correct. Open the cited sources, check whether they support the claim, compare important facts with primary material and look for missing context." },
+      { question: "Who may find Perplexity useful?", answer: "Students, researchers, professionals and curious readers may use it to start research, collect sources and compare information. Follow school or workplace rules and verify important findings independently." }
+    ],
+    planGuideUrl: "https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you"
   },
   chatgpt: {
     overview: "ChatGPT is a conversational AI assistant for tasks such as learning, brainstorming, writing, planning, coding and working with information. Depending on the model, plan and enabled tools, it can also search the web, analyze uploaded files or images, and help create images. Availability and usage limits can differ across accounts and change over time.",
@@ -224,8 +231,8 @@ for (const tool of catalog) {
   const categoryName = categoryNames[category] || "Other";
   const canonical = `${origin}/tool/${tool.slug}`;
   const rawTitle = `${tool.name} — ${categoryName} AI Tool | Anjal AI`;
-  const title = rawTitle.length <= 60 ? rawTitle : `${tool.name} — AI Tool | Anjal AI`;
-  const description = `${tool.name} is an AI tool listed in Anjal AI under ${categoryName}. Explore its official website, category and directory information.`;
+  const title = tool.slug === "perplexity" ? "Perplexity AI: Features, Uses & Free Search | Anjal AI" : rawTitle.length <= 60 ? rawTitle : `${tool.name} — AI Tool | Anjal AI`;
+  const description = tool.slug === "perplexity" ? "Explore Perplexity AI for cited web research, source checking and follow-up questions. Compare use cases, limitations and official plan details." : `${tool.name} is an AI tool listed in Anjal AI under ${categoryName}. Explore its official website, category and directory information.`;
   const related = catalog.filter(x => x.slug !== tool.slug && mapCategory(x.category) === category).slice(0, 8);
   const relatedLinks = related.map(x => `<li><a href="/tool/${encodeURIComponent(x.slug)}">${escapeHtml(x.name)}</a></li>`).join("");
   const profile = curatedToolProfiles[tool.slug] || (tool.name.toLowerCase() === "chatgpt" ? curatedToolProfiles.chatgpt : null);
@@ -233,7 +240,8 @@ for (const tool of catalog) {
 <section><h2>What people use it for</h2><ul>${profile.bestFor.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
 <section><h2>A practical way to evaluate it</h2><ol>${profile.workflow.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ol></section>
 <section><h2>Things to check before relying on it</h2><ul>${profile.considerations.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
-<section><h2>Official product information</h2><p>Confirm current features, availability and terms with the provider: <a href="${escapeHtml(profile.sourceUrl)}" rel="nofollow noopener">${escapeHtml(profile.sourceLabel)}</a>.</p></section>` : "";
+${profile.faq ? `<section><h2>Frequently asked questions about ${escapeHtml(tool.name)}</h2>${profile.faq.map(item => `<h3>${escapeHtml(item.question)}</h3><p>${escapeHtml(item.answer)}</p>`).join("")}</section>` : ""}
+<section><h2>Official product information</h2><p>Confirm current features, availability and terms with the provider: <a href="${escapeHtml(profile.sourceUrl)}" rel="nofollow noopener">${escapeHtml(profile.sourceLabel)}</a>${profile.planGuideUrl ? ` and <a href="${escapeHtml(profile.planGuideUrl)}" rel="nofollow noopener">its official plan guide</a>` : ""}.</p></section>` : "";;
   const body = `<main><nav><a href="/">AI Tools</a> → <a href="/category/${category}">${escapeHtml(categoryName)}</a> → <strong>${escapeHtml(tool.name)}</strong></nav><h1>${escapeHtml(tool.name)}</h1><p>${escapeHtml(description)}</p>${profileSections}<h2>Directory profile</h2><ul><li>Category: <a href="/category/${category}">${escapeHtml(categoryName)}</a></li><li>Platform: Web</li><li>Official website: <a href="${escapeHtml(tool.website)}" rel="nofollow">${escapeHtml(tool.name)}</a></li><li>Commercial details: not verified unless explicitly marked.</li></ul><h2>Related AI tools</h2><ul>${relatedLinks}</ul><p><a href="/finder">Use AI Tool Finder</a> · <a href="/">Browse all 1000 AI tools</a></p></main>`;
   const jsonLd = {"@context":"https://schema.org","@type":"SoftwareApplication",name:tool.name,description,url:tool.website,applicationCategory:categoryName,operatingSystem:"Web",isPartOf:{"@type":"WebSite",name:"Anjal AI",url:origin},mainEntityOfPage:{"@type":"WebPage","@id":canonical},sameAs:[tool.website]};
   const out = path.join(dist, "tool", tool.slug, "index.html");
