@@ -105,6 +105,15 @@ function render({ title, description, canonical, body, jsonLd }) {
 
 const categories = [...new Set(catalog.map(x => mapCategory(x.category)))];
 
+// Prerender the homepage so crawlers receive meaningful HTML before React loads.
+const homeTitle = "Anjal AI — AI Tools & Ready-to-Use Prompts";
+const homeDescription = "Discover useful AI tools and copy-ready prompts for writing, coding, design, research, education, marketing and productivity.";
+const homeCategoryLinks = categories.map(category => `<li><a href="/category/${category}">${escapeHtml(categoryNames[category] || "Other")}</a></li>`).join("");
+const homeToolLinks = catalog.slice(0, 24).map(tool => `<li><a href="/tool/${encodeURIComponent(tool.slug)}">${escapeHtml(tool.name)}</a></li>`).join("");
+const homeBody = `<main><header><h1>Find the right AI tool and ready-to-use prompt</h1><p>Explore a curated directory of AI tools and practical prompts for everyday work, learning and creativity. Compare categories, visit official tool websites, and copy prompt templates you can customize.</p><p><a href="/finder">Find an AI tool</a> · <a href="/prompts">Browse free AI prompts</a></p></header><section><h2>Explore AI tool categories</h2><ul>${homeCategoryLinks}</ul></section><section><h2>Popular AI tools</h2><ul>${homeToolLinks}</ul></section></main>`;
+const homeJsonLd = {"@context":"https://schema.org","@graph":[{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`,description:homeDescription,potentialAction:{"@type":"SearchAction",target:{"@type":"EntryPoint",urlTemplate:`${origin}/?q={search_term_string}`},"query-input":"required name=search_term_string"}},{"@type":"Organization",name:"Anjal AI",url:`${origin}/`}]};
+fs.writeFileSync(path.join(dist, "index.html"), render({title:homeTitle,description:homeDescription,canonical:`${origin}/`,body:homeBody,jsonLd:homeJsonLd}));
+
 for (const category of categories) {
   const name = categoryNames[category] || "Other";
   const matches = catalog.filter(x => mapCategory(x.category) === category);
@@ -149,6 +158,22 @@ await build({
 });
 const { prompts } = await import(pathToFileURL(promptManifestPath).href);
 const curatedPrompts = prompts.filter(prompt => !prompt.command.startsWith("/prompt-"));
+
+// Give the prompt-library hub its own crawlable content and internal links.
+const promptHubTitle = "Free AI Prompt Library | Copy-Ready Prompts | Anjal AI";
+const promptHubDescription = "Browse free copy-ready AI prompts for writing, coding, images, productivity, education and more. Customize templates for your favorite AI tools.";
+const promptCategories = [...new Set(curatedPrompts.map(prompt => prompt.category))].sort();
+const promptCategoryList = promptCategories.map(category => `<li>${escapeHtml(category)}</li>`).join("");
+const promptHubLinks = curatedPrompts.map(prompt => {
+  const slug = prompt.command.replace(/^\\//, "").toLowerCase();
+  return `<li><a href="/prompt/${encodeURIComponent(slug)}">${escapeHtml(prompt.title)} Prompt</a> — ${escapeHtml(prompt.description)}</li>`;
+}).join("");
+const promptHubBody = `<main><nav><a href="/">Anjal AI</a> → <strong>AI Prompt Library</strong></nav><h1>Free AI Prompt Library</h1><p>Find practical, copy-ready prompts for image editing, video creation, writing, coding, education, business and productivity. Choose a prompt, replace its placeholders with your details, and adapt the result to your preferred AI assistant.</p><section><h2>Browse prompt categories</h2><ul>${promptCategoryList}</ul></section><section><h2>Copy-ready AI prompts</h2><ul>${promptHubLinks}</ul></section><p>New to AI prompts? Start with a clear goal, provide useful context, and review generated results before using them.</p></main>`;
+const promptHubJsonLd = {"@context":"https://schema.org","@type":"CollectionPage",name:promptHubTitle,description:promptHubDescription,url:`${origin}/prompts`,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
+const promptHubOut = path.join(dist, "prompts", "index.html");
+fs.mkdirSync(path.dirname(promptHubOut), { recursive: true });
+fs.writeFileSync(promptHubOut, render({title:promptHubTitle,description:promptHubDescription,canonical:`${origin}/prompts`,body:promptHubBody,jsonLd:promptHubJsonLd}));
+
 for (const prompt of curatedPrompts) {
   const slug = prompt.command.replace(/^\//, "").toLowerCase();
   const canonical = `${origin}/prompt/${slug}`;
