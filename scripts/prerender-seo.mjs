@@ -85,9 +85,9 @@ function render({ title, description, canonical, body, jsonLd }) {
   }
 
   // Fail the build if a prerendered route ever ships duplicate or incorrect SEO head tags.
-  const canonicalTags = html.match(/<link\\b(?=[^>]*\\brel=["']canonical["'])[^>]*>/gi) || [];
-  const descriptionTags = html.match(/<meta\\b(?=[^>]*\\bname=["']description["'])[^>]*>/gi) || [];
-  const titleTags = html.match(/<title\\b[^>]*>[\\s\\S]*?<\\/title>/gi) || [];
+  const canonicalTags = html.match(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/gi) || [];
+  const descriptionTags = html.match(/<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/gi) || [];
+  const titleTags = html.match(/<title\b[^>]*>[\s\S]*?<\/title>/gi) || [];
   if (canonicalTags.length !== 1 || !canonicalTags[0].includes(`href="${escapeHtml(canonical)}"`)) {
     throw new Error(`Expected exactly one self canonical for ${canonical}`);
   }
