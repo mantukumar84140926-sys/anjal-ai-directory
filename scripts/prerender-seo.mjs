@@ -165,7 +165,7 @@ const promptHubDescription = "Browse free copy-ready AI prompts for writing, cod
 const promptCategories = [...new Set(curatedPrompts.map(prompt => prompt.category))].sort();
 const promptCategoryList = promptCategories.map(category => `<li>${escapeHtml(category)}</li>`).join("");
 const promptHubLinks = curatedPrompts.map(prompt => {
-  const slug = prompt.command.replace(/^\\//, "").toLowerCase();
+  const slug = prompt.command.replace(/^\//, "").toLowerCase();
   return `<li><a href="/prompt/${encodeURIComponent(slug)}">${escapeHtml(prompt.title)} Prompt</a> — ${escapeHtml(prompt.description)}</li>`;
 }).join("");
 const promptHubBody = `<main><nav><a href="/">Anjal AI</a> → <strong>AI Prompt Library</strong></nav><h1>Free AI Prompt Library</h1><p>Find practical, copy-ready prompts for image editing, video creation, writing, coding, education, business and productivity. Choose a prompt, replace its placeholders with your details, and adapt the result to your preferred AI assistant.</p><section><h2>Browse prompt categories</h2><ul>${promptCategoryList}</ul></section><section><h2>Copy-ready AI prompts</h2><ul>${promptHubLinks}</ul></section><p>New to AI prompts? Start with a clear goal, provide useful context, and review generated results before using them.</p></main>`;
