@@ -116,6 +116,32 @@ const homeBody = `<main><header><h1>Find the right AI tool and ready-to-use prom
 const homeJsonLd = {"@context":"https://schema.org","@graph":[{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`,description:homeDescription,potentialAction:{"@type":"SearchAction",target:{"@type":"EntryPoint",urlTemplate:`${origin}/?q={search_term_string}`},"query-input":"required name=search_term_string"}},{"@type":"Organization",name:"Anjal AI",url:`${origin}/`,logo:{"@type":"ImageObject",url:`${origin}/anjal-ai-mark.svg`,width:512,height:512}}]};
 fs.writeFileSync(path.join(dist, "index.html"), render({title:homeTitle,description:homeDescription,canonical:`${origin}/`,body:homeBody,jsonLd:homeJsonLd}));
 
+// Prerender the AI Tool Finder and legal pages so direct crawls receive route-specific HTML.
+const finderTitle = "AI Tool Finder — Find the Best AI Tool | Anjal AI";
+const finderDescription = "Find AI tools for writing, coding, design, research, education, marketing, video and productivity using practical recommendations.";
+const finderCategoryLinks = categories.map(category => `<li><a href="/category/${category}">${escapeHtml(categoryNames[category] || "Other")} AI tools</a></li>`).join("");
+const finderBody = `<main><nav><a href="/">Anjal AI</a> → <strong>AI Tool Finder</strong></nav><h1>Find the right AI tool for your task</h1><p>Use the Anjal AI Finder to explore a directory of 1,000 AI tools across writing, coding, design, research, education, marketing, productivity, image and video creation, and more. Search by the job you need to complete rather than by product name alone.</p><section><h2>How to choose an AI tool</h2><ol><li>Describe your task and the result you need.</li><li>Compare tools in the relevant category and check their official websites.</li><li>Verify current pricing, free-plan limits, supported regions, privacy terms and export options before signing up.</li><li>Test a tool with a real example and review the output before relying on it.</li></ol></section><section><h2>Explore AI tool categories</h2><ul>${finderCategoryLinks}</ul></section><section><h2>Explore practical AI prompts</h2><p>Prompts help you give an AI assistant the goal, context, constraints and output format it needs. Browse the <a href="/prompts">free AI prompt library</a> for editable starting points.</p></section><p><a href="/">Browse all AI tools</a> · <a href="/prompts">Open the AI Prompt Library</a></p></main>`;
+const finderJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:finderTitle,description:finderDescription,url:`${origin}/finder`,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
+const finderOut = path.join(dist, "finder", "index.html");
+fs.mkdirSync(path.dirname(finderOut), { recursive: true });
+fs.writeFileSync(finderOut, render({title:finderTitle,description:finderDescription,canonical:`${origin}/finder`,body:finderBody,jsonLd:finderJsonLd}));
+
+const privacyTitle = "Privacy Policy — Anjal AI";
+const privacyDescription = "Read how Anjal AI handles basic site analytics, tool submissions, listing claims and links to third-party services.";
+const privacyBody = `<main><article><h1>Privacy Policy</h1><p>Last updated: September 10, 2026</p><section><h2>What we collect</h2><p>Anjal AI may record basic page views, tool views and outbound tool clicks when analytics is configured. Tool submissions and listing claims may include the contact information you choose to provide.</p></section><section><h2>How we use information</h2><p>We use submitted information to review directory listings and claims, and aggregate analytics to understand which parts of the directory are useful.</p></section><section><h2>Third-party services</h2><p>Tool links take you to third-party websites. Their privacy practices are governed by their own policies. Advertising may be provided by advertising partners after publisher configuration and approval.</p></section><section><h2>Contact</h2><p>For privacy or listing questions, use the contact method provided by the Anjal AI Directory operator.</p></section></article></main>`;
+const privacyJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:privacyTitle,description:privacyDescription,url:`${origin}/privacy`,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
+const privacyOut = path.join(dist, "privacy", "index.html");
+fs.mkdirSync(path.dirname(privacyOut), { recursive: true });
+fs.writeFileSync(privacyOut, render({title:privacyTitle,description:privacyDescription,canonical:`${origin}/privacy`,body:privacyBody,jsonLd:privacyJsonLd}));
+
+const termsTitle = "Terms of Use — Anjal AI";
+const termsDescription = "Review the terms for using Anjal AI Directory, including listings, third-party websites, submissions and availability.";
+const termsBody = `<main><article><h1>Terms of Use</h1><p>Last updated: September 10, 2026</p><section><h2>Directory listings</h2><p>Anjal AI is an independent discovery directory. Listings are provided for discovery and may change over time. Commercial details are marked as not verified when reliable pricing data is unavailable.</p></section><section><h2>Third-party websites</h2><p>Anjal AI does not operate the third-party tools listed in the directory. Use each provider's official website and terms for purchases, accounts, subscriptions and product capabilities.</p></section><section><h2>Submissions and claims</h2><p>Submitting a tool or claiming a listing does not guarantee publication, verification or approval. We may reject, edit or remove listings to maintain directory quality.</p></section><section><h2>Availability</h2><p>The directory is provided on an as-available basis. We do not guarantee that every listed tool, link, price or feature will remain available or accurate at all times.</p></section></article></main>`;
+const termsJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:termsTitle,description:termsDescription,url:`${origin}/terms`,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
+const termsOut = path.join(dist, "terms", "index.html");
+fs.mkdirSync(path.dirname(termsOut), { recursive: true });
+fs.writeFileSync(termsOut, render({title:termsTitle,description:termsDescription,canonical:`${origin}/terms`,body:termsBody,jsonLd:termsJsonLd}));
+
 for (const category of categories) {
   const name = categoryNames[category] || "Other";
   const matches = catalog.filter(x => mapCategory(x.category) === category);
