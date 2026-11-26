@@ -199,6 +199,25 @@ for (const category of categories) {
   fs.writeFileSync(out, render({title,description,canonical,body,jsonLd}));
 }
 
+const curatedToolProfiles = {
+  perplexity: {
+    overview: "Perplexity is an AI answer engine designed around web research. It searches the web and presents synthesized answers with links to sources, so readers can inspect the material behind a response. Its official product information also describes deeper research workflows and access to multiple AI models; exact options can vary by plan and product updates.",
+    bestFor: ["Starting research on a topic and collecting source links", "Comparing claims across multiple webpages before making a decision", "Building a first-pass summary that you can verify against original sources", "Following up on an answer to explore a narrower question"],
+    workflow: ["Write a focused question and include a date range, location or audience when relevant.", "Open the cited pages rather than relying only on the generated summary.", "Check whether the source is primary, current and directly relevant to the claim.", "Ask a follow-up that tests uncertainty or requests a comparison table.", "Save useful source URLs and independently verify important facts."],
+    considerations: ["AI summaries can omit context or misread a source; citations still need to be checked.", "A cited page may not support every sentence next to its citation.", "Research depth, model choices, file features and usage limits can depend on the current plan.", "Do not enter confidential data unless the provider's current privacy terms meet your requirements."],
+    sourceLabel: "Perplexity official product overview",
+    sourceUrl: "https://www.perplexity.ai/en-GB/hub/products/search"
+  },
+  chatgpt: {
+    overview: "ChatGPT is a conversational AI assistant for tasks such as learning, brainstorming, writing, planning, coding and working with information. Depending on the model, plan and enabled tools, it can also search the web, analyze uploaded files or images, and help create images. Availability and usage limits can differ across accounts and change over time.",
+    bestFor: ["Explaining concepts and learning through follow-up questions", "Drafting, rewriting and organizing written material", "Planning projects and turning a broad goal into steps", "Getting help with code, debugging and technical explanations", "Analyzing supported files or images when those tools are available"],
+    workflow: ["State the outcome you want and who the result is for.", "Provide relevant context, constraints and a sample of the desired format.", "Ask for assumptions or uncertain points to be identified.", "Review the response, test code and verify important facts with reliable sources.", "Refine the result with specific feedback instead of accepting the first draft."],
+    considerations: ["ChatGPT can produce incorrect or outdated information; verify consequential claims.", "Search, file analysis, image tools and other capabilities may depend on plan, region and settings.", "Avoid sharing sensitive information unless you understand the applicable data controls.", "Check current plan details and limits on the official website before purchasing."],
+    sourceLabel: "OpenAI ChatGPT capabilities overview",
+    sourceUrl: "https://help.openai.com/en/articles/9260256-chatgpt-capabilities-overview"
+  }
+};
+
 for (const tool of catalog) {
   const category = mapCategory(tool.category);
   const categoryName = categoryNames[category] || "Other";
@@ -208,7 +227,13 @@ for (const tool of catalog) {
   const description = `${tool.name} is an AI tool listed in Anjal AI under ${categoryName}. Explore its official website, category and directory information.`;
   const related = catalog.filter(x => x.slug !== tool.slug && mapCategory(x.category) === category).slice(0, 8);
   const relatedLinks = related.map(x => `<li><a href="/tool/${encodeURIComponent(x.slug)}">${escapeHtml(x.name)}</a></li>`).join("");
-  const body = `<main><nav><a href="/">AI Tools</a> → <a href="/category/${category}">${escapeHtml(categoryName)}</a> → <strong>${escapeHtml(tool.name)}</strong></nav><h1>${escapeHtml(tool.name)}</h1><p>${escapeHtml(description)}</p><h2>Directory profile</h2><ul><li>Category: <a href="/category/${category}">${escapeHtml(categoryName)}</a></li><li>Platform: Web</li><li>Official website: <a href="${escapeHtml(tool.website)}" rel="nofollow">${escapeHtml(tool.name)}</a></li><li>Commercial details: not verified unless explicitly marked.</li></ul><h2>Related AI tools</h2><ul>${relatedLinks}</ul><p><a href="/finder">Use AI Tool Finder</a> · <a href="/">Browse all 1000 AI tools</a></p></main>`;
+  const profile = curatedToolProfiles[tool.slug];
+  const profileSections = profile ? \`<section><h2>About \${escapeHtml(tool.name)}</h2><p>\${escapeHtml(profile.overview)}</p></section>
+<section><h2>What people use it for</h2><ul>\${profile.bestFor.map(item => \`<li>\${escapeHtml(item)}</li>\`).join("")}</ul></section>
+<section><h2>A practical way to evaluate it</h2><ol>\${profile.workflow.map(item => \`<li>\${escapeHtml(item)}</li>\`).join("")}</ol></section>
+<section><h2>Things to check before relying on it</h2><ul>\${profile.considerations.map(item => \`<li>\${escapeHtml(item)}</li>\`).join("")}</ul></section>
+<section><h2>Official product information</h2><p>Confirm current features, availability and terms with the provider: <a href="\${escapeHtml(profile.sourceUrl)}" rel="nofollow noopener">\${escapeHtml(profile.sourceLabel)}</a>.</p></section>\` : "";
+  const body = \`<main><nav><a href="/">AI Tools</a> → <a href="/category/\${category}">\${escapeHtml(categoryName)}</a> → <strong>\${escapeHtml(tool.name)}</strong></nav><h1>\${escapeHtml(tool.name)}</h1><p>\${escapeHtml(description)}</p>\${profileSections}<h2>Directory profile</h2><ul><li>Category: <a href="/category/\${category}">\${escapeHtml(categoryName)}</a></li><li>Platform: Web</li><li>Official website: <a href="\${escapeHtml(tool.website)}" rel="nofollow">\${escapeHtml(tool.name)}</a></li><li>Commercial details: not verified unless explicitly marked.</li></ul><h2>Related AI tools</h2><ul>\${relatedLinks}</ul><p><a href="/finder">Use AI Tool Finder</a> · <a href="/">Browse all 1000 AI tools</a></p></main>\`;
   const jsonLd = {"@context":"https://schema.org","@type":"SoftwareApplication",name:tool.name,description,url:tool.website,applicationCategory:categoryName,operatingSystem:"Web",isPartOf:{"@type":"WebSite",name:"Anjal AI",url:origin},mainEntityOfPage:{"@type":"WebPage","@id":canonical},sameAs:[tool.website]};
   const out = path.join(dist, "tool", tool.slug, "index.html");
   fs.mkdirSync(path.dirname(out), { recursive: true });
