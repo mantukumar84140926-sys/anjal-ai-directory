@@ -265,7 +265,7 @@ const curatedToolProfiles = {
     considerations: ["ChatGPT can produce incorrect or outdated information; verify consequential claims.", "Search, file analysis, image tools and other capabilities may depend on plan, region and settings.", "Avoid sharing sensitive information unless you understand the applicable data controls.", "Check current plan details and limits on the official website before purchasing."],
     sourceLabel: "OpenAI ChatGPT capabilities overview",
     sourceUrl: "https://help.openai.com/en/articles/9260256-chatgpt-capabilities-overview"
-  }
+  },
 
   make: {
     overview: "Make is a visual automation platform for connecting apps, data sources and AI models into repeatable workflows. Users can build scenarios with a drag-and-drop canvas, describe an automation in natural language, or start from an AI chat and refine the result visually. It is designed for individuals and teams that want to coordinate work across connected services without writing every integration from scratch.",
