@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/tool/surfer-seo",
-      "destination": "/category/marketing",
+      "destination": "/tool/surfer-ai",
       "permanent": true
     }
   ],
