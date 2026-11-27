@@ -324,7 +324,7 @@ const curatedToolProfiles = {
       { question: "Is Microsoft Copilot the same as Microsoft 365 Copilot?", answer: "No. Microsoft describes Copilot Chat as web-grounded AI chat, while a Microsoft 365 Copilot licence adds deeper work-context and app integrations. Exact features depend on the eligible plan." },
       { question: "Can Copilot help with Word, Excel and PowerPoint?", answer: "Microsoft lists Copilot experiences across apps such as Word, Excel, PowerPoint, Outlook and Teams for eligible Microsoft 365 Copilot users. Check your account's licence and feature availability." }
     ]
-  }
+  },
   "openrouter": {
     "overview": "OpenRouter provides a unified API for accessing models from many AI providers. Developers can use one integration to compare and call models for text, image, video, audio and other tasks. Its routing layer can select among providers for a requested model and can account for factors such as price, speed, availability and provider failures.",
     "bestFor": [
