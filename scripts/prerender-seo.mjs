@@ -227,6 +227,19 @@ const termsOut = path.join(dist, "terms", "index.html");
 fs.mkdirSync(path.dirname(termsOut), { recursive: true });
 fs.writeFileSync(termsOut, render({title:termsTitle,description:termsDescription,canonical:`${origin}/terms`,body:termsBody,jsonLd:termsJsonLd}));
 
+const categoryGuides = {
+  "ai-assistants": "<section><h2>How to choose an AI assistant</h2><p>AI assistants can help with conversation, writing, reasoning, coding, search, file analysis and everyday planning. Start by defining the task: a quick explanation, a source-backed research answer, a long document review or a multi-step workflow may need different capabilities. A general chatbot is not automatically the best choice for every job.</p><h2>What to compare</h2><ul><li><strong>Answer quality:</strong> Test the assistant with realistic questions from your own work and check whether it follows instructions consistently.</li><li><strong>Fresh information:</strong> Confirm whether web search is available and whether answers include links that support the claims.</li><li><strong>Files and media:</strong> Check the file types, image or audio support and size limits you actually need.</li><li><strong>Model choice:</strong> Compare reasoning, speed, context limits and available models rather than relying on a single benchmark.</li><li><strong>Privacy:</strong> Review retention, training controls, workspace permissions and data-processing terms before sharing sensitive material.</li><li><strong>Cost:</strong> Check message caps, model-specific usage, API billing and team seats.</li></ul><h2>A reliable assistant workflow</h2><ol><li>State the goal, audience, constraints and expected output format.</li><li>Give only the context needed for the task.</li><li>Ask the assistant to separate verified facts, assumptions and uncertainty.</li><li>Open cited sources and test code or calculations independently.</li><li>Review the final result before using or sharing it.</li></ol><p>AI assistants can make factual and reasoning mistakes. Use them as support for human judgment, not as the only authority for important decisions.</p></section>",
+  "image-generation": "<section><h2>How to choose an AI image generator</h2><p>Image tools vary in how they interpret prompts, preserve details, edit existing pictures and support commercial workflows. Decide whether you need concept art, product imagery, social graphics, photo editing, background removal or consistent visual assets before comparing products.</p><h2>Features worth checking</h2><ul><li><strong>Prompt control:</strong> Look for useful controls for composition, aspect ratio, style, lighting and negative instructions.</li><li><strong>Image editing:</strong> Check whether the tool supports inpainting, outpainting, image-to-image workflows or reference images.</li><li><strong>Consistency:</strong> Test whether it can keep a subject, product or visual identity consistent across variations.</li><li><strong>Output quality:</strong> Review resolution, upscaling, export formats, watermarks and generation speed.</li><li><strong>Rights and safety:</strong> Read the provider's rules for commercial use, uploaded reference images, likenesses and generated content.</li><li><strong>Cost:</strong> Compare credit systems, queue priority and limits for high-resolution outputs.</li></ul><h2>A practical image workflow</h2><ol><li>Describe the subject, purpose, audience and required aspect ratio.</li><li>Generate a small set of concepts before spending credits on refinements.</li><li>Use reference images only when you have permission to use them.</li><li>Inspect text, hands, logos and small details manually.</li><li>Export the correct size and keep a record of any required attribution or usage terms.</li></ol></section>",
+  "video-generation": "<section><h2>How to choose an AI video generator</h2><p>AI video products may turn text prompts or still images into motion, extend clips, create avatars, add voiceovers or assemble edited scenes. The best fit depends on whether you need cinematic shots, product demonstrations, explainers, social clips or repeatable production templates.</p><h2>What to evaluate</h2><ul><li><strong>Input modes:</strong> Check text-to-video, image-to-video, video editing and reference-image support.</li><li><strong>Continuity:</strong> Test whether characters, clothing, products, locations and camera direction remain consistent across shots.</li><li><strong>Control:</strong> Compare camera motion, timing, keyframes, scene extension and editing controls.</li><li><strong>Audio:</strong> Confirm whether speech, sound effects, music and lip synchronization are included or require separate tools.</li><li><strong>Output:</strong> Review clip length, resolution, aspect ratios, watermarking and export formats.</li><li><strong>Rights:</strong> Check commercial permissions and restrictions on real people, copyrighted material and uploaded footage.</li></ul><h2>A dependable production workflow</h2><ol><li>Write a shot list and lock the visual style before generating clips.</li><li>Use one reference frame or character description consistently across related shots.</li><li>Generate short tests and review motion artifacts before creating a full sequence.</li><li>Join clips in an editor, then check continuity, sound and pacing.</li><li>Review every frame and confirm rights before publishing.</li></ol></section>",
+  "audio-music": "<section><h2>How to choose an AI audio or music tool</h2><p>Audio products cover several different jobs: music composition, voice generation, speech transcription, voice cleanup, sound effects, mastering and audio editing. Decide whether you need an original track, a narration, a transcript or a finished mix; tools designed for one job may not be suitable for another.</p><h2>What to compare</h2><ul><li><strong>Audio task:</strong> Confirm whether the product generates music, speech, effects or transcripts, and which languages it supports.</li><li><strong>Creative control:</strong> Look for controls over genre, mood, tempo, duration, lyrics, voice style or editing.</li><li><strong>Quality:</strong> Listen for pronunciation, artifacts, timing, mix balance and consistency across longer outputs.</li><li><strong>Export:</strong> Check formats, sample rates, stems, editing options and download limits.</li><li><strong>Rights and consent:</strong> Review commercial licensing and never clone or imitate a real person's voice without appropriate permission.</li><li><strong>Usage limits:</strong> Check credits, generation caps and whether uploads or advanced tools require a paid plan.</li></ul><h2>A safe audio workflow</h2><ol><li>Write a brief describing the intended use, audience, duration and mood.</li><li>Generate a short draft and listen on more than one device.</li><li>Correct names, pronunciation, lyrics and timing before publishing.</li><li>Keep proof of rights for source audio, samples and voice recordings.</li><li>Check the provider's current licence for monetized or client work.</li></ol></section>",
+  "writing": "<section><h2>How to choose an AI writing tool</h2><p>Writing assistants can help with drafting, rewriting, grammar, summaries, translation, tone and long-form editing. Choose a product based on the stage of writing you need help with: planning, first drafts, line editing, fact-checking or publishing. A rewriting tool is not a substitute for subject knowledge or original reporting.</p><h2>What to evaluate</h2><ul><li><strong>Editing depth:</strong> Check whether it explains grammar and style suggestions or simply replaces words.</li><li><strong>Voice and tone:</strong> Test whether it preserves your meaning, terminology and intended audience.</li><li><strong>Long documents:</strong> Check context limits, document imports, comments and collaboration features.</li><li><strong>Language support:</strong> Test the languages and regional variants you actually write in.</li><li><strong>Privacy:</strong> Review how drafts, manuscripts and uploaded documents are stored and used.</li><li><strong>Integrity:</strong> Do not use paraphrasing or AI-detection scores as proof of authorship or as a way to bypass academic or editorial rules.</li></ul><h2>A responsible editing workflow</h2><ol><li>Write the core ideas and factual claims yourself or provide trusted source material.</li><li>Ask for a specific edit, such as clarity, structure or tone, rather than a vague rewrite.</li><li>Compare the revised draft with the original to catch changed meaning.</li><li>Verify quotations, statistics, citations and technical details.</li><li>Make the final editorial decision yourself and disclose AI assistance when required.</li></ol></section>",
+  "coding": "<section><h2>How to choose an AI coding assistant</h2><p>Coding assistants range from chat-based explainers to IDE autocomplete, repository-aware agents, code review tools and test generators. Choose one that fits your development workflow and the languages, frameworks and repositories you actually use.</p><h2>What to compare</h2><ul><li><strong>Context:</strong> Check whether the tool can understand multiple files, repository structure, documentation and project conventions.</li><li><strong>IDE support:</strong> Confirm compatibility with your editor, terminal, Git provider and development environment.</li><li><strong>Control:</strong> Review whether proposed edits are shown as diffs and require approval before they are applied.</li><li><strong>Testing:</strong> See whether it can run tests, explain failures and suggest targeted fixes.</li><li><strong>Security:</strong> Inspect generated dependencies, authentication logic, secrets handling and vulnerable patterns.</li><li><strong>Data policy:</strong> Review how source code and prompts are retained, used for training or shared with providers.</li></ul><h2>A safer coding workflow</h2><ol><li>Describe the bug or feature and provide the smallest relevant code context.</li><li>Ask for a plan before requesting broad changes.</li><li>Review every diff and keep changes small enough to understand.</li><li>Run tests, linting and security checks locally or in CI.</li><li>Commit only after reviewing the final behavior and rollback path.</li></ol><p>AI-generated code can contain bugs, insecure assumptions or incompatible licences. Treat it as a draft that must be reviewed and tested.</p></section>",
+  "design": "<section><h2>How to choose an AI design tool</h2><p>Design products may generate graphics, create layouts, edit images, produce presentations or help maintain a visual identity. Start with the deliverable you need and the people who must edit or approve it, then compare tools for control and export quality.</p><h2>What to evaluate</h2><ul><li><strong>Design task:</strong> Confirm whether the tool handles brand assets, layouts, presentations, graphics or image editing.</li><li><strong>Brand control:</strong> Check reusable colors, fonts, logos, templates and brand guidelines.</li><li><strong>Editing:</strong> See whether you can adjust individual elements after generation or only export a flattened result.</li><li><strong>Collaboration:</strong> Review comments, shared libraries, approvals and team permissions.</li><li><strong>Accessibility:</strong> Check contrast, readable typography, alt text and language support.</li><li><strong>Rights:</strong> Understand ownership and commercial use rules for templates, fonts, stock assets and generated images.</li></ul><h2>A practical design workflow</h2><ol><li>Define the audience, message, channel and output dimensions.</li><li>Prepare approved brand assets and a clear content brief.</li><li>Generate concepts, then refine the strongest option manually.</li><li>Check text, layout, contrast and mobile readability.</li><li>Export the correct format and retain editable source files when possible.</li></ol></section>",
+  "productivity": "<section><h2>How to choose an AI productivity tool</h2><p>Productivity tools can help organize tasks, summarize information, automate repetitive work, manage meetings or connect business applications. Choose based on the workflow you want to improve, not the number of AI features on a product page.</p><h2>What to compare</h2><ul><li><strong>Workflow fit:</strong> Identify the exact repetitive task and the people involved.</li><li><strong>Integrations:</strong> Confirm that the apps, calendars, files and databases you use are supported.</li><li><strong>Automation control:</strong> Check approval steps, error handling, logs and the ability to undo changes.</li><li><strong>Reliability:</strong> Test what happens when an app is unavailable or data is missing.</li><li><strong>Security:</strong> Review permissions, data retention and access controls for connected accounts.</li><li><strong>Cost:</strong> Compare task, credit, user and API limits at the scale you expect.</li></ul><h2>A practical automation workflow</h2><ol><li>Map the current process from trigger to outcome.</li><li>Start with a small test using non-sensitive data.</li><li>Require human approval for payments, external messages or important record changes.</li><li>Test failure cases and monitor each run.</li><li>Document ownership and a manual fallback before depending on automation.</li></ol></section>",
+  "research": "<section><h2>How to choose an AI research tool</h2><p>Research assistants can search the web, read documents, compare sources, summarize findings or produce longer reports. Their value depends on the quality of the sources and how clearly they show where claims came from. Choose a tool that matches the depth and evidence standard of your research.</p><h2>What to evaluate</h2><ul><li><strong>Source coverage:</strong> Check whether it searches the open web, selected databases, uploaded files or a defined corpus.</li><li><strong>Citations:</strong> Open links and confirm that each source supports the sentence it is attached to.</li><li><strong>Freshness:</strong> Check publication dates and whether the tool can distinguish current information from older material.</li><li><strong>Research depth:</strong> Compare quick answers with multi-step research, document extraction and report exports.</li><li><strong>Transparency:</strong> Look for source lists, quotes, uncertainty and a way to inspect the underlying material.</li><li><strong>Privacy:</strong> Review how uploaded documents and queries are handled.</li></ul><h2>A reliable research workflow</h2><ol><li>Turn the topic into a specific question and define the time period.</li><li>Ask for a source list before requesting a final summary.</li><li>Prioritize primary sources, official documents and original research.</li><li>Compare conflicting claims and record what remains uncertain.</li><li>Keep citations and notes so another person can reproduce the work.</li></ol></section>",
+  "other": "<section><h2>How to evaluate an AI tool</h2><p>Tools in this collection cover different tasks, so start by checking the product's actual purpose and whether it uses AI for the workflow you need. A clear use case is more useful than a long feature list. Try to identify the input you provide, the output you receive and the amount of human review required.</p><h2>Questions to ask before choosing</h2><ul><li><strong>Purpose:</strong> What specific task does the product perform, and who is it designed for?</li><li><strong>Evidence:</strong> Can you test the core feature and verify the result?</li><li><strong>Compatibility:</strong> Does it work with your devices, files, languages and existing tools?</li><li><strong>Privacy:</strong> What data do you upload, and how does the provider handle it?</li><li><strong>Commercial terms:</strong> Are pricing, usage limits, ownership and cancellation rules clear?</li><li><strong>Support:</strong> Is there current documentation and a way to get help?</li></ul><h2>Before relying on an AI result</h2><p>Test a real example, compare the result with a trusted source and check what happens when the input is incomplete or unusual. AI-generated material can be inaccurate or unsuitable. Keep a human review step for decisions, public content and sensitive information.</p></section>"
+};
+
 for (const category of Object.keys(categoryNames)) {
   const name = categoryNames[category] || "Other";
   const matches = catalog.filter(x => mapCategory(x.category) === category);
@@ -234,7 +247,7 @@ for (const category of Object.keys(categoryNames)) {
   const title = category === "education" ? "Education AI Tools for Students & Teachers | Anjal AI" : category === "marketing" ? "Marketing AI Tools for SEO & Content | Anjal AI" : `${name} AI Tools | Anjal AI`;
   const description = matches.length === 0 ? `${name} AI tools are being organized in the Anjal AI directory. Explore related categories and official product listings while this collection is expanded.` : category === "education" ? "Compare education AI tools for study, revision and teaching. Check learning value, accuracy, privacy, language support and free-plan limits." : `Explore ${matches.length} ${name} AI tools in the Anjal AI directory. Browse related tools and official websites.`;
   const items = matches.map((x, i) => `<li><a href="/tool/${encodeURIComponent(x.slug)}">${escapeHtml(x.name)}</a></li>`).join("");
-  const categoryGuide = category === "marketing" ? `<section><h2>How to choose marketing AI tools</h2><p>Marketing tools can support research, content planning, search optimization, creative production, campaign operations and performance analysis. Start with one clear business goal—such as improving content quality, speeding up research or organizing campaign assets—then compare tools against the actual workflow and the people who will use them.</p><h2>What to evaluate before choosing</h2><ul><li><strong>Workflow fit:</strong> Check whether the tool solves a specific step or simply adds another dashboard to manage.</li><li><strong>Originality and brand voice:</strong> Review whether you can guide tone, audience, terminology and editorial standards.</li><li><strong>Evidence and accuracy:</strong> Verify research, statistics, product claims and SEO recommendations against reliable sources.</li><li><strong>Measurement:</strong> Understand which metrics the product reports and whether you can export or validate the underlying data.</li><li><strong>Privacy and rights:</strong> Check how customer data, campaign assets and uploaded content are handled, and review usage rights for generated outputs.</li><li><strong>Cost and integrations:</strong> Confirm current limits, billing, supported channels and compatibility with your existing tools.</li></ul><h2>A practical AI-assisted marketing workflow</h2><ol><li>Define the audience, campaign objective and success metric.</li><li>Gather first-party information and trustworthy research before drafting.</li><li>Use AI for outlines, variations or analysis—not as a substitute for editorial judgment.</li><li>Fact-check claims, review brand consistency and check legal or platform requirements.</li><li>Publish only after human review, then measure results and update the workflow.</li></ol><p>AI-generated copy, images and recommendations can contain errors or rights issues. Review every deliverable before publishing or spending campaign budget.</p></section>` : category === "education" ? `<section><h2>How to choose education AI tools</h2><p>Education software should support learning rather than replace it. Before choosing a tool, decide whether you need help explaining a difficult topic, creating revision material, practicing a language, organizing research or preparing classroom resources. Then check whether the tool is suitable for the learner's age and level, supports the required language, and makes its limitations clear.</p><h2>Useful ways to evaluate a study tool</h2><ul><li><strong>Accuracy:</strong> Compare explanations with textbooks, trusted academic material or teacher guidance.</li><li><strong>Learning value:</strong> Prefer tools that explain steps and encourage practice instead of only supplying answers.</li><li><strong>Privacy:</strong> Check what happens to student names, uploaded assignments, recordings and other personal data.</li><li><strong>Accessibility:</strong> Confirm language, device support and accessibility features before adopting it.</li><li><strong>Cost and limits:</strong> Verify current free-plan quotas, subscriptions and age requirements on the provider's website.</li></ul><h2>A responsible AI study workflow</h2><ol><li>Start with a specific learning objective and your class or exam level.</li><li>Ask for a simple explanation, worked example or short practice quiz.</li><li>Attempt the problem yourself before viewing a suggested solution.</li><li>Check important facts and answers against reliable course material.</li><li>Use feedback to identify what to revise next.</li></ol><p>AI-generated explanations can be incomplete or incorrect. Students should follow their school's academic-integrity rules and teachers or guardians should review tools before classroom or child use.</p><h2>Questions to ask before adopting an education tool</h2><h3>Can it replace a textbook or teacher?</h3><p>No. Treat it as a support tool for explanations and practice. Course materials and qualified teachers remain important sources for curriculum and assessment.</p><h3>Should students copy AI-generated answers?</h3><p>Students should follow their school's rules. A stronger learning approach is to use an explanation to understand the method, solve the task independently and cite or disclose AI assistance when required.</p><h3>What should parents and teachers check?</h3><p>Review age suitability, data collection, account requirements, advertising, moderation, language quality and whether a learner can use the tool safely without sharing unnecessary personal information.</p></section>` : "";
+  const categoryGuide = categoryGuides[category] || "";
   const emptyCategoryGuide = matches.length === 0 ? `<section><h2>Explore related AI tools</h2><p>This category does not yet have a dedicated tool collection. Many business workflows can be supported by tools in marketing, productivity, coding and design. Browse those collections to compare relevant products and confirm their current features on the official provider websites.</p><ul><li><a href="/category/marketing">Marketing AI tools</a></li><li><a href="/category/productivity">Productivity AI tools</a></li><li><a href="/category/coding">Coding AI tools</a></li><li><a href="/category/design">Design AI tools</a></li></ul></section>` : "";
   const body = `<main><nav><a href="/">Anjal AI</a> → <strong>${escapeHtml(name)}</strong></nav><h1>${escapeHtml(name)} AI Tools</h1><p>${escapeHtml(description)}</p>${categoryGuide}${matches.length ? `<p><strong>${matches.length}</strong> tools listed in this category.</p><ul>${items}</ul>` : emptyCategoryGuide}<p><a href="/finder">Find an AI tool</a> · <a href="/">Browse all tools</a></p></main>`;
   const jsonLd = {"@context":"https://schema.org","@type":"CollectionPage",name:title,description,url:canonical,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:origin}};
@@ -312,6 +325,300 @@ const curatedToolProfiles = {
       { question: "Can Copilot help with Word, Excel and PowerPoint?", answer: "Microsoft lists Copilot experiences across apps such as Word, Excel, PowerPoint, Outlook and Teams for eligible Microsoft 365 Copilot users. Check your account's licence and feature availability." }
     ]
   }
+  "openrouter": {
+    "overview": "OpenRouter provides a unified API for accessing models from many AI providers. Developers can use one integration to compare and call models for text, image, video, audio and other tasks. Its routing layer can select among providers for a requested model and can account for factors such as price, speed, availability and provider failures.",
+    "bestFor": [
+      "Building applications that need to switch between multiple model providers",
+      "Comparing model availability, pricing and context limits in one catalogue",
+      "Routing requests across providers with fallback behavior",
+      "Prototyping model-backed products without maintaining a separate integration for every provider"
+    ],
+    "workflow": [
+      "Choose the model or model family that fits the task and inspect its current context and modality support.",
+      "Create an API key and follow the official quickstart for the integration style you use.",
+      "Set model, provider and routing preferences explicitly when reliability or cost matters.",
+      "Log usage and inspect returned model/provider metadata so you can understand how requests were served.",
+      "Add budget controls, retries and tests for provider failures before production use."
+    ],
+    "considerations": [
+      "Model availability, pricing and provider support can change; check the live model catalogue before estimating costs.",
+      "Different providers may have different latency, rate limits, data policies and model behavior.",
+      "A unified API does not remove the need to secure API keys or monitor application usage.",
+      "Review the current privacy and data-retention terms for the provider route selected for each request."
+    ],
+    "sourceLabel": "OpenRouter official platform and routing documentation",
+    "sourceUrl": "https://openrouter.ai/"
+  },
+  "word-spinner": {
+    "overview": "Word Spinner is an AI writing assistant with tools for rewriting, humanizing, grammar checking, detecting AI-like text, summarizing, translating and drafting common content such as emails. It is aimed at people who want to revise or reshape existing text as well as create a first draft. Its own product information emphasizes keeping the writer involved in reviewing the result.",
+    "bestFor": [
+      "Rephrasing a draft while trying to preserve its original meaning",
+      "Checking grammar and improving clarity before publication",
+      "Summarizing or translating text for a different audience",
+      "Creating an initial email or short-form content draft",
+      "Exploring alternate wording and tone for marketing or general writing"
+    ],
+    "workflow": [
+      "Start with your own notes or a draft that you have permission to edit.",
+      "Choose a specific task such as grammar correction, rephrasing or summarization.",
+      "Compare the output with the original to catch changed facts, tone or nuance.",
+      "Restore citations and verify any factual statements that were altered during rewriting.",
+      "Edit the final text yourself and follow the rules of your school, employer or publisher."
+    ],
+    "considerations": [
+      "A humanizer or AI detector cannot reliably prove who wrote a text or guarantee that it will pass a detector.",
+      "Paraphrasing does not remove the need to cite sources or respect copyright.",
+      "Review privacy terms before pasting unpublished, confidential or personal material.",
+      "Check current free and paid usage limits directly with the provider."
+    ],
+    "sourceLabel": "Word Spinner official product overview",
+    "sourceUrl": "https://word-spinner.com/about"
+  },
+  "basmo": {
+    "overview": "Basmo is a reading companion rather than a general-purpose chatbot. Its product information describes a place to organize books, track reading sessions and keep notes, with AI-assisted features for exploring book ideas and returning to saved passages. Readers can also use supported imports and mobile apps, although exact features can differ by platform and subscription.",
+    "bestFor": [
+      "Keeping a personal record of books and reading sessions",
+      "Saving passages, notes and ideas from books",
+      "Returning to important ideas through personal recaps",
+      "Exploring a book's themes or deciding what to read next",
+      "Building a regular reading habit with simple goals"
+    ],
+    "workflow": [
+      "Add the books you are reading and set a realistic reading goal.",
+      "Record sessions and save notes or passages that matter to you.",
+      "Use AI-assisted exploration to ask questions about selected ideas or notes.",
+      "Check any generated explanation against the original book or your saved passage.",
+      "Review the provider's privacy information before sending notes or text to remote AI features."
+    ],
+    "considerations": [
+      "Basmo does not provide a library of full ebooks or licensed audiobooks; it helps organize your reading life and notes.",
+      "AI answers can be imperfect, so keep the original passage or source close by.",
+      "Basic tracking and advanced AI or audio features may have different plan requirements.",
+      "Availability and feature parity can differ between iOS, Android and app versions."
+    ],
+    "sourceLabel": "Basmo official product and FAQ",
+    "sourceUrl": "https://basmo.app/faq/"
+  },
+  "switchboard-ai": {
+    "overview": "Switchboard Canvas is a template-driven image production platform. Teams can design reusable visual templates and generate images through an API by supplying changing text, image and other values. The product is suited to repeatable creative operations such as producing branded assets in multiple sizes, rather than only generating one-off pictures from a text prompt.",
+    "bestFor": [
+      "Generating batches of branded graphics from reusable templates",
+      "Creating multiple image sizes from one API request",
+      "Producing localized visuals with translated text",
+      "Connecting image production to spreadsheets, Airtable or automation services",
+      "Building repeatable image workflows for agencies and content teams"
+    ],
+    "workflow": [
+      "Create a responsive template and define the text, image and layout fields that should change.",
+      "Test one output manually and confirm that text, images and dimensions render correctly.",
+      "Use the API to provide replacement values and request the required sizes.",
+      "Connect the workflow to approved data sources or automation tools only after testing permissions.",
+      "Review every output for brand consistency, text overflow and image rights before publishing."
+    ],
+    "considerations": [
+      "Switchboard Canvas is template-led; it is not the same as a free-form text-to-image generator.",
+      "API calls, batch sizes, translation and integrations depend on the selected plan.",
+      "Template design quality and source assets strongly affect the final output.",
+      "Check the current API documentation, pricing and data-handling terms before production use."
+    ],
+    "sourceLabel": "Switchboard Canvas official image generation API",
+    "sourceUrl": "https://www.switchboard.ai/canvas/image-generation-api/"
+  },
+  "you-com": {
+    "overview": "You.com currently presents AI search and inference infrastructure for developers and organizations. Its product suite includes web search, answer, extract, research and finance research APIs, alongside an inference router for calling supported models through a unified interface. This makes the platform relevant to teams building AI applications that need fresh web information or model routing.",
+    "bestFor": [
+      "Adding real-time web search to an AI application",
+      "Extracting content from webpages or PDF URLs",
+      "Generating cited answers or multi-step research outputs",
+      "Routing model requests through a unified API",
+      "Building agent workflows that need web data and inference together"
+    ],
+    "workflow": [
+      "Decide whether the application needs search results, page extraction, a cited answer, research or model inference.",
+      "Read the matching API quickstart and choose the response format your application expects.",
+      "Create an API key and test a small request with representative queries.",
+      "Inspect citations, source freshness, latency and usage costs before scaling.",
+      "Set rate limits, logging and data-retention controls for the production workflow."
+    ],
+    "considerations": [
+      "You.com has expanded from a consumer search experience into an API and inference platform; check the current product pages for the exact service you need.",
+      "Each API can have different pricing, response formats and usage limits.",
+      "Search results and generated answers still require source review for high-stakes use.",
+      "Review the provider's security and data-retention options before sending customer or confidential information."
+    ],
+    "sourceLabel": "You.com official APIs and quickstart",
+    "sourceUrl": "https://you.com/docs/quickstart"
+  },
+  "deepseek": {
+    "overview": "DeepSeek offers conversational AI and model services for users and developers. Its official materials describe chat, coding and model APIs, while recent API documentation explains built-in web search, multi-step deep-thinking search, file input and URL reading for supported models. Available models and capabilities change over time, so users should check the official app and documentation rather than rely on old model names.",
+    "bestFor": [
+      "Asking questions and exploring ideas in the official chat",
+      "Getting help with coding and technical explanations",
+      "Using supported web search and URL reading in AI conversations",
+      "Building applications with DeepSeek model APIs",
+      "Providing supported documents or images as context for a task"
+    ],
+    "workflow": [
+      "Use the official DeepSeek chat or developer platform rather than a similarly named third-party service.",
+      "Choose the model and interface appropriate for a consumer conversation or API integration.",
+      "For research, enable supported search features and inspect the returned sources.",
+      "For file-based questions, confirm that the uploaded format is supported and review extracted content.",
+      "Test API behavior, costs and safety controls before deploying an application."
+    ],
+    "considerations": [
+      "Model names, API endpoints and supported capabilities are updated; follow current official documentation.",
+      "Search and generated answers can still be incomplete or inaccurate; verify important claims.",
+      "API tool usage may add costs beyond standard model token charges.",
+      "Do not upload sensitive files unless the provider's current privacy and security terms are appropriate."
+    ],
+    "sourceLabel": "DeepSeek official website and API feature guide",
+    "sourceUrl": "https://www.deepseek.com/en/",
+    "faq": [
+      {
+        "question": "Can DeepSeek search the web?",
+        "answer": "DeepSeek's official API documentation describes web search and multi-step deep-thinking search for supported models when the relevant tools are enabled. Check the current chat and API documentation for availability."
+      },
+      {
+        "question": "Can developers send files to DeepSeek?",
+        "answer": "The official chatbot guide describes file input for supported formats such as PDF, Word, PowerPoint and images. Supported formats and limits should be checked in the current documentation."
+      }
+    ]
+  },
+  "prowritingaid": {
+    "overview": "ProWritingAid is a writing and editing toolkit for people who want feedback on grammar, clarity, style and longer-form storytelling. Its official feature pages describe grammar and spelling checks, rephrasing, 25-plus writing reports and tools for planning, story critique and manuscript analysis. It is especially relevant to writers who want detailed editorial feedback rather than only a one-click rewrite.",
+    "bestFor": [
+      "Checking grammar, spelling and punctuation in a draft",
+      "Reviewing readability, repetition, sentence structure and style",
+      "Exploring alternate phrasings for awkward sentences",
+      "Analyzing pacing, characters and structure in longer fiction",
+      "Planning and refining manuscripts before publication"
+    ],
+    "workflow": [
+      "Choose the document or chapter you want to review and keep an original copy.",
+      "Run focused reports for grammar, readability, repetition or style rather than changing everything at once.",
+      "Review each suggestion in context and preserve deliberate voice or terminology.",
+      "Use story and manuscript feedback as editorial input, not as an automatic verdict.",
+      "Proofread the final draft and check citations, names and facts independently."
+    ],
+    "considerations": [
+      "Automated suggestions can flatten a distinctive voice or change intended meaning; accept edits selectively.",
+      "Some reports, integrations and advanced features may depend on the current subscription.",
+      "Check supported apps and integrations before choosing it for a particular writing workflow.",
+      "Review privacy terms before uploading unpublished manuscripts or client documents."
+    ],
+    "sourceLabel": "ProWritingAid official features",
+    "sourceUrl": "https://prowritingaid.com/features",
+    "faq": [
+      {
+        "question": "What does ProWritingAid check?",
+        "answer": "Its official feature list describes grammar, spelling, punctuation, readability, sentence structure, repetition, style and story-level feedback, with more than 25 writing reports."
+      },
+      {
+        "question": "Is ProWritingAid only for fiction writers?",
+        "answer": "No. Its tools can support many kinds of writing, although several features are specifically designed for storytellers and long-form manuscripts."
+      }
+    ]
+  },
+  "spinbot": {
+    "overview": "SpinBot is an online paraphrasing and text-rewriting tool with a grammar checker. Its official pages describe rewriting sentences, paragraphs and longer text, with controls for different rewrite styles and options to leave selected words unchanged. It is designed for quick text revision, but the output still needs careful human editing.",
+    "bestFor": [
+      "Trying alternative wording for a sentence or paragraph",
+      "Improving clarity or shortening a draft",
+      "Exploring different phrasing before a manual edit",
+      "Checking grammar in short pieces of text",
+      "Reworking text that you own or have permission to edit"
+    ],
+    "workflow": [
+      "Paste text that you have written or are authorized to modify.",
+      "Choose a rewrite mode and specify words or names that should remain unchanged.",
+      "Compare the output with the original to confirm that the meaning has not shifted.",
+      "Restore citations and verify quotations, technical terms and factual claims.",
+      "Edit the result manually and disclose assistance where required."
+    ],
+    "considerations": [
+      "Paraphrasing does not make copied material original or remove the need to cite sources.",
+      "Automated rewrites can introduce errors, awkward wording or changed meaning.",
+      "Do not use rewriting to evade academic integrity rules or plagiarism checks.",
+      "Check the current free, ad-supported and paid options and text limits on the provider's website."
+    ],
+    "sourceLabel": "SpinBot official paraphrasing tool",
+    "sourceUrl": "https://spinbot.com/paraphrasing-tool"
+  },
+  "udio": {
+    "overview": "Udio is an AI music creation platform where users describe a song idea and generate musical clips. Its help centre explains how to write a prompt, choose a clip length, create variations, extend a track and work with custom lyrics. Supported audio-upload workflows can be used to extend, remix or stylize audio, subject to account eligibility and the provider's rights rules.",
+    "bestFor": [
+      "Creating early music ideas from a written description",
+      "Exploring genres, moods and song concepts",
+      "Generating lyric ideas or working with custom lyrics",
+      "Extending or refining a generated track",
+      "Experimenting with permitted audio uploads and variations"
+    ],
+    "workflow": [
+      "Describe the intended mood, genre, theme and any musical details in a concise prompt.",
+      "Generate a short draft and listen before changing several prompt elements at once.",
+      "Edit lyrics and regenerate variations until the direction is clear.",
+      "Use extension or audio editing features only when they are available to your account.",
+      "Keep records of source material and review the current licence before sharing or monetizing a track."
+    ],
+    "considerations": [
+      "Generated music can contain unexpected artifacts or unwanted similarities; listen carefully before release.",
+      "Audio upload features may be limited to paid subscribers and require you to own or have rights to the uploaded audio.",
+      "Commercial use, distribution and ownership terms can change; read the current Udio terms before publishing.",
+      "Do not upload commercial recordings or other copyrighted audio unless you have permission."
+    ],
+    "sourceLabel": "Udio official creation and audio-upload guides",
+    "sourceUrl": "https://help.udio.com/en/articles/10715838-create-your-first-song"
+  },
+  "subpals": {
+    "overview": "SubPals is a YouTube creator resource that combines channel-growth information with free tools for making channel content easier to prepare. Its current site describes a subscribe-link generator and AI-assisted tools for video ideas, scripts, titles and descriptions, outlines, tags and thumbnail text. It also promotes creator collaborations and paid shoutout campaigns, so users should distinguish its free content utilities from its separate growth services.",
+    "bestFor": [
+      "Creating a YouTube subscribe link for a channel or video",
+      "Generating first-draft ideas and outlines for videos",
+      "Drafting titles, descriptions, tags and thumbnail text",
+      "Preparing content variations for a particular audience or niche",
+      "Exploring creator collaboration resources alongside content planning"
+    ],
+    "workflow": [
+      "Use the free subscribe-link tool with your own channel handle or video URL.",
+      "Describe your audience and video topic before generating ideas or a script.",
+      "Edit generated titles, descriptions and tags to match the actual video.",
+      "Check YouTube policies and avoid misleading metadata or engagement tactics.",
+      "Evaluate any paid promotion or shoutout offer separately; review terms and do not assume a specific subscriber result."
+    ],
+    "considerations": [
+      "SubPals is a creator-growth resource, not only an AI writing assistant; features and offers on the site may change.",
+      "AI-generated scripts and metadata need human review for accuracy, originality and audience fit.",
+      "The provider distinguishes creator exposure from guaranteed subscriber numbers; no growth result should be assumed.",
+      "Review payment, refund, privacy and platform-policy terms before using paid services."
+    ],
+    "sourceLabel": "SubPals official creator tools and service information",
+    "sourceUrl": "https://www.subpals.com/"
+  },
+  "digital-first-ai": {
+    "overview": "Digital First AI has rebranded to DFIRST AI. The current product presents itself as a creative workspace for brand and marketing teams, bringing research, copy, images, video and website or campaign assets into connected workflows. Its feature pages describe multi-model orchestration, brand-voice guidance, reusable references, real-time research and tools for producing campaign variations. The current product and access model may differ from older Digital First AI listings.",
+    "bestFor": [
+      "Planning a product launch campaign from source material and brand assets",
+      "Creating and adapting marketing copy, images and short videos",
+      "Keeping campaign outputs aligned with brand references and voice",
+      "Researching trends or competitor information to inform creative work",
+      "Coordinating multiple creative deliverables in one workspace"
+    ],
+    "workflow": [
+      "Open the current DFIRST website and confirm the product access available to your account.",
+      "Provide a clear campaign brief, target audience, product details and approved brand assets.",
+      "Use research and generation tools to develop a small set of concepts.",
+      "Review text, visuals and factual claims before approving any output.",
+      "Check connected apps, permissions and data controls before linking company information."
+    ],
+    "considerations": [
+      "Digital First AI is now presented as DFIRST AI; older links or product descriptions may be outdated.",
+      "The current website indicates that some workspace access is being introduced through a waitlist.",
+      "Generated campaign assets and research require human review for accuracy, brand safety and rights.",
+      "Review current pricing, availability, integrations and privacy terms directly with DFIRST."
+    ],
+    "sourceLabel": "DFIRST official product and feature overview",
+    "sourceUrl": "https://dfirst.ai/"
+  },
 };
 
 for (const tool of catalog) {
