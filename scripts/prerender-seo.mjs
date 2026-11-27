@@ -771,7 +771,7 @@ for (const tool of catalog) {
   const claimJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:claimTitle,description:claimDescription,url:claimCanonical,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
   const claimOut = path.join(dist, "claim", tool.slug, "index.html");
   fs.mkdirSync(path.dirname(claimOut), { recursive: true });
-  fs.writeFileSync(claimOut, render({title:claimTitle,description:claimDescription,canonical:claimCanonical,body:claimBody,jsonLd:claimJsonLd,robots:"noindex,nofollow"}));
+  fs.writeFileSync(claimOut, render({title:claimTitle,description:claimDescription,canonical:claimCanonical,body:claimBody,jsonLd:claimJsonLd,robots:"noindex,follow"}));
 
   const goCanonical = `${origin}/go/${encodeURIComponent(tool.slug)}`;
   const goTitle = `Opening ${tool.name} Official Website | Anjal AI`;
@@ -784,7 +784,7 @@ for (const tool of catalog) {
   const goJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:goTitle,description:goDescription,url:goCanonical,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
   const goOut = path.join(dist, "go", tool.slug, "index.html");
   fs.mkdirSync(path.dirname(goOut), { recursive: true });
-  fs.writeFileSync(goOut, render({title:goTitle,description:goDescription,canonical:goCanonical,body:goBody,jsonLd:goJsonLd,robots:"noindex,nofollow"}));
+  fs.writeFileSync(goOut, render({title:goTitle,description:goDescription,canonical:goCanonical,body:goBody,jsonLd:goJsonLd,robots:"noindex,follow"}));
 }
 
 const promptManifestPath = path.join(dist, ".prompt-data.mjs");
