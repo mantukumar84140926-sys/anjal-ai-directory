@@ -338,6 +338,58 @@ ${profile.faq ? `<section><h2>Frequently asked questions about ${escapeHtml(tool
 }
 
 
+
+/* Give the public submission page its own crawlable content instead of the SPA homepage fallback. */
+const submitTitle = "Submit an AI Tool to Anjal AI | Directory Listing Review";
+const submitDescription = "Suggest an AI product for the Anjal AI directory. Share its official website, category and a clear description for editorial review.";
+const submitBody = `<main><nav><a href="/">Anjal AI</a> → <strong>Submit an AI tool</strong></nav>
+<h1>Submit an AI tool to Anjal AI</h1>
+<p>Know an AI product that should be easier to discover? Suggest it for review in the Anjal AI directory. The submission form collects the product name, official website, primary category and a short description so the directory team can assess whether the listing is useful and accurate.</p>
+<section><h2>What to include in a submission</h2><ul>
+<li><strong>Product name:</strong> Use the name shown by the product's own provider.</li>
+<li><strong>Official website:</strong> Provide the direct HTTPS website, not an affiliate redirect or an unrelated download page.</li>
+<li><strong>Primary category:</strong> Choose the task the product is mainly designed to support, such as writing, coding, research, design, education, marketing, image, video or audio creation.</li>
+<li><strong>Clear description:</strong> Explain what the product does and who may find it useful. Avoid unsupported pricing, ratings or feature claims.</li>
+<li><strong>Contact email (optional):</strong> Add an address only if you want the reviewer to be able to ask a follow-up question.</li>
+</ul></section>
+<section><h2>How the review works</h2><ol><li>Send the product details through the submission form.</li><li>The directory team reviews the official website and checks whether the product fits the directory.</li><li>Incomplete, duplicate, misleading or unverifiable submissions may be declined or edited.</li><li>Approval is not guaranteed, and a submission does not guarantee a particular ranking or placement.</li></ol></section>
+<section><h2>Before you submit</h2><p>Only submit information you are authorized to share. Do not include passwords, payment details, confidential customer data or sensitive personal information. Product features, free plans and pricing can change, so the directory avoids presenting commercial details as verified unless reliable evidence is available.</p><p>Read the <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Use</a> before sending information.</p></section>
+<p><a href="/">Browse the AI tools directory</a> · <a href="/finder">Find an AI tool</a></p></main>`;
+const submitJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:submitTitle,description:submitDescription,url:`${origin}/submit`,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
+const submitOut = path.join(dist, "submit", "index.html");
+fs.mkdirSync(path.dirname(submitOut), { recursive: true });
+fs.writeFileSync(submitOut, render({title:submitTitle,description:submitDescription,canonical:`${origin}/submit`,body:submitBody,jsonLd:submitJsonLd}));
+
+/* Claim and outbound-redirect routes are functional utility pages, not search landing pages.
+   Give each one a route-specific noindex document and self-canonical instead of homepage HTML. */
+for (const tool of catalog) {
+  const claimCanonical = `${origin}/claim/${encodeURIComponent(tool.slug)}`;
+  const claimTitle = `Claim ${tool.name} Listing | Anjal AI`;
+  const claimDescription = `Request an ownership review for the ${tool.name} listing in the Anjal AI directory.`;
+  const claimBody = `<main><nav><a href="/">Anjal AI</a> → <a href="/tool/${encodeURIComponent(tool.slug)}">${escapeHtml(tool.name)}</a> → <strong>Claim listing</strong></nav>
+<h1>Claim the ${escapeHtml(tool.name)} listing</h1>
+<p>This page is for a person authorized to represent ${escapeHtml(tool.name)} who wants to request a correction or update to its Anjal AI directory listing.</p>
+<section><h2>How listing claims are reviewed</h2><p>Provide a business contact, your role and a clear explanation of the requested change. The directory may verify ownership using the official product website or other reliable evidence before making changes. Submitting a claim does not guarantee approval, publication, a particular placement or a response time.</p></section>
+<p>Review the <a href="/privacy">Privacy Policy</a> before sending contact details. Visit the <a href="/tool/${encodeURIComponent(tool.slug)}">public ${escapeHtml(tool.name)} directory profile</a> or its <a href="${escapeHtml(tool.website)}" rel="nofollow noopener">official website</a>.</p></main>`;
+  const claimJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:claimTitle,description:claimDescription,url:claimCanonical,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
+  const claimOut = path.join(dist, "claim", tool.slug, "index.html");
+  fs.mkdirSync(path.dirname(claimOut), { recursive: true });
+  fs.writeFileSync(claimOut, render({title:claimTitle,description:claimDescription,canonical:claimCanonical,body:claimBody,jsonLd:claimJsonLd,robots:"noindex,nofollow"}));
+
+  const goCanonical = `${origin}/go/${encodeURIComponent(tool.slug)}`;
+  const goTitle = `Opening ${tool.name} Official Website | Anjal AI`;
+  const goDescription = `Continue to the official ${tool.name} website from the Anjal AI directory.`;
+  const goBody = `<main><nav><a href="/">Anjal AI</a> → <a href="/tool/${encodeURIComponent(tool.slug)}">${escapeHtml(tool.name)}</a> → <strong>Official website</strong></nav>
+<h1>Continue to ${escapeHtml(tool.name)}</h1>
+<p>You are leaving the Anjal AI directory to visit the product provider's official website.</p>
+<p><a href="${escapeHtml(tool.website)}" rel="nofollow noopener">Continue to ${escapeHtml(tool.name)} official website</a></p>
+<p><a href="/tool/${encodeURIComponent(tool.slug)}">Return to the Anjal AI listing</a></p></main>`;
+  const goJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:goTitle,description:goDescription,url:goCanonical,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
+  const goOut = path.join(dist, "go", tool.slug, "index.html");
+  fs.mkdirSync(path.dirname(goOut), { recursive: true });
+  fs.writeFileSync(goOut, render({title:goTitle,description:goDescription,canonical:goCanonical,body:goBody,jsonLd:goJsonLd,robots:"noindex,nofollow"}));
+}
+
 const promptManifestPath = path.join(dist, ".prompt-data.mjs");
 await build({
   entryPoints: [path.join(root, "scripts", "prompt-data-entry.ts")],
