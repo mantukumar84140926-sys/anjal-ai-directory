@@ -265,6 +265,51 @@ const curatedToolProfiles = {
     considerations: ["ChatGPT can produce incorrect or outdated information; verify consequential claims.", "Search, file analysis, image tools and other capabilities may depend on plan, region and settings.", "Avoid sharing sensitive information unless you understand the applicable data controls.", "Check current plan details and limits on the official website before purchasing."],
     sourceLabel: "OpenAI ChatGPT capabilities overview",
     sourceUrl: "https://help.openai.com/en/articles/9260256-chatgpt-capabilities-overview"
+  },
+
+  make: {
+    overview: "Make is a visual automation platform for connecting apps, data sources and AI models into repeatable workflows. Users can build scenarios with a drag-and-drop canvas, describe an automation in natural language, or start from an AI chat and refine the result visually. It is designed for individuals and teams that want to coordinate work across connected services without writing every integration from scratch.",
+    bestFor: ["Connecting business apps so information moves between them automatically", "Automating repetitive steps such as lead routing, notifications and data updates", "Building workflows that include AI models alongside ordinary app actions", "Making multi-step processes visible so teams can inspect how each run behaves"],
+    workflow: ["Write down the trigger, the information that enters the workflow and the final outcome you want.", "Search Make's integration catalogue for the apps involved and confirm the actions each connector supports.", "Build a small scenario with one trigger and one action before adding branches or AI steps.", "Test normal, missing-data and failure cases; inspect each module's input and output.", "Add error handling, usage monitoring and access controls before relying on the workflow in production."],
+    considerations: ["A visual builder still requires careful logic: incorrect filters or mappings can send or change the wrong data.", "Usage is measured through plan-specific credits and limits; check current pricing and quotas before scaling.", "Some apps or actions may require custom API connections, permissions or paid plans.", "Review data access, retention and security requirements before connecting business or customer information."],
+    sourceLabel: "Make official platform overview",
+    sourceUrl: "https://www.make.com/"
+  },
+  poe: {
+    overview: "Poe is a platform for using a range of AI bots in one place. Its help centre describes bots powered by different third-party model providers, alongside image, video and audio tools and user-created bots. Poe also lets people create custom bots, including prompt-based bots and API-connected bots, so the experience can be adapted to a particular task.",
+    bestFor: ["Trying different AI models through one interface", "Comparing how multiple bots respond to the same question", "Exploring specialist bots for writing, learning, research or creative tasks", "Creating and sharing a custom prompt bot or an API-backed bot"],
+    workflow: ["Open the bot directory and choose a bot suited to the task rather than assuming all bots behave alike.", "Give the bot the same clear context and constraints you would provide any AI assistant.", "For comparisons, ask several bots the same question and check their answers against reliable sources.", "Review the point cost shown for a bot before using it repeatedly, especially for image or other media generation.", "If building a custom bot, define its purpose, instructions and boundaries, then test it with realistic prompts."],
+    considerations: ["Bots may be powered by third-party providers, so capabilities and behavior differ between bots.", "Responses consume points; free and paid accounts have different point allowances and access.", "A custom bot's output still needs human review for accuracy, privacy and suitability.", "Check Poe's current terms and privacy information before uploading sensitive files or personal data."],
+    sourceLabel: "Poe official FAQs and bot guide",
+    sourceUrl: "https://help.poe.com/hc/en-us/articles/19944206309524-Poe-FAQs",
+    faq: [
+      { question: "Can Poe use different AI models?", answer: "Yes. Poe provides access to bots powered by multiple third-party AI providers. The available bots and their capabilities can change, so check the bot details in Poe." },
+      { question: "Can I create my own Poe bot?", answer: "Poe supports prompt bots and API bots. Prompt bots use written instructions, while API bots can connect custom code to respond to messages." }
+    ]
+  },
+  grok: {
+    overview: "Grok is a conversational AI assistant from xAI for chat, search, reasoning and content creation. Its official product information describes web and X search, voice conversations, coding assistance, file and image understanding, and image or video generation. Which capabilities and usage limits are available can depend on the account, plan, region and current product release.",
+    bestFor: ["Exploring current topics with web search and X-related context", "Drafting, summarizing and brainstorming through conversational follow-ups", "Getting explanations or assistance with code", "Working with supported files, images and creative-generation features"],
+    workflow: ["Choose whether the task needs current search, deeper reasoning, coding help or creative generation.", "State the goal, relevant context, date range and preferred answer format.", "For current events or factual research, open the cited sources and verify key claims independently.", "For code, test the suggested changes in a safe environment before using them.", "Review generated images, video and text for accuracy, rights and suitability before publishing."],
+    considerations: ["AI responses can be wrong, incomplete or missing context; verify consequential information.", "Search results and social posts may be biased, unrepresentative or outdated.", "Image, video, voice, file and advanced reasoning features may have separate plan limits.", "Do not upload confidential material unless the provider's current privacy terms and controls meet your needs."],
+    sourceLabel: "xAI official Grok overview",
+    sourceUrl: "https://x.ai/grok",
+    faq: [
+      { question: "What can Grok help with?", answer: "xAI describes Grok as an assistant for chat, search, reasoning and creation, including writing, research, coding, voice and supported image or video tasks." },
+      { question: "Does Grok provide live information?", answer: "Grok's official product page describes web and X search for current information. Always open and verify sources for important or time-sensitive claims." }
+    ]
+  },
+  "microsoft-copilot": {
+    overview: "Microsoft Copilot is an AI assistant for asking questions, drafting and rewriting content, summarizing information and working with supported Microsoft experiences. Microsoft's Copilot Chat information describes web-grounded chat and features such as voice, read-aloud, dictation and chat history. A Microsoft 365 Copilot licence adds deeper integration with apps such as Word, Excel, PowerPoint, Outlook and Teams, depending on the plan and organization setup.",
+    bestFor: ["Getting help with everyday questions, explanations and brainstorming", "Rewriting text for clarity, tone or a specific audience", "Summarizing supported documents, PDFs, webpages or conversations", "Working with Microsoft 365 apps and organizational content when the right licence is available"],
+    workflow: ["Sign in with the account type appropriate for personal, school or work use.", "Describe the task and specify the audience, tone, length and output format.", "When using web-grounded answers, open sources and verify important details.", "For Microsoft 365 work, confirm which apps and features are included in your organization's licence.", "Review drafts, summaries and generated files before sharing or relying on them."],
+    considerations: ["Microsoft Copilot and Microsoft 365 Copilot are not identical products; features depend on account and licence.", "Work-grounded features may require an eligible Microsoft 365 plan and organizational configuration.", "AI-generated text, summaries and analysis can contain errors and should be checked.", "Follow your organization's data, privacy and AI-use policies when using a work or school account."],
+    sourceLabel: "Microsoft Copilot Chat features and plans",
+    sourceUrl: "https://www.microsoft.com/en/copilot/features/chat",
+    faq: [
+      { question: "Is Microsoft Copilot the same as Microsoft 365 Copilot?", answer: "No. Microsoft describes Copilot Chat as web-grounded AI chat, while a Microsoft 365 Copilot licence adds deeper work-context and app integrations. Exact features depend on the eligible plan." },
+      { question: "Can Copilot help with Word, Excel and PowerPoint?", answer: "Microsoft lists Copilot experiences across apps such as Word, Excel, PowerPoint, Outlook and Teams for eligible Microsoft 365 Copilot users. Check your account's licence and feature availability." }
+    ]
   }
 };
 
