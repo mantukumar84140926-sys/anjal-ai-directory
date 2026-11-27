@@ -356,6 +356,43 @@ const curatedToolProfiles = {
     "sourceLabel": "ChatIQ official product overview and FAQs",
     "sourceUrl": "https://www.chatiq.ai/"
   },
+  "surfer-ai": {
+    "seoTitle": "Surfer AI — SEO & AI Search Visibility | Anjal AI",
+    "overview": "Surfer is an SEO and AI search visibility platform that combines content research, writing and optimization with monitoring for how brands appear in AI-generated answers. Its official product information describes tools such as Content Editor, Surfer AI, Content Audit, Topical Map, keyword research and AI Tracker. Teams can use it to plan content, improve existing pages and monitor visibility across supported search and AI surfaces.",
+    "bestFor": [
+      "Planning topic clusters and content briefs from keyword and competitor research",
+      "Writing or editing articles with live SEO and AI-search optimization guidance",
+      "Generating long-form article drafts with Surfer AI and then editing them",
+      "Auditing existing pages to find content refresh opportunities",
+      "Tracking brand mentions and citations across supported AI search experiences"
+    ],
+    "workflow": [
+      "Choose a target topic, audience, location and language for the content task.",
+      "Use keyword research or Topical Map to organize related topics and identify gaps.",
+      "Create a Content Editor and decide whether to write manually or generate a draft with Surfer AI.",
+      "Review the outline, source context, facts, brand voice and internal links before publishing.",
+      "Use Content Audit and available visibility reports to prioritize future updates."
+    ],
+    "considerations": [
+      "Surfer provides optimization guidance, not a guarantee of Google rankings or AI citations.",
+      "Generated drafts need human editing, source verification and original expertise before publication.",
+      "AI visibility features, tracked engines and usage limits depend on the current plan.",
+      "Content scores are guidance signals; do not write unnaturally or add irrelevant keywords just to increase a score.",
+      "Check the current provider terms, integrations and data controls before connecting a production website."
+    ],
+    "sourceLabel": "Surfer official product and documentation",
+    "sourceUrl": "https://surfer.ai/",
+    "faq": [
+      {
+        "question": "Is Surfer AI only an article generator?",
+        "answer": "No. Surfer's current product suite also includes content optimization, keyword research, topical planning, content auditing and AI search visibility tracking."
+      },
+      {
+        "question": "Does Surfer guarantee search rankings?",
+        "answer": "No. Optimization tools can help structure and improve content, but search rankings and AI citations depend on many factors outside any one tool's control."
+      }
+    ]
+  },
   "openrouter": {
     "overview": "OpenRouter provides a unified API for accessing models from many AI providers. Developers can use one integration to compare and call models for text, image, video, audio and other tasks. Its routing layer can select among providers for a requested model and can account for factors such as price, speed, availability and provider failures.",
     "bestFor": [
@@ -668,7 +705,8 @@ const profileDescriptions = {
   "udio": "Explore Udio's AI music generation, prompt-based song creation, lyrics and audio editing workflows.",
   "subpals": "Explore SubPals' YouTube creator tools for ideas, scripts, metadata and subscribe links.",
   "digital-first-ai": "Digital First AI is now DFIRST AI, a creative workspace for brand campaigns, content and visual production.",
-  "chatiq": "Explore ChatIQ's AI customer-support chatbot, company knowledge base and automated ticketing workflow."
+  "chatiq": "Explore ChatIQ's AI customer-support chatbot, company knowledge base and automated ticketing workflow.",
+  "surfer-ai": "Explore Surfer's SEO and AI search visibility platform, including Content Editor, Surfer AI, Topical Map, Content Audit and AI Tracker."
 };
 const titleOverrides = {
   "openrouter": "OpenRouter — Multi-Model AI API | Anjal AI",
