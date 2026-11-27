@@ -2,17 +2,17 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const categorySlugs = ["ai-assistants","image-generation","video-generation","audio-music","writing","coding","design","productivity","marketing","education","research","business","presentation","developer-tools","other"];
+const categoryMap = {"llm-chatbot":"ai-assistants","general-other":"other","creative-tools":"design","video-image":"image-generation","marketing-seo":"marketing","productivity-automation":"productivity","ai-writing":"writing","ai-search":"research","seo":"marketing","healthcare":"other","video-editing":"video-generation","ai-tools":"other","creative":"design","audio":"audio-music","music":"audio-music","coding":"coding","developer-tools":"developer-tools","education":"education","research":"research","business":"business","presentation":"presentation","writing":"writing","design":"design","productivity":"productivity","marketing":"marketing","image-generation":"image-generation","video-generation":"video-generation","audio-music":"audio-music","ai-assistants":"ai-assistants","other":"other"};\nconst mapCategory = raw => categoryMap[String(raw || "").toLowerCase()] || "other";
 const curatedPromptSlugs = ["enhance","cinematic","danger","studio","product","anime","background","cinematic-video","reels","thumbnail","logo","poster","caption","hooks","blog","rewrite","translate","study","flashcards","explain","debug","review","sql","business-plan","productivity","research","email","story","ad-copy","resume"];
 const dir = path.join(root, "src", "data", "catalog");
 const files = fs.readdirSync(dir).filter(f => f.endsWith(".ts")).sort();
-const slugs = [];
+const slugs = [];\nconst rawCategories = [];
 for (const file of files) {
   const text = fs.readFileSync(path.join(dir, file), "utf8");
   const json = text.replace(/^export default /, "").replace(/;\s*$/, "");
-  for (const item of JSON.parse(json)) if (item?.slug) slugs.push(item.slug);
+  for (const item of JSON.parse(json)) { if (item?.slug) slugs.push(item.slug); if (item?.category) rawCategories.push(item.category); }
 }
-const uniqueSlugs = [...new Set(slugs)];
+const uniqueSlugs = [...new Set(slugs)];\nconst categorySlugs = [...new Set(rawCategories.map(mapCategory))].sort();
 if (uniqueSlugs.length !== 1000) throw new Error(`Expected 1000 unique catalog slugs, found ${uniqueSlugs.length}`);
 
 const origin = (process.env.VITE_SITE_URL || "https://anjal-ai-directory.vercel.app").replace(/\/$/, "");
