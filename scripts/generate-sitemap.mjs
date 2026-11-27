@@ -14,7 +14,8 @@ for (const file of files) {
   const json = text.replace(/^export default /, "").replace(/;\s*$/, "");
   for (const item of JSON.parse(json)) { if (item?.slug) slugs.push(item.slug); if (item?.category) rawCategories.push(item.category); }
 }
-const uniqueSlugs = [...new Set(slugs)];\nconst categorySlugs = [...new Set(rawCategories.map(mapCategory))].sort();
+const uniqueSlugs = [...new Set(slugs)];
+const categorySlugs = [...new Set(rawCategories.map(mapCategory))].sort();
 if (uniqueSlugs.length !== 1000) throw new Error(`Expected 1000 unique catalog slugs, found ${uniqueSlugs.length}`);
 
 const origin = (process.env.VITE_SITE_URL || "https://anjal-ai-directory.vercel.app").replace(/\/$/, "");
