@@ -17,7 +17,7 @@ for (const file of files) {
 const excludedToolSlugs = new Set(["atonce","experai","cheatography"]);
 const uniqueSlugs = [...new Set(slugs)].filter(slug => !excludedToolSlugs.has(slug));
 const categorySlugs = [...new Set(rawCategories.map(mapCategory))].sort();
-if (uniqueSlugs.length !== 1000) throw new Error(`Expected 1000 unique catalog slugs, found ${uniqueSlugs.length}`);
+if (uniqueSlugs.length !== 997) throw new Error(`Expected 997 indexable catalog slugs after excluding 3 unverified listings, found ${uniqueSlugs.length}`);
 
 const origin = (process.env.VITE_SITE_URL || "https://anjal-ai-directory.vercel.app").replace(/\/$/, "");
 const urls = ["/", "/finder", "/prompts", "/submit", ...categorySlugs.map(slug => `/category/${slug}`), ...uniqueSlugs.map(slug => `/tool/${slug}`), ...curatedPromptSlugs.map(slug => `/prompt/${slug}`)];
