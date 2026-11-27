@@ -705,7 +705,8 @@ const profileDescriptions = {
   "udio": "Explore Udio's AI music generation, prompt-based song creation, lyrics and audio editing workflows.",
   "subpals": "Explore SubPals' YouTube creator tools for ideas, scripts, metadata and subscribe links.",
   "digital-first-ai": "Digital First AI is now DFIRST AI, a creative workspace for brand campaigns, content and visual production.",
-  "chatiq": "Explore ChatIQ's AI customer-support chatbot, company knowledge base and automated ticketing workflow."
+  "chatiq": "Explore ChatIQ's AI customer-support chatbot, company knowledge base and automated ticketing workflow.",
+  "surfer-ai": "Explore Surfer's SEO and AI search visibility platform, including Content Editor, Surfer AI, Topical Map, Content Audit and AI Tracker."
 };
 const titleOverrides = {
   "openrouter": "OpenRouter — Multi-Model AI API | Anjal AI",
