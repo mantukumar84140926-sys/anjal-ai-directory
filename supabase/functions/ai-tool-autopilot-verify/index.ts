@@ -171,6 +171,7 @@ Deno.serve(async (req: Request) => {
 
     if (!start) {
       status = "failed";
+      failed++;
       reason = "URL failed HTTPS and hostname safety checks";
     } else {
       try {
