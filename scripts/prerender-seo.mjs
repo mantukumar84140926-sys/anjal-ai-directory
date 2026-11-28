@@ -1356,13 +1356,13 @@ Object.assign(curatedToolProfiles, {
   }
 });
 
+const profileDescriptions = {
   "chatpdf": "Explore ChatPDF for cited PDF answers, document summaries, multi-file chats and multilingual reading.",
   "askyourpdf": "Explore AskYourPDF for cited document chat, OCR, multi-PDF research, data extraction and PDF workflows.",
   "humata": "Explore Humata AI for cited document Q&A, research summaries and shared team knowledge bases.",
   "pdf-ai": "Explore PDF.ai for PDF chat, structured extraction, OCR parsing and developer document APIs.",
   "documind": "Explore Documind for multi-PDF chat, document summaries, study notes and shareable knowledge-base chatbots.",
   "doclime": "Explore DocLime for AI PDF chat, research-paper Q&A, document navigation and note-taking.",
-const profileDescriptions = {
   "descript": "Explore Descript for transcript-based audio and video editing, recording, speech cleanup and AI-assisted production.",
   "adobe-podcast": "Explore Adobe Podcast for AI speech enhancement, podcast recording, transcription and browser-based audio editing.",
   "aiva": "Explore AIVA for AI music composition, customizable styles, audio and MIDI references, and plan-based licensing.",
