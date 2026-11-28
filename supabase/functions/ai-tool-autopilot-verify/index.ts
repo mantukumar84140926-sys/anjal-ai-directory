@@ -191,7 +191,7 @@ Deno.serve(async (req: Request) => {
       : {};
     const update = await supabase.from("ai_tool_discoveries").update({
       verification_status: status,
-      publication_status: status,
+      publication_status: status === "failed" ? "rejected" : "needs_review",
       source_evidence: { ...existing, homepage_check: evidence, checked_at: new Date().toISOString() },
       rejection_reason: reason,
       updated_at: new Date().toISOString(),
