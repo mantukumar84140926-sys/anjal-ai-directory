@@ -708,7 +708,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "google-gemini": {
-    seoTitle: "Google Gemini — AI Assistant for Writing, Research & Files | Anjal AI",
+    seoTitle: "Google Gemini — AI Assistant & File Tools | Anjal AI",
     overview: "Google Gemini is Google's AI assistant for asking questions, exploring ideas and working with supported text, images and files. Google's product updates describe workflows for generating, previewing and editing documents, PDFs, presentations, spreadsheets and code directly in a Gemini conversation. The formats and editing tools available can differ between web and mobile, and depend on the current release and account.",
     bestFor: ["Getting explanations, brainstorming and help with everyday questions", "Drafting and refining documents or presentations from a written brief", "Working with supported PDFs and other uploaded files", "Turning notes or source material into structured summaries and study resources", "Iterating on code, spreadsheets and written content with follow-up instructions"],
     workflow: ["State the goal, intended audience and format before asking Gemini to create an output.", "Attach only the files needed and explain what information should be extracted or changed.", "Ask for a preview and make targeted edits rather than accepting a first draft.", "Check calculations, citations, factual claims and formatting against the original material.", "Confirm which file formats and editing features are available on your device and account."],
@@ -721,7 +721,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "meta-ai": {
-    seoTitle: "Meta AI — Assistant for Chat, Research & Image Creation | Anjal AI",
+    seoTitle: "Meta AI — Chat, Research & Image Creation | Anjal AI",
     overview: "Meta AI is Meta's AI assistant, available through meta.ai and supported Meta apps and devices. Meta describes it as a tool for everyday questions, writing help, image generation, recommendations and more involved research. Its current assistant information also describes research reports with citations, document and presentation tasks, voice interactions and connections to services such as email or calendars in supported experiences. Availability varies by country, account and product.",
     bestFor: ["Getting quick explanations, brainstorming and writing assistance", "Generating or editing images from a prompt where the feature is available", "Exploring a topic with deeper research and source links", "Using AI assistance inside supported WhatsApp, Instagram, Facebook or Messenger experiences", "Getting help with recommendations, planning and everyday tasks"],
     workflow: ["Choose the Meta AI surface available to you, such as the website, app or an integrated Meta app.", "Describe the task and include the context, language and output format you need.", "For research, open cited sources and verify that they support the answer.", "For generated images or documents, inspect details and edit before sharing.", "Check feature availability, connected-app permissions and privacy settings before linking accounts."],
@@ -747,7 +747,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "hugging-face-community": {
-    seoTitle: "Hugging Face Hub — AI Models, Datasets & Demo Apps | Anjal AI",
+    seoTitle: "Hugging Face Hub — Models, Datasets & AI Apps | Anjal AI",
     overview: "Hugging Face is a platform and community for discovering, sharing and building with machine-learning resources. Its Hub documentation describes repositories for models, datasets and interactive demo applications called Spaces, alongside version history, collaboration tools, model cards and integrations with popular development libraries. Developers can explore open models, inspect documentation and use supported inference or deployment services.",
     bestFor: ["Discovering machine-learning models for language, vision, audio and other tasks", "Finding datasets and reviewing their documentation and intended use", "Trying interactive model demos through Spaces", "Sharing model repositories and collaborating on AI projects", "Integrating supported models into applications with libraries or inference services"],
     workflow: ["Search the Hub by task, model type, language, license and supported framework.", "Read the model card, dataset card and repository documentation before using an asset.", "Test the model or Space with representative inputs and inspect limitations.", "Check the license, provenance, safety notes and data requirements for your use case.", "Pin model versions and add evaluation, monitoring and access controls before production use."],
@@ -760,7 +760,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "runway": {
-    seoTitle: "Runway AI — Text-to-Video & Image-to-Video Generation | Anjal AI",
+    seoTitle: "Runway AI — Text-to-Video & Image-to-Video | Anjal AI",
     overview: "Runway is an AI creative platform with tools for generating and editing video and other media. Its current Gen-4.5 documentation describes text-to-video and image-to-video workflows, with prompts that can specify camera movement, scene composition, timing and motion. Runway's model and app lineup changes over time, so supported inputs, duration, output settings and access should be checked in the current interface.",
     bestFor: ["Creating short video concepts from text prompts", "Animating a still image into a moving shot", "Testing camera movement and scene choreography", "Developing visual ideas for social clips, ads and storyboards", "Iterating on a video concept before a larger production"],
     workflow: ["Choose text-to-video or image-to-video based on whether you have a starting frame.", "Describe subject movement, camera motion, scene action and timing in clear sequence.", "Generate a short test and evaluate motion consistency, composition and visual artifacts.", "Refine one or two prompt details at a time and compare versions.", "Check the current model settings, credits, output rights and commercial terms before publishing."],
