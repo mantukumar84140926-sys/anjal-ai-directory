@@ -110,14 +110,14 @@ function render({ title, description, canonical, body, jsonLd, robots = "index,f
 const categories = [...new Set(catalog.map(x => mapCategory(x.category)))];
 
 // Prerender the homepage so crawlers receive meaningful HTML before React loads.
-const homeTitle = "Anjal AI — AI Tools & Ready-to-Use Prompts";
-const homeDescription = "Discover useful AI tools and copy-ready prompts for writing, coding, design, research, education, marketing and productivity.";
+const homeTitle = "Anjal AI — 1,000 AI Tools & 5,000 Prompts";
+const homeDescription = "Explore 1,000 AI tools and 5,000 ready-to-use prompts for writing, coding, design, research, education and productivity. Find the right tool or prompt.";
 const homeCategoryLinks = categories.map(category => `<li><a href="/category/${category}">${escapeHtml(categoryNames[category] || "Other")}</a></li>`).join("");
 const homeToolLinks = catalog.slice(0, 24).map(tool => `<li><a href="/tool/${encodeURIComponent(tool.slug)}">${escapeHtml(tool.name)}</a></li>`).join("");
 const homeBody = `<main>
 <header>
-<h1>Find the right AI tool and ready-to-use prompt</h1>
-<p>Anjal AI is an independent directory for discovering AI software and practical prompt templates. Explore tools for research, writing, coding, design, education, marketing, image and video creation, audio and everyday productivity. Start with the task you want to complete, compare relevant options, and use the provider's official website to confirm current features, pricing and terms.</p>
+<h1>Find the right AI tool or prompt</h1>
+<p>Anjal AI brings together 1,000 AI tools and 5,000 practical prompts for research, writing, coding, design, education, marketing, image and video creation, audio and everyday productivity. Start with the task you want to complete, compare relevant options, and use the provider's official website to confirm current features, pricing and terms.</p>
 <p><a href="/finder">Find an AI tool</a> · <a href="/prompts">Browse the Prompt Finder</a></p>
 </header>
 <section>
