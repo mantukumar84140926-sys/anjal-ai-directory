@@ -287,12 +287,17 @@ const curatedToolProfiles = {
   },
 
   make: {
+    seoTitle: "Make.com — Workflow Automation & AI | Anjal AI",
     overview: "Make is a visual automation platform for connecting apps, data sources and AI models into repeatable workflows. Users can build scenarios with a drag-and-drop canvas, describe an automation in natural language, or start from an AI chat and refine the result visually. It is designed for individuals and teams that want to coordinate work across connected services without writing every integration from scratch.",
     bestFor: ["Connecting business apps so information moves between them automatically", "Automating repetitive steps such as lead routing, notifications and data updates", "Building workflows that include AI models alongside ordinary app actions", "Making multi-step processes visible so teams can inspect how each run behaves"],
     workflow: ["Write down the trigger, the information that enters the workflow and the final outcome you want.", "Search Make's integration catalogue for the apps involved and confirm the actions each connector supports.", "Build a small scenario with one trigger and one action before adding branches or AI steps.", "Test normal, missing-data and failure cases; inspect each module's input and output.", "Add error handling, usage monitoring and access controls before relying on the workflow in production."],
     considerations: ["A visual builder still requires careful logic: incorrect filters or mappings can send or change the wrong data.", "Usage is measured through plan-specific credits and limits; check current pricing and quotas before scaling.", "Some apps or actions may require custom API connections, permissions or paid plans.", "Review data access, retention and security requirements before connecting business or customer information."],
     sourceLabel: "Make official platform overview",
-    sourceUrl: "https://www.make.com/"
+    sourceUrl: "https://www.make.com/",
+    faq: [
+      { question: "What is Make.com used for?", answer: "Make is a visual automation platform that connects apps, data sources and AI services into multi-step workflows called scenarios." },
+      { question: "Can Make connect AI models to business workflows?", answer: "Yes. Make supports workflows that combine AI models with app integrations, data transformations and approval steps. Available modules depend on the connected service." }
+    ]
   },
   poe: {
     overview: "Poe is a platform for using a range of AI bots in one place. Its help centre describes bots powered by different third-party model providers, alongside image, video and audio tools and user-created bots. Poe also lets people create custom bots, including prompt-based bots and API-connected bots, so the experience can be adapted to a particular task.",
@@ -1193,6 +1198,7 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "make": "Explore Make.com for visual workflow automation, app integrations, AI-powered scenarios and business process orchestration.",
   "perplexity": "Explore Perplexity AI for cited web search, Pro Search, Deep Research, Computer workflows and developer APIs.",
   "perplexity-ai": "Perplexity AI is the same product as the primary Perplexity listing; this legacy URL is consolidated there.",
   "google-veo": "Explore Google Veo for text-to-video, image-to-video, audio-video generation and cinematic creative workflows.",
