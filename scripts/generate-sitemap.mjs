@@ -14,10 +14,10 @@ for (const file of files) {
   const json = text.replace(/^export default /, "").replace(/;\s*$/, "");
   for (const item of JSON.parse(json)) { if (item?.slug) slugs.push(item.slug); if (item?.category) rawCategories.push(item.category); }
 }
-const excludedToolSlugs = new Set(["atonce","experai","cheatography","perplexity-ai"]);
+const excludedToolSlugs = new Set(["atonce","experai","cheatography","perplexity-ai","surfer-seo"]);
 const uniqueSlugs = [...new Set(slugs)].filter(slug => !excludedToolSlugs.has(slug));
 const categorySlugs = [...new Set(rawCategories.map(mapCategory))].sort();
-if (uniqueSlugs.length !== 996) throw new Error(`Expected 996 indexable catalog slugs after excluding 3 unverified listings and 1 duplicate URL, found ${uniqueSlugs.length}`);
+if (uniqueSlugs.length !== 995) throw new Error(`Expected 995 indexable catalog slugs after excluding 3 unverified listings, 1 duplicate URL and 1 redirect alias, found ${uniqueSlugs.length}`);
 
 const origin = (process.env.VITE_SITE_URL || "https://anjal-ai-directory.vercel.app").replace(/\/$/, "");
 const urls = ["/", "/finder", "/prompts", "/submit", ...categorySlugs.map(slug => `/category/${slug}`), ...uniqueSlugs.map(slug => `/tool/${slug}`), ...curatedPromptSlugs.map(slug => `/prompt/${slug}`)];
