@@ -694,6 +694,97 @@ const curatedToolProfiles = {
 };
 
 Object.assign(curatedToolProfiles, {
+  "google-veo": {
+    seoTitle: "Google Veo — AI Video Generation with Audio | Anjal AI",
+    overview: "Google Veo is Google's generative video model family, available through creative experiences such as Google Flow and Gemini as well as supported developer platforms. Google's current Veo materials describe text-to-video and image-to-video generation, synchronized audio and video, realistic motion and physics, and creative controls for shaping scenes. Flow provides a workspace for assembling clips and stories, while model and feature availability can differ across subscriptions and interfaces. Veo is best understood as a model family accessed through Google's products, not as one standalone editing application.",
+    bestFor: ["Generating short video clips from text descriptions or reference images", "Creating cinematic scenes with synchronized audio where supported", "Developing storyboards and multi-clip creative sequences in Google Flow", "Exploring visual concepts for advertising, social content and filmmaking", "Integrating supported Veo capabilities into applications through Google developer services"],
+    workflow: ["Choose the surface that fits the task: Gemini for accessible creation, Flow for scene-based creative work or a developer platform for integration.", "Check the active Veo model and the current supported features before writing the prompt.", "Describe the subject, action, setting, camera movement, lighting, audio and desired aspect ratio.", "Use reference frames or ingredients when available and keep a consistent visual brief across clips.", "Review motion, faces, text, sound and continuity, then confirm usage rights and current plan limits before publishing."],
+    considerations: ["Veo capabilities differ by model version and product surface; do not assume every interface exposes every feature.", "Generation credits, resolution, clip duration and access depend on subscription and current availability.", "AI-generated video can contain visual, motion or audio artifacts that need editing.", "Check the current Google product terms and content policies before using outputs commercially."],
+    sourceLabel: "Google DeepMind official Veo model overview",
+    sourceUrl: "https://deepmind.google/models/veo/",
+    faq: [
+      { question: "What is Google Veo used for?", answer: "Veo generates video from text and image inputs, with supported versions offering audio-video generation and creative controls for short-form scenes." },
+      { question: "Where can I use Google Veo?", answer: "Google lists Veo in products including Gemini and Google Flow, with developer access through supported Google platforms. Exact features depend on the surface and plan." }
+    ]
+  },
+  "heygen": {
+    seoTitle: "HeyGen — AI Avatar Videos & Video Translation | Anjal AI",
+    overview: "HeyGen is an AI video platform focused on presenter-style videos, digital avatars and multilingual localization. Users can create a video from a script by choosing an avatar, voice and language, or use a personal avatar built from approved reference footage. HeyGen also offers video translation and dubbing workflows that aim to preserve the speaker's voice characteristics and synchronize translated speech with lip movement. These tools are used for explainers, product demonstrations, training, marketing and localized communications where a presenter-led format is useful.",
+    bestFor: ["Creating presenter-led explainer and training videos from scripts", "Producing product demos and marketing videos with AI avatars", "Translating existing videos into other languages with dubbing and lip-sync", "Creating a reusable personal avatar with the required consent process", "Producing localized content for international audiences"],
+    workflow: ["Choose a stock avatar, approved personal avatar or video-translation workflow.", "Write and proofread the script, including pronunciation notes for names and technical terms.", "Select the target language, voice and visual layout, then preview timing and lip synchronization.", "Apply brand elements and edit captions, scenes and transitions before rendering.", "Obtain permission for every person's likeness and voice, and verify translations before publishing."],
+    considerations: ["Avatar creation and voice cloning involve likeness and voice data; use only material you have permission to submit.", "Lip-sync and translation can mispronounce names or alter meaning, so native-language review is important.", "Language counts, video duration, avatar access and generation limits vary by plan.", "Review platform terms and disclosure requirements when publishing synthetic presenters or translated footage."],
+    sourceLabel: "HeyGen official product overview",
+    sourceUrl: "https://www.heygen.com/",
+    faq: [
+      { question: "Can HeyGen translate an existing video?", answer: "Yes. HeyGen describes video translation with voice preservation and synchronized lip movements across supported languages and dialects." },
+      { question: "Can I create a video using an AI avatar?", answer: "Yes. You can select an available avatar, add a script and voice, then customize the visuals. Personal avatars require the platform's identity and consent steps." }
+    ]
+  },
+  "synthesia": {
+    seoTitle: "Synthesia — AI Avatar Video & Training Platform | Anjal AI",
+    overview: "Synthesia is an AI video platform designed for business communications, training and learning content. Users can turn a script into a presenter-led video using stock or custom avatars, voiceovers, scenes and branded templates. The platform also supports localization, AI dubbing, voice cloning, collaboration and video analytics. Its API options extend video creation and localization into automated workflows, which can help teams produce consistent training or internal communications at scale. Synthesia is oriented toward structured business video rather than open-ended cinematic scene generation.",
+    bestFor: ["Creating employee training and onboarding videos", "Producing product explainers and internal communications", "Building presenter-led videos from scripts and templates", "Localizing business videos into multiple languages", "Automating video creation through supported APIs and integrations"],
+    workflow: ["Start with a script or outline and divide it into short, clear scenes.", "Choose a stock, customizable or properly consented personal avatar.", "Select a voice and language, then add brand colors, fonts, logos and visual assets.", "Preview pronunciation, pacing, captions and scene transitions before rendering.", "For recurring production, test templates and API workflows with a small batch before scaling."],
+    considerations: ["Avatar realism, language availability, video limits and API access depend on the plan.", "Personal avatars and voice cloning require consent and should not imitate someone without authorization.", "AI voiceovers and translations need human review for pronunciation, tone and factual accuracy.", "Use appropriate disclosure and organizational approval when videos represent a real person or employer."],
+    sourceLabel: "Synthesia official features and API documentation",
+    sourceUrl: "https://www.synthesia.io/features",
+    faq: [
+      { question: "What is Synthesia best for?", answer: "Synthesia focuses on business video production, including training, onboarding, explainers and localized presenter-led communications." },
+      { question: "Can Synthesia create videos automatically through an API?", answer: "Yes. Its developer documentation describes APIs for video generation, localization, uploads and interactive avatars, with access varying by plan." }
+    ]
+  },
+  "pika": {
+    seoTitle: "Pika AI — Video Generator, Editing & Creative Studio | Anjal AI",
+    overview: "Pika is an AI creative platform for generating and editing videos, images and sound. Its workspace combines Video Studio with focused apps for extending footage, changing colors and lighting, editing images, creating product shots and building reusable characters. Pika also offers model and app choices for workflows such as text-to-video, image-to-video, keyframe animation, effects and soundtrack generation. The platform has expanded beyond a single video model, so users should select the specific app and model that match the intended result.",
+    bestFor: ["Creating short social videos from prompts or reference images", "Animating between still images with ordered keyframes", "Applying creative effects or modifying objects in existing clips", "Building reusable characters and product visuals", "Adding generated sound, speech or music to a video workflow"],
+    workflow: ["Choose Video Studio or a focused app such as Pikaframes, Extend Video, Color Grade or Pika Soundtrack.", "Add a concise prompt and upload only reference media you have rights to use.", "Select a model and inspect its supported duration, resolution and credit cost.", "Generate a draft, then refine motion, timing, visual consistency and sound in the relevant tools.", "Review the final clip and confirm the subscription's commercial-use terms before using it for a client or business."],
+    considerations: ["Pika offers multiple apps and models; generation limits and supported inputs differ by workflow.", "Commercial use depends on the selected subscription and model terms; free access may have different rights.", "Generated motion, text, faces and transitions can contain artifacts and should be reviewed.", "Do not upload copyrighted, confidential or identifiable material unless you have the necessary rights and consent."],
+    sourceLabel: "Pika official creative platform and help center",
+    sourceUrl: "https://pika.art/",
+    faq: [
+      { question: "What can Pika create?", answer: "Pika describes tools for generating and editing videos, images and sound, including short clips, multi-shot videos, effects, character assets and product visuals." },
+      { question: "Can Pika animate between images?", answer: "Yes. Its Pikaframes workflow uses two to five ordered still images and a prompt to guide the motion between keyframes." }
+    ]
+  },
+  "kling-ai": {
+    seoTitle: "Kling AI — Video Generator & Motion Control Tools | Anjal AI",
+    overview: "Kling AI is a generative media platform for creating and editing videos and images. Its current creative workspace includes text-to-video, image-to-video, reference-guided generation, motion control, avatars, lip-sync, image editing and video-to-audio tools. Kling's newer model guides describe multi-reference workflows, keyframe control and longer generated clips, while the exact resolution, duration and audio options depend on the selected model and account. The platform is useful for creators who want more control over characters, motion and shot continuity than a simple text prompt can provide.",
+    bestFor: ["Generating video clips from text prompts or still images", "Guiding character appearance and motion with reference assets", "Directing camera movement and keyframes for story scenes", "Creating talking avatars and lip-synced clips", "Editing, extending or adding audio to generated footage"],
+    workflow: ["Choose the current video model and generation mode that match the task.", "Write a shot brief covering subject, action, camera movement, scene and style.", "Add reference images, video, voice or keyframes when the workflow supports them.", "Generate a short draft and inspect motion, identity consistency, timing and sound.", "Refine the shot and verify resolution, duration, credit cost and usage terms before final export."],
+    considerations: ["Model versions and capabilities change; check the current user guide rather than relying on older tutorials.", "Duration, resolution, reference limits and audio features vary by model and plan.", "Complex motion and multi-reference generation may still produce continuity or anatomy errors.", "Only upload reference media you own or are authorized to use, especially faces and voices."],
+    sourceLabel: "Kling AI official user guide and model overview",
+    sourceUrl: "https://kling.ai/quickstart",
+    faq: [
+      { question: "Can Kling AI generate video from an image?", answer: "Yes. Kling documents image-to-video generation alongside text-to-video and reference-based workflows." },
+      { question: "Does Kling AI support motion control?", answer: "Yes. Kling's official product and guide pages describe motion-control features for directing character actions and poses, with availability depending on the model." }
+    ]
+  },
+  "luma-dream-machine": {
+    seoTitle: "Luma AI — Ray Video Generation & Creative Workflows | Anjal AI",
+    overview: "Luma is a multimodal creative platform whose current video model family is Ray. Luma's official product information identifies Ray3.2 as its current video model and describes text-to-video, image-to-video, video modification and reframing workflows. Ray3.2 adds multi-keyframe direction, motion and performance tracking, and production-oriented HDR and EXR outputs for professional post-production. The consumer creative workspace and developer API provide different ways to access the models, with credits and available features varying by product and plan. Dream Machine is an older product name and should not be confused with the current Ray model family.",
+    bestFor: ["Creating directed video clips from text or image references", "Controlling action and camera progression with multiple keyframes", "Modifying existing footage while retaining parts of the original performance", "Reframing clips for different aspect ratios and delivery formats", "Producing HDR and EXR assets for professional color grading and VFX pipelines"],
+    workflow: ["Open the current Luma creative workspace or API and choose the Ray model available to your account.", "Plan the shot with a clear action, camera direction, subject continuity and desired ending.", "Use keyframes or reference footage to guide important moments and transformations.", "For existing footage, choose a modification or reframing workflow and specify what must remain unchanged.", "Review the clip in an editing application and confirm output format, credits and license before delivery."],
+    considerations: ["Luma's product naming has changed; Ray is the current video model family and Dream Machine is an older name.", "Ray model capabilities, clip duration, resolution, HDR and API access vary by release and plan.", "Some video-generation modes may not generate native audio; check the selected workflow's documentation.", "Professional HDR/EXR outputs still require compatible post-production software and color-management knowledge."],
+    sourceLabel: "Luma official Ray3.2 model overview",
+    sourceUrl: "https://lumalabs.ai/ray",
+    faq: [
+      { question: "Is Luma Dream Machine still the current product name?", answer: "Luma's current official information identifies the creative workspace as Luma and its current video model family as Ray. Dream Machine is an older product name." },
+      { question: "What is Ray3.2 used for?", answer: "Luma describes Ray3.2 for text-to-video, image-to-video, video modification and reframing, with multi-keyframe controls and professional HDR/EXR workflows." }
+    ]
+  },
+  "sora": {
+    seoTitle: "Sora AI Discontinued — Official Status & Alternatives | Anjal AI",
+    overview: "Sora was OpenAI's video-generation product for creating clips from text and visual inputs. It is no longer available: OpenAI's official discontinuation notice states that the Sora web and app experiences ended on April 26, 2026, and the Sora API ended on September 24, 2026. This Anjal AI page is retained as a status reference, not as a recommendation to sign up or generate new videos with Sora. Creators looking for current video-generation workflows can compare active alternatives such as Google Veo, Kling AI, Pika and Luma.",
+    bestFor: ["Checking the official discontinuation status of Sora", "Understanding the dates when Sora web, app and API access ended", "Finding current video-generation alternatives in the Anjal AI directory", "Reviewing OpenAI's guidance for exporting existing Sora content"],
+    workflow: ["Read OpenAI's official discontinuation notice before following older Sora tutorials or links.", "If you previously created Sora content, follow the official export instructions while the export option is available.", "For new video projects, compare current tools such as Google Veo, Kling AI, Pika and Luma.", "Check each alternative's current model, access, credit limits and commercial terms before starting.", "Treat older Sora feature guides and API examples as historical rather than current instructions."],
+    considerations: ["Sora web and app experiences were discontinued on April 26, 2026.", "The Sora API was discontinued on September 24, 2026.", "OpenAI's export and data-retention instructions may change; consult the official help article for current steps.", "Do not rely on old pricing, availability or integration tutorials for Sora."],
+    sourceLabel: "OpenAI official Sora discontinuation notice",
+    sourceUrl: "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation",
+    faq: [
+      { question: "Is Sora still available?", answer: "No. OpenAI states that the Sora web and app experiences ended on April 26, 2026, and the API ended on September 24, 2026." },
+      { question: "What can I use instead of Sora?", answer: "Current alternatives listed in Anjal AI include Google Veo, Kling AI, Pika and Luma. Compare their current capabilities, access and usage terms before choosing." }
+    ]
+  },
   "groq": {
     seoTitle: "GroqCloud — Fast AI Inference & Model APIs | Anjal AI",
     overview: "GroqCloud is a hosted AI inference platform for developers who want to run supported language, speech and vision models through APIs. The official console provides a model catalogue, API reference, quickstarts, SDK examples and integrations with common AI development frameworks. Its API is designed to work with familiar OpenAI-compatible client patterns, although compatibility is not identical for every feature. GroqCloud is not a general-purpose model directory or a place to run every public model: developers select from the provider's currently supported production and preview models, each with its own limits and lifecycle.",
@@ -1087,6 +1178,13 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "google-veo": "Explore Google Veo for text-to-video, image-to-video, audio-video generation and cinematic creative workflows.",
+  "heygen": "Explore HeyGen for AI avatar videos, script-to-video creation, voice cloning and multilingual video translation.",
+  "synthesia": "Explore Synthesia for AI presenter videos, business training, localization, voiceovers and video APIs.",
+  "pika": "Explore Pika for AI video creation, keyframe animation, creative effects, image editing and generated sound.",
+  "kling-ai": "Explore Kling AI for text-to-video, image-to-video, motion control, avatars and reference-guided storytelling.",
+  "luma-dream-machine": "Explore Luma Ray video generation, keyframe direction, footage modification, reframing and HDR workflows.",
+  "sora": "Sora is discontinued: OpenAI ended the web and app experience in April 2026 and the API in September 2026.",
   "groq": "Explore GroqCloud for hosted AI inference, supported models, developer APIs and fast application workflows.",
   "meta-llama": "Explore Meta Llama models, developer guides, deployment options, model cards and license information.",
   "cohere": "Explore Cohere AI models for enterprise chat, retrieval-augmented generation, embeddings, reranking and document parsing.",
