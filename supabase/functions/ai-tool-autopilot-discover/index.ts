@@ -2,6 +2,15 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.4";
 
 type FeedSource = { name: string; url: string };
+type Candidate = {
+  title: string;
+  url: string;
+  articleUrl: string;
+  description: string;
+  sourceUrl: string;
+  sourceName: string;
+};
+
 const DEFAULT_FEEDS: FeedSource[] = [
   { name: "Hugging Face Blog", url: "https://huggingface.co/blog/feed.xml" },
   { name: "Google Research Blog", url: "https://blog.research.google/feeds/posts/default?alt=rss" },
@@ -25,7 +34,8 @@ function decodeXml(value: string): string {
     .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
     .replace(/&amp;/g, "&").replace(/&quot;/g, '"')
     .replace(/&#39;|&apos;/g, "'").replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">").replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&gt;/g, ">")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
     .replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
 
@@ -44,38 +54,53 @@ function safeUrl(raw: string): URL | null {
     const url = new URL(raw);
     if (url.protocol !== "https:" || url.username || url.password) return null;
     return url;
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 
-async function readFeed(source: FeedSource) {
+async function readFeed(source: FeedSource): Promise<Candidate[]> {
   const res = await fetch(source.url, {
     headers: { "User-Agent": "AnjalAI-DirectoryBot/1.0 (+https://anjal-ai-directory.vercel.app)" },
     signal: AbortSignal.timeout(12000),
   });
   if (!res.ok) throw new Error(`${source.name}: HTTP ${res.status}`);
+
   const xml = await res.text();
   const items = [...xml.matchAll(/<(?:item|entry)\b[^>]*>([\s\S]*?)<\/(?:item|entry)\s*>/gi)].slice(0, 30);
-  return items.map(([_, item]) => {
+  const candidates: Candidate[] = [];
+
+  for (const match of items) {
+    const item = match[1];
     const title = tag(item, "title").slice(0, 180);
     const articleUrl = safeUrl(tag(item, "link"));
     const descriptionRaw = tag(item, "description") || tag(item, "summary") || tag(item, "content");
     const description = descriptionRaw.slice(0, 1200);
-    if (!title || !articleUrl) return null;
+    if (!title || !articleUrl) continue;
 
-    // The feed article is evidence, not the product homepage. Require a distinct
-    // external HTTPS link in the article instead of mislabeling the publisher URL.
+    // The article URL is evidence, not the product homepage. Require a distinct
+    // external HTTPS link so a publisher article is never mislabeled as a tool.
     const sourceHost = new URL(source.url).hostname.replace(/^www\./, "");
     const ignoredHosts = /(^|\.)(linkedin\.com|twitter\.com|x\.com|facebook\.com|instagram\.com|youtube\.com|tiktok\.com)$/i;
-    const hrefs = [...item.matchAll(/href=["'](https:\/\/[^"'\s<>]+)["']/gi)].map(match => match[1]);
-    const productUrl = hrefs.map(safeUrl).find(candidate =>
+    const hrefs = [...item.matchAll(/href=["'](https:\/\/[^"'\s<>]+)["']/gi)].map((entry) => entry[1]);
+    const productUrl = hrefs.map(safeUrl).find((candidate) =>
       candidate &&
       candidate.hostname.replace(/^www\./, "") !== sourceHost &&
       !ignoredHosts.test(candidate.hostname) &&
       !candidate.hostname.endsWith(".google.com")
     );
-    if (!productUrl) return null;
-    return { title, url: productUrl.toString(), articleUrl: articleUrl.toString(), description, sourceUrl: source.url, sourceName: source.name };
-  }).filter(Boolean);
+    if (!productUrl) continue;
+
+    candidates.push({
+      title,
+      url: productUrl.toString(),
+      articleUrl: articleUrl.toString(),
+      description,
+      sourceUrl: source.url,
+      sourceName: source.name,
+    });
+  }
+  return candidates;
 }
 
 Deno.serve(async (req: Request) => {
@@ -84,38 +109,59 @@ Deno.serve(async (req: Request) => {
 
   const cronSecret = Deno.env.get("AUTOPILOT_CRON_SECRET");
   const supplied = req.headers.get("x-autopilot-secret");
-  if (!cronSecret || !supplied || supplied !== cronSecret) return response({ error: "Unauthorized" }, 401);
+  if (!cronSecret || !supplied || supplied !== cronSecret) {
+    return response({ error: "Unauthorized" }, 401);
+  }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-  if (!supabaseUrl || !serviceKey) return response({ error: "Server configuration incomplete" }, 503);
+  if (!supabaseUrl || !serviceKey) {
+    return response({ error: "Server configuration incomplete" }, 503);
+  }
 
   const supabase = createClient(supabaseUrl, serviceKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
-  const runStarted = new Date().toISOString();
+  const runStartedAt = new Date().toISOString();
   const runInsert = await supabase.from("ai_tool_discovery_runs").insert({
-    status: "running", run_started_at: runStarted, sources_checked: DEFAULT_FEEDS.length,
+    status: "running",
+    run_started_at: runStartedAt,
+    sources_checked: DEFAULT_FEEDS.length,
   }).select("id").single();
-  const runId = runInsert.data?.id ?? null;
 
-  let candidates = 0;
-  let inserted = 0;
+  if (runInsert.error || !runInsert.data?.id) {
+    return response({ error: "Could not create discovery run log" }, 500);
+  }
+
+  const runId = runInsert.data.id;
+  let candidatesFound = 0;
+  let recordsInserted = 0;
+  let duplicateOrSkipped = 0;
   const errors: string[] = [];
+
   for (const source of DEFAULT_FEEDS) {
     try {
       const entries = await readFeed(source);
-      candidates += entries.length;
+      candidatesFound += entries.length;
+
       for (const entry of entries) {
         const url = safeUrl(entry.url);
-        if (!url) continue;
+        if (!url) {
+          duplicateOrSkipped++;
+          continue;
+        }
+
         const domain = url.hostname.toLowerCase().replace(/^www\./, "");
-        const slugBase = entry.title.toLowerCase().normalize("NFKD")
+        const slug = entry.title.toLowerCase().normalize("NFKD")
           .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 70);
-        if (!slugBase) continue;
-        const { error } = await supabase.from("ai_tool_discoveries").insert({
+        if (!slug) {
+          duplicateOrSkipped++;
+          continue;
+        }
+
+        const { data, error } = await supabase.from("ai_tool_discoveries").insert({
           name: entry.title,
-          slug: slugBase,
+          slug,
           official_url: url.toString(),
           normalized_domain: domain,
           source_url: entry.sourceUrl,
@@ -124,36 +170,60 @@ Deno.serve(async (req: Request) => {
           source_evidence: {
             feed: entry.sourceName,
             feed_url: entry.sourceUrl,
-            item_url: entry.articleUrl,\n            candidate_url: entry.url,
+            item_url: entry.articleUrl,
+            candidate_url: entry.url,
             discovered_by: "rss",
           },
           verification_status: "pending",
           publication_status: "discovered",
-        }, { onConflict: "normalized_domain", ignoreDuplicates: true });
-        if (error) errors.push(`${entry.title}: ${error.message}`);
-        else inserted++;
+        }, { onConflict: "normalized_domain", ignoreDuplicates: true }).select("id");
+
+        if (error) {
+          errors.push(`${entry.title}: ${error.message}`);
+        } else if (data?.length) {
+          recordsInserted += data.length;
+        } else {
+          duplicateOrSkipped++;
+        }
       }
     } catch (error) {
       errors.push(error instanceof Error ? error.message : String(error));
     }
   }
 
-  if (runId) {
-    await supabase.from("ai_tool_discovery_runs").update({
-      status: errors.length ? "completed_with_errors" : "completed",
-      finished_at: new Date().toISOString(),
-      candidates_found: candidates,
-      records_inserted: inserted,
-      error_summary: errors.slice(0, 20),
-    }).eq("id", runId);
+  const runStatus = errors.length
+    ? (recordsInserted > 0 ? "partial" : "failed")
+    : "completed";
+
+  const runUpdate = await supabase.from("ai_tool_discovery_runs").update({
+    status: runStatus,
+    run_finished_at: new Date().toISOString(),
+    candidates_found: candidatesFound,
+    error_summary: errors.length ? errors.slice(0, 20).join("\\n").slice(0, 4000) : null,
+    metrics: {
+      records_inserted: recordsInserted,
+      duplicates_or_skipped: duplicateOrSkipped,
+      feeds_checked: DEFAULT_FEEDS.length,
+    },
+  }).eq("id", runId);
+
+  if (runUpdate.error) {
+    return response({
+      status: "partial",
+      runId,
+      error: "Discovery finished but run metrics could not be saved",
+      recordsInserted,
+    }, 500);
   }
+
   return response({
-    status: "completed",
+    status: runStatus,
     runId,
     feedsChecked: DEFAULT_FEEDS.length,
-    candidatesFound: candidates,
-    recordsInserted: inserted,
+    candidatesFound,
+    recordsInserted,
+    duplicatesOrSkipped: duplicateOrSkipped,
     errors: errors.slice(0, 10),
-    note: "Candidates are stored as unverified discoveries only. No tool is published by this function.",
+    note: "Candidates remain unverified. This function does not publish tools or create indexable pages.",
   });
 });
