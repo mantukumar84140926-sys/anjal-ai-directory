@@ -729,7 +729,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "humata": {
-    seoTitle: "Humata AI — PDF Assistant & Document Knowledge Base | Anjal AI",
+    seoTitle: "Humata AI — PDF Assistant & Knowledge Base | Anjal AI",
     overview: "Humata is an AI assistant for asking questions across uploaded files and shared document libraries. It is positioned as a knowledge-base tool for teams that need to summarize technical papers, compare documents and find answers without manually searching every page. Humata highlights cited links into source files, document embedding for websites and shared team spaces with access controls. This makes it useful for research groups and organizations that want a conversational layer over manuals, reports, policies or other internal documents.",
     bestFor: ["Summarizing and comparing research papers and long reports", "Finding answers across a collection of uploaded documents", "Creating a searchable knowledge base for a team", "Embedding document Q&A on an internal or public webpage", "Tracing answers back to citations in source files"],
     workflow: ["Create a workspace and upload a small, clearly organized set of documents.", "Ask a question that specifies the information you need and the source scope.", "Open the citations and compare the response with the original document text.", "Organize files into folders or team spaces and configure access for the intended users.", "For embedded or shared knowledge bases, test what unauthenticated and different-role users can access."],
