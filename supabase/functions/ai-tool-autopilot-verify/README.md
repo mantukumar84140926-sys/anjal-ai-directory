@@ -1,4 +1,4 @@
-# AI Tool Autopilot — Conservative Homepage Check
+# AI Tool Autopilot — Safe Metadata Screening
 
 This function processes up to 20 pending discoveries per run.
 
@@ -21,17 +21,18 @@ Do not place the secret in source control, browser code, or chat messages.
 ## What it does
 
 - Loads pending discoveries only.
-- Requires HTTPS, rejects URL credentials, non-standard ports, literal IP addresses, and local/internal hostnames.
-- Follows at most four HTTPS redirects, checking every redirect target.
-- Checks HTTP status and HTML content type, and reads at most 700 KB of homepage HTML.
-- Captures title, meta description, Open Graph site name, final URL and response metadata.
-- Stores evidence and moves reachable sites to `needs_review`.
-- Marks inaccessible or unsafe URLs as `failed` / `rejected`.
+- Performs syntax-only URL screening: HTTPS is required; credentials, non-standard ports, literal IP addresses, and local/internal hostnames are rejected.
+- Calculates a deterministic metadata-completeness score from the candidate name, description, HTTPS URL and RSS evidence.
+- Stores the score and screening evidence, then moves syntactically acceptable candidates to `needs_review`.
+- Marks malformed or unsafe URL syntax as `failed` / `rejected`.
 
-## Important safety boundary
+## Important security and quality boundaries
 
-A reachable homepage is not proof that the discovered site is the official product, that the product exists as described, or that its claims/pricing are accurate. Therefore this function **never** sets `verification_status=verified`, never generates SEO claims, and never publishes pages. Those require independent source/ownership checks and a later quality gate.
+- **It does not fetch candidate-controlled URLs.** This avoids turning the shared Edge Function into an SSRF or DNS-rebinding proxy.
+- The score measures metadata completeness only. It is not a measure of product quality, legitimacy, safety, popularity, ownership or accuracy.
+- No candidate is marked `verified` or `published`. Independent ownership/product checks and a separate high-quality content gate are still required before indexable pages can be generated.
+- A high completeness score must never be treated as permission to publish.
 
 ## Deployment
 
-This source is not deployed automatically by Vercel. Deploy it to the existing Supabase project only after setting the secrets privately and reviewing the Edge Function logs. Keep JWT verification enabled where the scheduler can provide the expected authorization; the shared secret check is an additional guard, not a replacement for platform authorization.
+This source is not deployed automatically by Vercel. Deploy it to the existing Supabase project only after setting the secrets privately and reviewing the Edge Function logs. Keep platform JWT verification enabled where the scheduler can provide the expected authorization; the shared secret check is an additional guard, not a replacement for platform authorization.
