@@ -747,7 +747,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "consensus": {
-    seoTitle: "Consensus AI — Search Scientific Research & Evidence | Anjal AI",
+    seoTitle: "Consensus AI — Scientific Research Search | Anjal AI",
     overview: "Consensus is an academic search and research platform that uses scholarly papers to answer research questions. Its help center describes semantic and keyword retrieval, AI summaries with citations, study comparisons, structured evidence tables and a Research Agent for multi-step searches. The Deep Review workflow can break a question into sub-questions, screen papers and synthesize a longer report. Consensus is designed to make research easier to explore, but users should still inspect the cited studies and assess their quality.",
     bestFor: ["Searching peer-reviewed research using natural-language questions", "Finding papers and following citations to related studies", "Comparing methods, populations, sample sizes and outcomes", "Getting citation-backed summaries of evidence", "Preparing a deeper literature review with structured findings"],
     workflow: ["Write a research question that specifies the population, topic, intervention or outcome.", "Choose a standard paper search, Pro analysis or Deep Review based on the depth required.", "Apply filters such as recency, study type, sample size or journal quality when relevant.", "Open cited papers and compare methods, limitations and conflicting findings.", "Export useful references and record the search scope and date for reproducibility."],
