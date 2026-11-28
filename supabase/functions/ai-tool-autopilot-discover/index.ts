@@ -57,11 +57,24 @@ async function readFeed(source: FeedSource) {
   const items = [...xml.matchAll(/<(?:item|entry)\b[^>]*>([\s\S]*?)<\/(?:item|entry)\s*>/gi)].slice(0, 30);
   return items.map(([_, item]) => {
     const title = tag(item, "title").slice(0, 180);
-    const link = tag(item, "link");
-    const description = tag(item, "description") || tag(item, "summary") || tag(item, "content");
-    const url = safeUrl(link);
-    if (!title || !url) return null;
-    return { title, url: url.toString(), description: description.slice(0, 1200), sourceUrl: source.url, sourceName: source.name };
+    const articleUrl = safeUrl(tag(item, "link"));
+    const descriptionRaw = tag(item, "description") || tag(item, "summary") || tag(item, "content");
+    const description = descriptionRaw.slice(0, 1200);
+    if (!title || !articleUrl) return null;
+
+    // The feed article is evidence, not the product homepage. Require a distinct
+    // external HTTPS link in the article instead of mislabeling the publisher URL.
+    const sourceHost = new URL(source.url).hostname.replace(/^www\./, "");
+    const ignoredHosts = /(^|\.)(linkedin\.com|twitter\.com|x\.com|facebook\.com|instagram\.com|youtube\.com|tiktok\.com)$/i;
+    const hrefs = [...item.matchAll(/href=["'](https:\/\/[^"'\s<>]+)["']/gi)].map(match => match[1]);
+    const productUrl = hrefs.map(safeUrl).find(candidate =>
+      candidate &&
+      candidate.hostname.replace(/^www\./, "") !== sourceHost &&
+      !ignoredHosts.test(candidate.hostname) &&
+      !candidate.hostname.endsWith(".google.com")
+    );
+    if (!productUrl) return null;
+    return { title, url: productUrl.toString(), articleUrl: articleUrl.toString(), description, sourceUrl: source.url, sourceName: source.name };
   }).filter(Boolean);
 }
 
@@ -111,7 +124,7 @@ Deno.serve(async (req: Request) => {
           source_evidence: {
             feed: entry.sourceName,
             feed_url: entry.sourceUrl,
-            item_url: entry.url,
+            item_url: entry.articleUrl,\n            candidate_url: entry.url,
             discovered_by: "rss",
           },
           verification_status: "pending",
