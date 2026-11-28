@@ -702,6 +702,84 @@ const curatedToolProfiles = {
 };
 
 Object.assign(curatedToolProfiles, {
+  "descript": {
+    seoTitle: "Descript — AI Audio & Video Editor | Anjal AI",
+    overview: "Descript is an audio and video production editor built around transcription and text-based editing. Creators can record a screen, camera or remote interview, import existing media, edit the transcript to change the recording, remove filler words and retakes, improve speech, add captions and export clips. Its Underlord AI co-editor can help with editing tasks, while tools for voice regeneration, studio sound and visual refinement support a broader production workflow. Descript is useful for podcasts, interviews, tutorials, screen recordings and social clips where spoken content is the main structure.",
+    bestFor: ["Editing podcast and interview recordings by changing the transcript", "Recording screen, camera and remote guests in one workflow", "Removing filler words, retakes and unwanted pauses", "Cleaning speech and preparing captions or short clips", "Repurposing long recordings into tutorials and social video"],
+    workflow: ["Record or import the audio and video files, then allow Descript to transcribe the media.", "Review the transcript and correct speaker names, technical terms and punctuation before editing.", "Edit by selecting and deleting text, then inspect the timeline for visual or audio transitions that need manual adjustment.", "Use speech cleanup and AI editing tools selectively, then review the result with headphones.", "Create captions, clips and exports in the format required by the publishing platform."],
+    considerations: ["Automatic transcripts can mishear names, accents and technical vocabulary; proofread before publishing.", "AI voice regeneration and voice cloning should only be used with appropriate consent and rights.", "Advanced recording, export, AI and transcription allowances vary by plan.", "Keep original media and review the full export for jump cuts, sync problems and unwanted edits."],
+    sourceLabel: "Descript official features overview",
+    sourceUrl: "https://www.descript.com/features",
+    faq: [
+      { question: "What is Descript used for?", answer: "Descript is used to record, transcribe and edit audio or video, with text-based editing, speech cleanup, captions and AI-assisted production tools." },
+      { question: "Can I edit a video by editing its transcript?", answer: "Yes. Descript's text-based editor links transcript changes to the media timeline, so removing or moving words can edit the corresponding recording." }
+    ]
+  },
+  "adobe-podcast": {
+    seoTitle: "Adobe Podcast — AI Speech Enhancement & Editing | Anjal AI",
+    overview: "Adobe Podcast is a browser-based audio recording and editing workspace for podcasts, voiceovers and spoken-word content. Its tools include Enhance Speech for reducing background noise and echo, Studio for recording solo or remote guests, transcription-based editing, captioning and audio or video transcription. Adobe also provides microphone checks and podcast-ready music and sound assets. Because it is designed around speech, Adobe Podcast is particularly useful for improving recordings and editing spoken content without needing a traditional desktop audio workstation.",
+    bestFor: ["Cleaning background noise and echo from voice recordings", "Recording podcasts with remote guests and separate audio tracks", "Editing spoken audio by working from its transcript", "Transcribing audio or video and creating captions", "Preparing voiceovers, class lectures and audio newsletters"],
+    workflow: ["Record in Adobe Podcast Studio or upload an existing supported audio file.", "For noisy recordings, run Enhance Speech and compare the result with the original.", "Use the transcript to locate sections, remove unwanted passages and organize the story.", "Check speaker levels, pronunciation, pacing and any artifacts introduced by enhancement.", "Export the finished audio or video captions and keep the original recording for future edits."],
+    considerations: ["Enhance Speech improves audio quality but does not translate speech or repair every recording problem.", "Results depend on source clarity, background noise and speaker audibility; heavy processing can sound unnatural.", "Free and Premium plans have different file-size, duration, daily processing and export limits.", "Obtain consent from remote guests before recording and follow the privacy rules that apply to the content."],
+    sourceLabel: "Adobe Podcast official feature overview and FAQ",
+    sourceUrl: "https://podcast.adobe.com/feature/enhance",
+    faq: [
+      { question: "What does Adobe Podcast Enhance Speech do?", answer: "Enhance Speech uses AI to reduce background noise and echo and make spoken recordings sound clearer. Results depend on the original recording." },
+      { question: "Can Adobe Podcast record remote guests?", answer: "Yes. Adobe Podcast Studio supports recording with remote guests and captures individual audio tracks for editing." }
+    ]
+  },
+  "aiva": {
+    seoTitle: "AIVA — AI Music Composer & Licensing | Anjal AI",
+    overview: "AIVA is an AI music composition assistant for generating original instrumental and soundtrack ideas. The platform offers more than 250 styles, customizable style models, audio or MIDI influence uploads, editing tools and downloads in supported formats. AIVA is designed for creators who want to generate compositions and then refine them for games, videos, films, streams or other projects. Licensing is an important part of the workflow: the rights and permitted uses of a composition depend on the plan under which it was created and downloaded.",
+    bestFor: ["Generating original music and soundtrack concepts in different styles", "Creating background compositions for video, games and presentations", "Using audio or MIDI references to influence a new composition", "Editing and exporting music in supported audio or MIDI formats", "Exploring licensing options for monetized or commercial music projects"],
+    workflow: ["Choose a musical style or create a custom style model that fits the project.", "Generate a few compositions, then refine the strongest idea using the available editing controls.", "Use audio or MIDI influence when you need the composition to follow a particular reference.", "Before downloading, confirm which license applies to that specific composition and intended use.", "Save the license record and export the required format for the production workflow."],
+    considerations: ["AIVA's free, Standard and Pro plans grant different rights; do not assume every plan includes commercial use or copyright ownership.", "The applicable license depends on the plan active when the composition is downloaded.", "Generated music may need arrangement, mixing and mastering before professional release.", "Check current plan limits, download formats and enterprise terms before building a commercial workflow."],
+    sourceLabel: "AIVA official music generator and licensing terms",
+    sourceUrl: "https://www.aiva.ai/",
+    faq: [
+      { question: "Can AIVA generate original music?", answer: "Yes. AIVA generates music in many styles and lets users customize, edit and download compositions in supported formats." },
+      { question: "Do I own the copyright to AIVA music?", answer: "Not on every plan. AIVA states that copyright and permitted use depend on the subscription license, with full copyright available under its Pro plan for eligible users." }
+    ]
+  },
+  "mubert": {
+    seoTitle: "Mubert — AI Music Generator & Streaming API | Anjal AI",
+    overview: "Mubert is an AI music platform for generating and streaming soundtracks for creators, apps and digital products. Its creator tools can produce music from prompts and creative settings such as mood, genre or activity, while the Mubert API lets developers generate tracks, loops and adaptive streams inside apps, games, video editors and UGC workflows. The API documentation describes text-to-music and image-to-music generation, live streaming and options for sub-licensing. Mubert has separate creator and developer offerings, and the license required depends on where and how the generated music will be used.",
+    bestFor: ["Generating background music for videos, podcasts and social content", "Creating soundtracks based on prompts, moods, genres or activities", "Adding on-demand music generation to apps and games", "Streaming adaptive background music in live or interactive products", "Building music workflows for creator platforms and video editors"],
+    workflow: ["Choose the creator generator or API based on whether you need a track for your own content or music inside a product.", "Describe the intended mood, genre, activity, tempo and duration.", "Generate a preview and listen for fit, transitions and suitability before downloading or streaming.", "Read the relevant license for the exact use case, especially ads, client work, apps or user-generated content.", "For API use, test authentication, generation limits, playback and licensing behavior before scaling."],
+    considerations: ["Mubert's creator subscriptions, API plans and licensing scopes are not interchangeable.", "Some free or entry-level uses may be non-commercial or require attribution; verify the current license before publishing.", "Commercial advertising, apps, client work and sub-licensing may require a different plan or agreement.", "Generated music should be reviewed for fit, looping artifacts and rights requirements in the final distribution channel."],
+    sourceLabel: "Mubert official creator and API overview",
+    sourceUrl: "https://mubert.com/api",
+    faq: [
+      { question: "Can Mubert generate music from a text prompt?", answer: "Yes. Mubert describes text-to-music generation, along with image, mood, genre and other controls in supported creator and API workflows." },
+      { question: "Can developers use Mubert in an app?", answer: "Yes. Mubert offers an API for generating tracks and streaming music inside apps, games, creator tools and other products. Licensing and usage limits depend on the plan." }
+    ]
+  },
+  "soundraw": {
+    seoTitle: "SOUNDRAW — AI Music Generator & Creator License | Anjal AI",
+    overview: "SOUNDRAW is an AI music generator for creating customizable background tracks and beats. Users can choose a genre and mood, generate options, adjust sections and intensity, and download music for video, social, streaming and other creative projects. SOUNDRAW also offers artist-focused plans and, on eligible tiers, separate stems for further editing in a digital audio workstation. Its license distinguishes background music use from releasing modified songs on streaming services, so creators should select the plan that matches their intended distribution.",
+    bestFor: ["Generating background music for YouTube videos and social content", "Creating tracks by genre, mood and intensity", "Editing song sections and adjusting musical energy", "Downloading stems for further work in a DAW on supported plans", "Preparing music for commercial projects under the correct license"],
+    workflow: ["Describe the mood and role of the music, then select a genre or blend of styles.", "Generate several versions and adjust sections, intensity and arrangement to fit the video or project.", "Preview the full track in context and make sure its duration and transitions fit the edit.", "Check whether the Creator or Artist license matches your use, especially for streaming-service distribution.", "Download the track or supported stems and keep the license details with the project."],
+    considerations: ["Commercial use is tied to the plan and license terms; the Creator and Artist plans cover different use cases.", "SOUNDRAW's license states that streaming-service distribution requires modifying the beat and making the final song clearly different.", "Do not register unmodified tracks in content identification systems or resell them as stock music.", "Plan features such as stems, downloads and distribution rights can change; confirm current terms before release."],
+    sourceLabel: "SOUNDRAW official generator and license guide",
+    sourceUrl: "https://soundraw.io/license",
+    faq: [
+      { question: "Can I use SOUNDRAW music in monetized videos?", answer: "SOUNDRAW says paid Creator and Artist plans allow commercial use in covered projects. Check the license for the exact platform and content type." },
+      { question: "Can I release SOUNDRAW music on Spotify?", answer: "SOUNDRAW's Artist license allows distribution only when you modify the beat, for example by adding vocals or instruments, and the final song is clearly different from the downloaded track." }
+    ]
+  },
+  "lalal-ai": {
+    seoTitle: "LALAL.AI — AI Stem Splitter & Vocal Remover | Anjal AI",
+    overview: "LALAL.AI is an AI audio-separation service for isolating vocals, instruments and other sound elements from mixed recordings. Its Stem Splitter can extract parts such as vocals, instrumental, drums, bass, piano, guitars, synthesizer and other supported stems. Separate tools target speech cleanup, background-noise removal, voice changing and echo reduction. Users can upload supported audio or video, preview separated stems and choose processing settings before downloading. LALAL.AI is useful for remix preparation, karaoke, music practice, editing and cleaning spoken recordings, although separation quality depends on the source mix.",
+    bestFor: ["Removing vocals to create instrumental or karaoke versions", "Extracting drums, bass, piano, guitar and other instrument stems", "Preparing tracks for remixes, practice and audio editing", "Separating speech from background noise or music", "Cleaning echo and unwanted artifacts from voice recordings"],
+    workflow: ["Choose the correct workflow: music stem separation for songs or voice cleaning for speech recordings.", "Upload a supported audio or video file and select the stem or elements you want to extract.", "Listen to the preview and compare processing modes when available.", "Adjust settings to balance stem isolation against leakage or loss of source detail.", "Process and download the results, then inspect them in your audio editor before final use."],
+    considerations: ["No stem-separation model can perfectly separate every mixed recording; some bleed or artifacts may remain.", "Use the speech-cleaning workflow for spoken audio rather than a music-vocal stem model.", "Processing limits, file sizes, supported formats and available stems depend on the plan and selected tool.", "Only upload audio and video that you own or are authorized to process; separation does not grant rights to reuse copyrighted material."],
+    sourceLabel: "LALAL.AI official stem splitter and API documentation",
+    sourceUrl: "https://www.lalal.ai/stem-splitter/",
+    faq: [
+      { question: "Can LALAL.AI remove vocals from a song?", answer: "Yes. Its Stem Splitter can separate vocals and instrumental audio, and can also extract supported instrument stems." },
+      { question: "Can LALAL.AI clean speech recordings?", answer: "Yes. LALAL.AI provides voice-cleaning tools for separating speech from background noise and reducing echo, with results depending on the source recording." }
+    ]
+  },
   "perplexity": {
     seoTitle: "Perplexity AI — Cited Search & Research | Anjal AI",
     overview: "Perplexity is an AI answer and research platform that searches the open web and returns synthesized answers with linked citations. Its current product suite includes Search for source-backed answers, Pro Search for more involved research, Deep Research for structured reports, Computer for multi-step work across files and connected apps, Comet for AI-assisted browsing, and APIs for developers. Perplexity can route work across multiple models and connect web information with files or approved app context. It is useful when a user wants to move from a question to evidence, analysis or a finished research deliverable in one workflow.",
@@ -1201,6 +1279,12 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "descript": "Explore Descript for transcript-based audio and video editing, recording, speech cleanup and AI-assisted production.",
+  "adobe-podcast": "Explore Adobe Podcast for AI speech enhancement, podcast recording, transcription and browser-based audio editing.",
+  "aiva": "Explore AIVA for AI music composition, customizable styles, audio and MIDI references, and plan-based licensing.",
+  "mubert": "Explore Mubert for prompt-based music generation, adaptive streaming and licensed music APIs for apps.",
+  "soundraw": "Explore SOUNDRAW for customizable AI background music, track editing, stems and creator licensing.",
+  "lalal-ai": "Explore LALAL.AI for AI vocal removal, instrument stem separation, voice cleaning and audio editing.",
   "poe": "Explore Poe AI to compare multiple models, use specialist bots and create custom AI chatbots.",
   "grok": "Explore Grok AI from xAI for conversational assistance, web and X search, coding and creative tools.",
   "microsoft-copilot": "Explore Microsoft Copilot for AI chat, web-grounded answers and supported Microsoft 365 workflows.",
