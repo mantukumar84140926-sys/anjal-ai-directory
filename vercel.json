@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/cron/ai-tool-autopilot",
+      "schedule": "30 3 * * *"
+    }
+  ],
   "redirects": [
     {
       "source": "/tool/surfer-seo",
