@@ -28,4 +28,4 @@ jobs:
         with:
           deno-version: v2.x
       - name: Type-check function
-        run: deno check supabase/functions/ai-tool-autopilot-discover/index.ts
+        run: deno check supabase/functions/ai-tool-autopilot-discover/index.ts supabase/functions/ai-tool-autopilot-verify/index.ts
