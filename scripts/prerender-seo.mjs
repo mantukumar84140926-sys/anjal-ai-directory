@@ -145,7 +145,7 @@ const homeBody = `<main>
 <section>
 <h2>Get better results with copy-ready AI prompts</h2>
 <p>A useful prompt tells an AI assistant what you are trying to achieve, provides the context it needs, explains constraints and specifies the format of the answer. For example, a study prompt can state the subject, class level and topic; a writing prompt can identify the audience and tone; and a coding prompt can include the language, expected behavior and error message.</p>
-<p>The <a href="/prompts">Anjal AI Prompt Library</a> offers editable starting points for common workflows. Replace placeholders with your own details, remove instructions that do not apply, and refine the prompt after reviewing the first response. Do not treat generated information as automatically correct.</p>
+<p>The <a href="/prompts">Prompt Finder</a> offers editable starting points for common workflows. Replace placeholders with your own details, remove instructions that do not apply, and refine the prompt after reviewing the first response. Do not treat generated information as automatically correct.</p>
 </section>
 <section>
 <h2>Using AI for learning and research</h2>
@@ -183,9 +183,9 @@ const finderBody = `<main><nav><a href="/">Anjal AI</a> → <strong>AI Tool Find
 <li><strong>Portability:</strong> Check whether you can export your work and use it with the other tools in your workflow.</li>
 <li><strong>Accessibility:</strong> Confirm device support, language options and availability in your country.</li>
 </ul></section>
-<section><h2>Use prompts to get better results</h2><p>A good AI prompt gives the assistant a clear goal, relevant context, constraints and an expected output format. Add examples when useful, replace placeholders with your own details and review generated content before sharing or publishing it. Browse the <a href="/prompts">free AI prompt library</a> for editable starting points.</p></section>
+<section><h2>Use prompts to get better results</h2><p>A good AI prompt gives the assistant a clear goal, relevant context, constraints and an expected output format. Add examples when useful, replace placeholders with your own details and review generated content before sharing or publishing it. Browse the <a href="/prompts">Prompt Finder</a> for editable starting points.</p></section>
 <section><h2>Independent discovery, not a product guarantee</h2><p>Anjal AI is a discovery directory. Listings are provided to help you explore options; product features, prices, free plans and availability can change. Always confirm important details on the official provider website and review its terms before creating an account or making a purchase.</p></section>
-<p><a href="/">Browse all AI tools</a> · <a href="/prompts">Open the AI Prompt Library</a> · <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Use</a></p></main>`;
+<p><a href="/">Browse all AI tools</a> · <a href="/prompts">Open Prompt Finder</a> · <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Use</a></p></main>`;
 const finderJsonLd = {"@context":"https://schema.org","@type":"WebPage",name:finderTitle,description:finderDescription,url:`${origin}/finder`,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
 const finderOut = path.join(dist, "finder", "index.html");
 fs.mkdirSync(path.dirname(finderOut), { recursive: true });
@@ -1587,7 +1587,7 @@ for (const prompt of curatedPrompts) {
 <h2>How to customize this ${escapeHtml(prompt.category.toLowerCase())} prompt</h2><ol><li>Replace every bracketed placeholder with specific information about your task, audience, source material or desired result.</li><li>Add relevant context such as your goal, experience level, preferred tone, format, length and any constraints the output must follow.</li><li>Keep instructions that protect important details, and remove any direction that does not apply to your use case.</li><li>Run the prompt once, inspect the result, then refine one instruction at a time if the answer is too broad, incomplete or inaccurate.</li></ol>
 <h2>Copy-ready prompt</h2><pre>${escapeHtml(prompt.prompt)}</pre>
 <h2>Tips for better results</h2><ul><li><strong>Be specific:</strong> replace vague requests with concrete requirements and examples.</li><li><strong>Set boundaries:</strong> state what must stay unchanged, what should be avoided and what information the AI must not invent.</li><li><strong>Choose an output format:</strong> ask for steps, a table, a checklist, a draft or another structure that is easy to review.</li><li><strong>Verify important details:</strong> check facts, names, figures, permissions and final quality before using the output.</li><li><strong>Protect private information:</strong> do not paste passwords, confidential records or personal data into an AI service unless you understand and accept its data practices.</li></ul>
-<h2>Related topics</h2><ul>${tags}</ul><h2>Related AI prompts</h2><ul>${relatedLinks}</ul><p>Explore more ideas in the <a href="/prompts">free AI prompt library</a>, or use the <a href="/finder">AI tool finder</a> to discover software for your workflow.</p></main>`;
+<h2>Related topics</h2><ul>${tags}</ul><h2>Related AI prompts</h2><ul>${relatedLinks}</ul><p>Explore more ideas in the <a href="/prompts">Prompt Finder</a>, or use the <a href="/finder">AI tool finder</a> to discover software for your workflow.</p></main>`;
   const jsonLd = {"@context":"https://schema.org","@type":"CreativeWork",name:prompt.title,description,url:canonical,genre:prompt.category,keywords:prompt.tags.join(", "),isPartOf:{"@type":"CollectionPage",name:"AI Prompt Finder",url:`${origin}/prompts`}};
   const out = path.join(dist, "prompt", slug, "index.html");
   fs.mkdirSync(path.dirname(out), { recursive: true });
