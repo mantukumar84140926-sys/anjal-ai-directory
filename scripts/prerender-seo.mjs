@@ -694,6 +694,84 @@ const curatedToolProfiles = {
 };
 
 Object.assign(curatedToolProfiles, {
+  "notebooklm": {
+    seoTitle: "NotebookLM — AI Research, Notes & Audio Overviews | Anjal AI",
+    overview: "NotebookLM is Google's AI research and learning assistant for working with a collection of sources you choose. Google's Gemini Notebook help materials describe support for sources such as Google Docs, Slides, PDFs, text and Markdown files, web pages, public YouTube URLs and audio. You can ask questions grounded in those materials, organize notes and create Audio Overviews that turn source material into a listenable discussion. Product naming and feature access may differ between consumer and Workspace experiences.",
+    bestFor: ["Studying a set of class notes, readings or reference documents", "Summarizing and comparing information across selected sources", "Finding answers in long PDFs, documents and supported web sources", "Creating Audio Overviews to review material while away from a screen", "Preparing research notes, study guides and source-based outlines"],
+    workflow: ["Create a notebook for one topic or project and add only relevant sources.", "Ask focused questions that name the comparison, explanation or output you need.", "Open the cited passages in the original sources and check that they support the answer.", "Save useful notes and use Audio Overview as a revision aid, not as a replacement for reading.", "Review source permissions and privacy settings before adding private or copyrighted material."],
+    considerations: ["Answers are grounded in the sources you provide and can still misinterpret them.", "Audio Overviews are generated summaries, not complete or objective accounts of every source.", "Supported source types, import limits and features can change by account and product version.", "Do not upload confidential or sensitive material unless the applicable privacy controls are suitable."],
+    sourceLabel: "Google Gemini Notebook official help and FAQ",
+    sourceUrl: "https://support.google.com/gemininotebook/answer/16269187?hl=en",
+    faq: [
+      { question: "What is NotebookLM used for?", answer: "Google describes NotebookLM as a research and learning assistant that helps people explore their selected sources, ask questions and create source-based notes or summaries." },
+      { question: "Can NotebookLM create an audio summary?", answer: "Google's Audio Overview feature turns source material into a generated audio discussion. Review the original documents because an audio overview may omit details or contain errors." }
+    ]
+  },
+  "google-gemini": {
+    seoTitle: "Google Gemini — AI Assistant for Writing, Research & Files | Anjal AI",
+    overview: "Google Gemini is Google's AI assistant for asking questions, exploring ideas and working with supported text, images and files. Google's product updates describe workflows for generating, previewing and editing documents, PDFs, presentations, spreadsheets and code directly in a Gemini conversation. The formats and editing tools available can differ between web and mobile, and depend on the current release and account.",
+    bestFor: ["Getting explanations, brainstorming and help with everyday questions", "Drafting and refining documents or presentations from a written brief", "Working with supported PDFs and other uploaded files", "Turning notes or source material into structured summaries and study resources", "Iterating on code, spreadsheets and written content with follow-up instructions"],
+    workflow: ["State the goal, intended audience and format before asking Gemini to create an output.", "Attach only the files needed and explain what information should be extracted or changed.", "Ask for a preview and make targeted edits rather than accepting a first draft.", "Check calculations, citations, factual claims and formatting against the original material.", "Confirm which file formats and editing features are available on your device and account."],
+    considerations: ["Gemini can produce incorrect information or alter meaning when summarizing files; verify important details.", "File creation and editing support can vary by format, device, region and account.", "Some advanced features may have usage limits or require an eligible plan.", "Review Google's privacy and activity settings before sharing sensitive documents."],
+    sourceLabel: "Google official Gemini file creation and editing update",
+    sourceUrl: "https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly/",
+    faq: [
+      { question: "Can Gemini create documents and PDFs?", answer: "Google's October 2026 update describes generating, previewing and editing documents and PDFs in Gemini, alongside presentations, spreadsheets and code. Availability differs by format and device." },
+      { question: "Can Gemini edit an uploaded file?", answer: "Gemini can help refine supported files in a conversation. Review the preview and compare the result with your original before downloading or sharing it." }
+    ]
+  },
+  "meta-ai": {
+    seoTitle: "Meta AI — Assistant for Chat, Research & Image Creation | Anjal AI",
+    overview: "Meta AI is Meta's AI assistant, available through meta.ai and supported Meta apps and devices. Meta describes it as a tool for everyday questions, writing help, image generation, recommendations and more involved research. Its current assistant information also describes research reports with citations, document and presentation tasks, voice interactions and connections to services such as email or calendars in supported experiences. Availability varies by country, account and product.",
+    bestFor: ["Getting quick explanations, brainstorming and writing assistance", "Generating or editing images from a prompt where the feature is available", "Exploring a topic with deeper research and source links", "Using AI assistance inside supported WhatsApp, Instagram, Facebook or Messenger experiences", "Getting help with recommendations, planning and everyday tasks"],
+    workflow: ["Choose the Meta AI surface available to you, such as the website, app or an integrated Meta app.", "Describe the task and include the context, language and output format you need.", "For research, open cited sources and verify that they support the answer.", "For generated images or documents, inspect details and edit before sharing.", "Check feature availability, connected-app permissions and privacy settings before linking accounts."],
+    considerations: ["Meta AI features and app availability are not identical in every country or account.", "Generated answers, recommendations and research summaries can be incomplete or inaccurate.", "Connected email, calendar or business information may require additional permissions.", "Review privacy controls before sharing personal, business or customer information."],
+    sourceLabel: "Meta official AI assistant overview and FAQs",
+    sourceUrl: "https://ai.meta.com/meta-ai/assistant/",
+    faq: [
+      { question: "Where can I use Meta AI?", answer: "Meta lists meta.ai, its Meta AI app and supported experiences in WhatsApp, Instagram, Messenger and Facebook. Availability and individual features vary by region." },
+      { question: "Can Meta AI help with research?", answer: "Meta describes a Deep Research experience that can build research plans, search sources and draft structured reports with citations. Verify the cited material before relying on a report." }
+    ]
+  },
+  "github-copilot": {
+    seoTitle: "GitHub Copilot — AI Coding Assistant & Agent | Anjal AI",
+    overview: "GitHub Copilot is an AI coding assistant integrated into GitHub and supported development environments. GitHub's documentation describes inline code suggestions, codebase questions, code explanations, code review and agent workflows that can research a repository, plan changes, edit files, run tools and prepare pull requests for review. Available features depend on the Copilot plan, client and organization policies.",
+    bestFor: ["Getting code suggestions while writing or editing software", "Understanding unfamiliar files, repositories and development concepts", "Planning and implementing multi-step coding tasks with an agent", "Reviewing code changes and pull requests for potential issues", "Generating tests, refactoring code and troubleshooting errors"],
+    workflow: ["Choose the Copilot surface that fits the task: IDE, GitHub website, CLI or app.", "Describe the expected behavior, constraints, relevant files and acceptance criteria.", "For agent tasks, ask for a plan and keep changes within a clearly scoped repository.", "Review every diff, command, dependency change and pull request before approving it.", "Run the project's tests and security checks before merging or deploying."],
+    considerations: ["AI-generated code can contain bugs, insecure patterns or unsuitable dependencies.", "Agent capabilities and access depend on the selected plan, repository permissions and organization settings.", "Review proposed terminal commands and file changes before allowing them to run.", "Do not expose credentials, production secrets or private code beyond the access your account permits."],
+    sourceLabel: "GitHub official Copilot capabilities documentation",
+    sourceUrl: "https://docs.github.com/en/copilot/get-started/about-github-copilot",
+    faq: [
+      { question: "What can GitHub Copilot do?", answer: "GitHub documents code completion, repository questions, explanations, code review and agent workflows for planning and implementing changes." },
+      { question: "Can GitHub Copilot create a pull request?", answer: "Supported Copilot agent workflows can work on a task and prepare a pull request for human review. Review the changes and run tests before merging." }
+    ]
+  },
+  "hugging-face-community": {
+    seoTitle: "Hugging Face Hub — AI Models, Datasets & Demo Apps | Anjal AI",
+    overview: "Hugging Face is a platform and community for discovering, sharing and building with machine-learning resources. Its Hub documentation describes repositories for models, datasets and interactive demo applications called Spaces, alongside version history, collaboration tools, model cards and integrations with popular development libraries. Developers can explore open models, inspect documentation and use supported inference or deployment services.",
+    bestFor: ["Discovering machine-learning models for language, vision, audio and other tasks", "Finding datasets and reviewing their documentation and intended use", "Trying interactive model demos through Spaces", "Sharing model repositories and collaborating on AI projects", "Integrating supported models into applications with libraries or inference services"],
+    workflow: ["Search the Hub by task, model type, language, license and supported framework.", "Read the model card, dataset card and repository documentation before using an asset.", "Test the model or Space with representative inputs and inspect limitations.", "Check the license, provenance, safety notes and data requirements for your use case.", "Pin model versions and add evaluation, monitoring and access controls before production use."],
+    considerations: ["Community repositories vary in quality, maintenance, documentation and safety.", "A model's benchmark results may not predict performance on your own data or language.", "Check licenses and dataset permissions before redistributing or using resources commercially.", "Hosted inference, private repositories and deployment options may have separate limits or costs."],
+    sourceLabel: "Hugging Face official Hub documentation",
+    sourceUrl: "https://huggingface.co/docs/hub/index",
+    faq: [
+      { question: "What is the Hugging Face Hub?", answer: "Hugging Face describes the Hub as a place to host and discover machine-learning models, datasets and interactive Spaces, with versioning and collaboration features." },
+      { question: "Can I try AI models without installing them?", answer: "Some model repositories and Spaces provide browser-based demos or inference widgets. Availability depends on the repository, hardware and provider settings." }
+    ]
+  },
+  "runway": {
+    seoTitle: "Runway AI — Text-to-Video & Image-to-Video Generation | Anjal AI",
+    overview: "Runway is an AI creative platform with tools for generating and editing video and other media. Its current Gen-4.5 documentation describes text-to-video and image-to-video workflows, with prompts that can specify camera movement, scene composition, timing and motion. Runway's model and app lineup changes over time, so supported inputs, duration, output settings and access should be checked in the current interface.",
+    bestFor: ["Creating short video concepts from text prompts", "Animating a still image into a moving shot", "Testing camera movement and scene choreography", "Developing visual ideas for social clips, ads and storyboards", "Iterating on a video concept before a larger production"],
+    workflow: ["Choose text-to-video or image-to-video based on whether you have a starting frame.", "Describe subject movement, camera motion, scene action and timing in clear sequence.", "Generate a short test and evaluate motion consistency, composition and visual artifacts.", "Refine one or two prompt details at a time and compare versions.", "Check the current model settings, credits, output rights and commercial terms before publishing."],
+    considerations: ["Generated motion can contain visual inconsistencies; review every frame before using a clip.", "Model versions, supported durations, resolution and input options can change.", "Credit usage and access depend on the model and subscription.", "Use only reference images and footage you have permission to upload and transform."],
+    sourceLabel: "Runway official Gen-4.5 video generation documentation",
+    sourceUrl: "https://help.runwayml.com/hc/en-us/articles/46974685288467-Creating-with-Gen-4-5",
+    faq: [
+      { question: "Can Runway generate video from text?", answer: "Runway's Gen-4.5 documentation describes a text-to-video workflow as well as image-to-video generation." },
+      { question: "Can I animate an existing image in Runway?", answer: "The documented image-to-video workflow uses an input image together with a text prompt to guide the motion in the resulting clip." }
+    ]
+  },
   "claude": {
     seoTitle: "Claude AI — Assistant, Projects & Workflows | Anjal AI",
     overview: "Claude is Anthropic's AI assistant for writing, analysis, coding, research and multi-step work. Anthropic's product overview describes web search, connectors, file handling, projects, artifacts, voice and the ability to create editable documents and other deliverables. Available capabilities vary by account, plan and workspace settings.",
@@ -775,6 +853,12 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "notebooklm": "Explore NotebookLM for source-grounded research, document summaries, study notes and AI Audio Overviews.",
+  "google-gemini": "Explore Google Gemini for AI assistance, research, file analysis and creating or editing documents and PDFs.",
+  "meta-ai": "Explore Meta AI for chat, writing, image creation, deeper research and assistance across supported Meta apps.",
+  "github-copilot": "Explore GitHub Copilot for code suggestions, repository questions, code review and AI coding-agent workflows.",
+  "hugging-face-community": "Explore Hugging Face Hub for AI models, datasets, Spaces demos, model cards and developer tools.",
+  "runway": "Explore Runway AI for text-to-video, image-to-video generation and controllable creative video workflows.",
   "claude": "Explore Claude for AI writing, analysis, coding, file workflows, web research and editable work.",
   "cursor": "Explore Cursor's AI code editor and Agent for codebase search, multi-file edits, tests and debugging.",
   "elevenlabs": "Explore ElevenLabs AI voice generation, text to speech, voice tools and multilingual dubbing.",
