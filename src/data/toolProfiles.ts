@@ -1,4 +1,6 @@
 export type ToolProfile = {
+  seoTitle?: string;
+  seoDescription?: string;
   overview: string;
   bestFor: string[];
   workflow: string[];
@@ -10,6 +12,8 @@ export type ToolProfile = {
 
 export const toolProfiles: Record<string, ToolProfile> = {
   perplexity: {
+    seoTitle: "Perplexity AI — Cited Search & Research | Anjal AI",
+    seoDescription: "Explore Perplexity AI for cited web search, Pro Search, Deep Research, Computer workflows and developer APIs.",
     overview: "Perplexity is an AI answer engine designed around web research. It searches the web and presents synthesized answers with links to sources, so readers can inspect the material behind a response. Its official product information also describes deeper research workflows and access to multiple AI models; exact options can vary by plan and product updates.",
     bestFor: [
       "Starting research on a topic and collecting source links",
@@ -38,6 +42,8 @@ export const toolProfiles: Record<string, ToolProfile> = {
     ]
   },
   make: {
+    seoTitle: "Make.com — Workflow Automation & AI | Anjal AI",
+    seoDescription: "Explore Make.com for visual workflow automation, app integrations, AI-powered scenarios and business process orchestration.",
     overview: "Make is a visual automation platform for connecting apps, data sources and AI models into repeatable workflows. Users can build scenarios with a drag-and-drop canvas, describe an automation in natural language, or start from an AI chat and refine the result visually. It is designed for individuals and teams that want to coordinate work across connected services without writing every integration from scratch.",
     bestFor: [
       "Connecting business apps so information moves between them automatically",
@@ -62,6 +68,8 @@ export const toolProfiles: Record<string, ToolProfile> = {
     sourceUrl: "https://www.make.com/"
   },
   "digital-first-ai": {
+    seoTitle: "DFIRST AI (formerly Digital First AI) | Anjal AI",
+    seoDescription: "Digital First AI is now DFIRST AI, a creative workspace for brand campaigns, content and visual production.",
     overview: "Digital First AI has rebranded to DFIRST AI. The current product presents itself as a creative workspace for brand and marketing teams, bringing research, copy, images, video and website or campaign assets into connected workflows. Its feature pages describe multi-model orchestration, brand-voice guidance, reusable references, real-time research and tools for producing campaign variations. The current product and access model may differ from older listings.",
     bestFor: [
       "Planning a product launch campaign from source material and brand assets",
@@ -87,6 +95,8 @@ export const toolProfiles: Record<string, ToolProfile> = {
     sourceUrl: "https://dfirst.ai/"
   },
   "surfer-ai": {
+    seoTitle: "Surfer AI — SEO & AI Search Visibility | Anjal AI",
+    seoDescription: "Explore Surfer's SEO and AI search visibility platform, including Content Editor, Surfer AI, Topical Map, Content Audit and AI Tracker.",
     overview: "Surfer is an SEO and AI search visibility platform that combines content research, writing and optimization with monitoring for how brands appear in AI-generated answers. Its official product information describes tools such as Content Editor, Surfer AI, Content Audit, Topical Map, keyword research and AI Tracker. Teams can use it to plan content, improve existing pages and monitor visibility across supported search and AI surfaces.",
     bestFor: [
       "Planning topic clusters and content briefs from keyword and competitor research",

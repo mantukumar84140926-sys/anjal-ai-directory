@@ -40,9 +40,11 @@ export default function ToolDetail() {
   const canonical = `${SITE_URL}/tool/${tool.slug}`;
   const pricingLabel = tool.pricingType === "Unknown" ? "Not verified" : tool.pricingType;
   const rawTitle = `${tool.name} — ${category} AI Tool | Anjal AI`;
-  const title = rawTitle.length <= 60 ? rawTitle : `${tool.name} — AI Tool | Anjal AI`;
+  const fallbackTitle = rawTitle.length <= 60 ? rawTitle : `${tool.name} — AI Tool | Anjal AI`;
+  const title = profile?.seoTitle || fallbackTitle;
   const rawDescription = `${tool.name} is an AI ${category.toLowerCase()} tool listed in Anjal AI. Discover what it is, explore directory information, and visit the official website.`;
-  const description = rawDescription.length <= 160 ? rawDescription : `${tool.name} is an AI ${category.toLowerCase()} tool in the Anjal AI directory. Explore its official website and listing information.`;
+  const fallbackDescription = rawDescription.length <= 160 ? rawDescription : `${tool.name} is an AI ${category.toLowerCase()} tool in the Anjal AI directory. Explore its official website and listing information.`;
+  const description = profile?.seoDescription || fallbackDescription;
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
