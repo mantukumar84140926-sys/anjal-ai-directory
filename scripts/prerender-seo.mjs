@@ -775,6 +775,12 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "claude": "Explore Claude for AI writing, analysis, coding, file workflows, web research and editable work.",
+  "cursor": "Explore Cursor's AI code editor and Agent for codebase search, multi-file edits, tests and debugging.",
+  "elevenlabs": "Explore ElevenLabs AI voice generation, text to speech, voice tools and multilingual dubbing.",
+  "canva-ai": "Explore Canva Magic Studio AI tools for designs, presentations, image editing, video and writing.",
+  "suno": "Explore Suno AI music creation for songs with vocals and lyrics or instrumental tracks.",
+  "midjourney": "Explore Midjourney AI image generation and its web Editor for inpainting, pan, zoom and image refinement.",
   "openrouter": "Explore OpenRouter's unified API for accessing and routing requests across multiple AI model providers.",
   "word-spinner": "Review Word Spinner's AI rewriting, grammar, summarizing and translation tools, plus responsible editing tips.",
   "basmo": "Discover Basmo's reading tracker, book notes and AI-assisted ways to explore and revisit ideas.",
