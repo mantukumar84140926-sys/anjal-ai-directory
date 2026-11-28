@@ -66,11 +66,11 @@ export default function PromptLibrary() {
   }
 
   return <main className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
-    <SEO title="AI Prompt Library — Ready-to-Use Prompts | Anjal AI" description="Discover and copy useful AI prompts for photo enhancement, cinematic images, video, writing, coding, study, design, marketing and productivity." canonical="https://anjal-ai-directory.vercel.app/prompts" />
+    <SEO title="AI Prompt Finder — 5,000 Ready-to-Use Prompts | Anjal AI" description="Find and copy 5,000 ready-to-use AI prompts for image editing, video, writing, coding, study, design, business and research. Search by task and category." canonical="https://anjal-ai-directory.vercel.app/prompts" />
     <section className="mx-auto max-w-3xl text-center">
       <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1 text-xs font-medium text-teal-700 dark:border-line-dark dark:bg-surface-dark"><Sparkles className="h-3.5 w-3.5"/> Free prompt collection</span>
-      <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-6xl">AI Prompt Library</h1>
-      <p className="mt-4 text-slate">Ready-to-use prompts for images, cinematic videos, writing, coding, study and more. Search, copy, and customize them for your favorite AI tool.</p>
+      <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-6xl">AI Prompt Finder — 5,000 Copy-Ready Prompts</h1>
+      <p className="mt-4 text-slate">Search 5,000 copy-ready prompts for image editing, cinematic video, writing, coding, study, design, business and research. Filter by category, copy a prompt and customize it for your favorite AI tool.</p>
       <div className="mt-7 flex items-center gap-2 rounded-2xl border border-line bg-white p-2 shadow-card dark:border-line-dark dark:bg-surface-dark"><Search className="ml-2 h-5 w-5 shrink-0 text-slate"/><input aria-label="Search prompts" className="w-full bg-transparent px-2 py-3 outline-none" placeholder="Search /enhance, cinematic, reels, coding..." value={query} onChange={(e) => { setQuery(e.target.value); setVisibleCount(PAGE_SIZE); }}/></div>
     </section>
     <div className="mt-8 flex flex-wrap gap-2">{categories.map((item) => <button key={item} onClick={() => { setCategory(item); setVisibleCount(PAGE_SIZE); }} className={`rounded-full border px-3 py-2 text-sm transition ${category === item ? "border-teal bg-teal text-white" : "border-line bg-white text-slate hover:border-teal dark:border-line-dark dark:bg-surface-dark"}`}>{item}</button>)}</div>

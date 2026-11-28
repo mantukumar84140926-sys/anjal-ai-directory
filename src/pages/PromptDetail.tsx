@@ -10,7 +10,7 @@ export default function PromptDetail() {
   const [copied, setCopied] = useState(false);
   const generated = prompt?.command.startsWith("/prompt-") ?? true;
   const related = useMemo(() => prompt ? prompts.filter(item => item.command !== prompt.command && item.category === prompt?.category && !item.command.startsWith("/prompt-")).slice(0, 6) : [], [prompt]);
-  if (!prompt) return <main className="mx-auto max-w-3xl px-4 py-16"><h1 className="text-3xl font-semibold">Prompt not found</h1><p className="mt-3 text-slate">This prompt may have moved. Browse the prompt library to find another one.</p><Link className="mt-5 inline-block text-teal underline" to="/prompts">Browse AI prompts</Link></main>;
+  if (!prompt) return <main className="mx-auto max-w-3xl px-4 py-16"><h1 className="text-3xl font-semibold">Prompt not found</h1><p className="mt-3 text-slate">This prompt may have moved. Open Prompt Finder to find another prompt.</p><Link className="mt-5 inline-block text-teal underline" to="/prompts" >Open Prompt Finder</Link></main>;
   const title = `${prompt.title} Prompt — ${prompt.category} AI | Anjal AI`.slice(0, 60);
   const description = `${prompt.description} Copy this free ${prompt.category.toLowerCase()} AI prompt and customize it for your task.`.slice(0, 158);
   const promptText = prompt.prompt;
@@ -19,7 +19,7 @@ export default function PromptDetail() {
   }
   return <main className="mx-auto max-w-4xl px-4 py-8 sm:py-12">
     <SEO title={title} description={description} canonical={`https://anjal-ai-directory.vercel.app/prompt/${slug}`} noindex={generated} jsonLd={{"@context":"https://schema.org","@type":"CreativeWork",name:prompt.title,description,url:`https://anjal-ai-directory.vercel.app/prompt/${slug}`,genre:prompt.category,keywords:prompt.tags.join(", ")}} />
-    <nav className="text-sm text-slate"><Link to="/">Home</Link> / <Link to="/prompts">Prompt Library</Link> / {prompt.title}</nav>
+    <nav className="text-sm text-slate"><Link to="/">Home</Link> / <Link to="/prompts">Prompt Finder</Link> / {prompt.title}</nav>
     <span className="mt-6 inline-flex rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800 dark:bg-teal/15 dark:text-teal-300">{prompt.category}</span>
     <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">{prompt.title} Prompt</h1>
     <p className="mt-4 text-lg text-slate">{prompt.description}</p>
@@ -30,6 +30,6 @@ export default function PromptDetail() {
     </section>
     <section className="mt-8"><h2 className="text-xl font-semibold">Prompt keywords</h2><div className="mt-3 flex flex-wrap gap-2">{prompt.tags.map(tag => <span key={tag} className="rounded-full border border-line px-3 py-1 text-sm text-slate dark:border-line-dark">{tag}</span>)}</div></section>
     {related.length > 0 && <section className="mt-8"><h2 className="text-xl font-semibold">Related {prompt.category} prompts</h2><ul className="mt-3 grid gap-2 sm:grid-cols-2">{related.map(item => <li key={item.command}><Link className="text-teal hover:underline" to={`/prompt/${item.command.replace(/^\//, "")}`}>{item.title}</Link></li>)}</ul></section>}
-    <p className="mt-8"><Link className="font-semibold text-teal hover:underline" to="/prompts">← Browse all AI prompts</Link></p>
+    <p className="mt-8"><Link className="font-semibold text-teal hover:underline" to="/prompts">← Browse Prompt Finder</Link></p>
   </main>;
 }
