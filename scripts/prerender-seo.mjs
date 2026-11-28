@@ -693,7 +693,94 @@ const curatedToolProfiles = {
   },
 };
 
+Object.assign(curatedToolProfiles, {
+  "claude": {
+    seoTitle: "Claude AI — Assistant, Projects & Workflows | Anjal AI",
+    overview: "Claude is Anthropic's AI assistant for writing, analysis, coding, research and multi-step work. Anthropic's product overview describes web search, connectors, file handling, projects, artifacts, voice and the ability to create editable documents and other deliverables. Available capabilities vary by account, plan and workspace settings.",
+    bestFor: ["Drafting, editing and restructuring long-form writing", "Analyzing documents, spreadsheets, presentations and images", "Explaining code, debugging and supporting software development", "Researching topics with web search and checking linked sources", "Organizing ongoing work with Projects, connectors and reusable instructions"],
+    workflow: ["Define the outcome and provide the audience, constraints and required format.", "Attach only the files needed for the task and confirm they are suitable to share.", "For research, request source links and inspect the original material.", "For code or data work, test outputs and calculations independently.", "Review generated files and edits before sharing or using them in a production workflow."],
+    considerations: ["Claude can make factual or reasoning errors; verify important claims against original sources.", "File, model, connector and usage availability can vary by plan and organization.", "Review privacy and data controls before uploading confidential or personal information.", "Treat generated code and spreadsheet formulas as drafts that require testing."],
+    sourceLabel: "Anthropic Claude product overview",
+    sourceUrl: "https://claude.com/product/overview",
+    faq: [
+      { question: "What can Claude help with?", answer: "Anthropic describes Claude as an assistant for writing, analysis, coding, research and longer tasks, with supported tools for files, web search, projects and creating editable work." },
+      { question: "Can Claude work with files?", answer: "Claude supports a range of document, spreadsheet, presentation, image and data formats. Check the current product documentation for file types and size limits." }
+    ]
+  },
+  "cursor": {
+    seoTitle: "Cursor AI — Code Editor & Agent for Developers | Anjal AI",
+    overview: "Cursor is an AI-powered code editor and coding agent designed to help developers understand, change and test software projects. Its Agent documentation says Agent can search a codebase, edit multiple files, run terminal commands, build features, refactor code, write tests and help fix errors. It is aimed at developers who want AI assistance within an editor and repository workflow.",
+    bestFor: ["Understanding an unfamiliar codebase and tracing how files connect", "Building features that require coordinated changes across multiple files", "Refactoring code and fixing bugs with repository context", "Generating tests and running project commands during development", "Reviewing proposed code changes before committing them"],
+    workflow: ["Open the correct project and let the editor index or inspect the relevant codebase.", "Describe the task, expected behavior, constraints and files or areas that should not change.", "Ask Agent for a plan when the task spans multiple files or has architectural risk.", "Review the diff, terminal commands and dependency changes before accepting them.", "Run tests, linting and security checks, then commit only after verifying the behavior."],
+    considerations: ["Agent-generated edits can introduce regressions; inspect diffs and test the application.", "Terminal access and repository-wide edits should be used carefully in production projects.", "Model availability, usage limits and pricing depend on the current plan.", "Do not expose secrets or private source code unless the configured data controls are appropriate."],
+    sourceLabel: "Cursor official Agent documentation",
+    sourceUrl: "https://cursor.com/help/ai-features/agent",
+    faq: [
+      { question: "Can Cursor edit multiple files?", answer: "Cursor's Agent documentation describes codebase search and multi-file editing, along with terminal commands and test execution." },
+      { question: "Is Cursor only autocomplete?", answer: "No. Cursor includes agent workflows for understanding repositories, planning changes, building features, fixing bugs and reviewing code." }
+    ]
+  },
+  "elevenlabs": {
+    seoTitle: "ElevenLabs — AI Voice, Text to Speech & Dubbing | Anjal AI",
+    overview: "ElevenLabs provides AI audio tools for generating speech, designing and managing voices, changing recorded voices, creating sound effects and dubbing audio or video into other languages. Its official documentation describes text-to-speech models, a voice library, voice cloning options and dubbing workflows that aim to preserve a speaker's timing and emotional delivery. Exact language support, limits and commercial rights depend on the selected product and plan.",
+    bestFor: ["Creating voiceovers and narration from written scripts", "Producing multilingual speech for videos, explainers and accessibility", "Dubbing existing audio or video for different language audiences", "Developing consistent character voices for permitted creative projects", "Generating or editing audio with supported voice and sound tools"],
+    workflow: ["Choose the task first: text-to-speech, voice design, voice conversion or dubbing.", "Select a voice and language suited to the audience, then test a short sample.", "Edit punctuation, names and pronunciation to improve delivery.", "For dubbing, review transcripts, speaker assignments, timing and translated meaning.", "Confirm consent, source-audio rights and the current licence before publishing or monetizing."],
+    considerations: ["Obtain appropriate consent before cloning or transforming a real person's voice.", "Language support and output quality can vary by model and voice.", "Commercial-use rights and usage limits depend on the current subscription and terms.", "Generated speech and translations need review for pronunciation, accuracy and context."],
+    sourceLabel: "ElevenLabs official Text to Speech and Dubbing documentation",
+    sourceUrl: "https://elevenlabs.io/docs/overview/capabilities/text-to-speech",
+    faq: [
+      { question: "What is ElevenLabs used for?", answer: "Its official documentation covers text-to-speech, voice options, voice changing, audio effects and dubbing for audio and video." },
+      { question: "Can ElevenLabs dub videos into other languages?", answer: "ElevenLabs documents dubbing workflows for translating audio and video while aiming to preserve speaker timing, tone and emotional delivery. Check current language and plan limits." }
+    ]
+  },
+  "canva-ai": {
+    seoTitle: "Canva AI — Magic Studio Design & Content Tools | Anjal AI",
+    overview: "Canva is a visual communication and design platform with AI features grouped under Magic Studio. Canva's official Magic Studio announcement describes prompt-assisted design creation, presentation and video generation, design resizing and translation, image editing tools, Magic Media, animation and AI writing assistance. Feature access can vary by product, region and subscription.",
+    bestFor: ["Creating social media graphics, posters, presentations and marketing materials", "Turning a written brief or uploaded media into an initial design", "Adapting one design into formats for different channels or languages", "Editing images by moving, expanding or changing selected elements", "Drafting copy and combining text, images and video in one design workflow"],
+    workflow: ["Choose the design format and describe the audience, purpose and visual direction.", "Use a Magic Studio feature that matches the task, such as design, writing, image or video.", "Apply brand colors, fonts and approved assets where consistency matters.", "Inspect generated text, image details, layout and translations before sharing.", "Check licensing, team permissions and current plan access for any assets or AI features."],
+    considerations: ["Not every Magic Studio feature is included in every Canva plan.", "AI-generated layouts and copy require editing for accuracy, accessibility and brand fit.", "Review content licensing and commercial-use terms for generated and uploaded assets.", "Feature names and availability can change as Canva updates its product."],
+    sourceLabel: "Canva official Magic Studio announcement",
+    sourceUrl: "https://www.canva.com/en_in/newsroom/news/magic-studio/",
+    faq: [
+      { question: "What is Canva Magic Studio?", answer: "Canva describes Magic Studio as a collection of AI-powered design and content tools, including design generation, image editing, video, presentations and writing assistance." },
+      { question: "Can Canva AI create presentations and videos?", answer: "Canva's Magic Studio announcement describes prompt-assisted presentation creation and Magic Design for Video. Confirm current access and limits in your Canva account." }
+    ]
+  },
+  "suno": {
+    seoTitle: "Suno AI — Create Songs, Vocals & Instrumentals | Anjal AI",
+    overview: "Suno is an AI music creation service that turns written descriptions into song ideas and generated tracks. Its official AI Music Generator page explains that the Create flow can generate songs with sung vocals and lyrics, or instrumental-only music. Users can continue developing ideas with supported tools such as Studio, Voices, Covers and vocal removal, subject to current account access and rights rules.",
+    bestFor: ["Turning a song idea, theme or mood into a musical draft", "Generating songs with vocals and lyrics from a description", "Creating instrumental music for permitted creative projects", "Exploring genre, mood and arrangement variations", "Developing an initial musical idea before editing or production"],
+    workflow: ["Write a concise brief describing the theme, mood, genre and intended use.", "Choose vocal or instrumental output and generate a short first version.", "Listen critically and refine the prompt or arrangement one change at a time.", "Use supported editing or continuation features when available to your account.", "Review the current ownership, distribution and commercial-use terms before sharing or monetizing."],
+    considerations: ["Generated music may contain artifacts or unexpected similarities; review it before release.", "Commercial rights and ownership conditions can depend on the plan and the terms in effect when content is created.", "Do not upload recordings, lyrics or samples unless you have the rights to use them.", "AI-generated lyrics and vocals should be checked for unintended content and attribution concerns."],
+    sourceLabel: "Suno official AI Music Generator",
+    sourceUrl: "https://suno.com/tools/ai-music-generator",
+    faq: [
+      { question: "Can Suno generate songs with vocals?", answer: "Suno's official generator page says its Create flow can produce songs with sung vocals and lyrics, as well as instrumental-only tracks." },
+      { question: "Do I need musical training to use Suno?", answer: "Suno says users can describe an idea in ordinary language without musical notation or recording equipment." }
+    ]
+  },
+  "midjourney": {
+    seoTitle: "Midjourney — AI Image Generation & Image Editor | Anjal AI",
+    overview: "Midjourney is an AI image-generation platform with a web-based workflow for creating and refining images. Its official Editor documentation describes tools for editing both Midjourney creations and uploaded images, including remixing, inpainting, panning, zooming out, resizing and selecting areas to erase or restore. The exact models and editing options can change with product updates.",
+    bestFor: ["Generating concept art and visual ideas from text prompts", "Refining an existing generated image with localized edits", "Extending a composition with pan or zoom-out tools", "Adjusting image framing, scale and aspect ratio", "Iterating on a visual concept while preserving selected parts of an image"],
+    workflow: ["Describe the subject, composition, style and intended aspect ratio.", "Generate initial concepts and choose the strongest composition.", "Open the Editor to resize, pan, zoom or select areas for inpainting and restoration.", "Compare each edit with the original and check important details such as text, logos and anatomy.", "Review the provider's current terms and rights guidance before using images commercially."],
+    considerations: ["Image generation is probabilistic; results may need multiple iterations and manual correction.", "Editing controls and model versions can change; consult current documentation.", "Check current subscription requirements, commercial terms and rules for uploaded images.", "Use reference images only when you have permission and avoid misleading depictions of real people."],
+    sourceLabel: "Midjourney official Editor documentation",
+    sourceUrl: "https://docs.midjourney.com/hc/en-us/articles/32764383466893-Editor",
+    faq: [
+      { question: "Can Midjourney edit an image I already have?", answer: "Midjourney's Editor documentation describes editing Midjourney images and personal images with tools such as inpainting, pan and zoom out." },
+      { question: "What can the Midjourney Editor change?", answer: "The documented controls include moving and resizing the image, changing aspect ratio, erasing or restoring selected areas, remixing, panning and zooming out." }
+    ]
+  }
+});
+
 const profileDescriptions = {
+  "claude": "Explore Claude for AI writing, analysis, coding, file workflows, web research and editable work.",
+  "cursor": "Explore Cursor's AI code editor and Agent for codebase search, multi-file edits, tests and debugging.",
+  "elevenlabs": "Explore ElevenLabs AI voice generation, text to speech, voice tools and multilingual dubbing.",
+  "canva-ai": "Explore Canva Magic Studio AI tools for designs, presentations, image editing, video and writing.",
+  "suno": "Explore Suno AI music creation for songs with vocals and lyrics or instrumental tracks.",
+  "midjourney": "Explore Midjourney AI image generation and its web Editor for inpainting, pan, zoom and image refinement.",
   "openrouter": "Explore OpenRouter's unified API for accessing and routing requests across multiple AI model providers.",
   "word-spinner": "Review Word Spinner's AI rewriting, grammar, summarizing and translation tools, plus responsible editing tips.",
   "basmo": "Discover Basmo's reading tracker, book notes and AI-assisted ways to explore and revisit ideas.",
