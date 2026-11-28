@@ -694,6 +694,21 @@ const curatedToolProfiles = {
 };
 
 Object.assign(curatedToolProfiles, {
+  "perplexity": {
+    seoTitle: "Perplexity AI — Cited Search & Research | Anjal AI",
+    overview: "Perplexity is an AI answer and research platform that searches the open web and returns synthesized answers with linked citations. Its current product suite includes Search for source-backed answers, Pro Search for more involved research, Deep Research for structured reports, Computer for multi-step work across files and connected apps, Comet for AI-assisted browsing, and APIs for developers. Perplexity can route work across multiple models and connect web information with files or approved app context. It is useful when a user wants to move from a question to evidence, analysis or a finished research deliverable in one workflow.",
+    bestFor: ["Getting concise answers grounded in current web sources", "Researching complex topics with Pro Search or Deep Research", "Comparing evidence and checking claims through inline citations", "Working with uploaded files and connected sources in supported plans", "Delegating multi-step research and deliverable creation to Computer", "Adding search-grounded answers to applications through Perplexity APIs"],
+    workflow: ["Start with a focused question and state the time period, geography or source types that matter.", "Use standard Search for a quick answer, Pro Search for deeper investigation or Deep Research for a structured report.", "Open the cited sources and check whether they directly support each important claim.", "For file or app-based work, connect only the sources needed and review access permissions.", "For a decision or published report, record the search scope, verify key facts independently and note gaps or conflicting evidence."],
+    considerations: ["Citations make answers easier to check but do not guarantee that every claim is supported or interpreted correctly.", "Search depth, model choices, file uploads, Computer features and usage limits depend on the product and plan.", "Connected apps and agent workflows may access or modify user data; review permissions and action approvals.", "Search results can be incomplete, outdated or biased toward available web sources, so verify important information.", "API model availability, rate limits and billing differ from the consumer search experience."],
+    sourceLabel: "Perplexity official product overview and help center",
+    sourceUrl: "https://www.perplexity.ai/hub",
+    faq: [
+      { question: "What is Perplexity AI?", answer: "Perplexity is an AI answer engine that searches the web and produces concise responses with citations linking to source material." },
+      { question: "Does Perplexity provide sources?", answer: "Yes. Perplexity describes inline citations and links to the sources used for its answers. Users should open those sources and verify important claims." },
+      { question: "What is the difference between Search and Deep Research?", answer: "Search is suited to focused questions and cited answers. Deep Research breaks a complex question into subtasks, searches many sources and produces a structured report." },
+      { question: "What is Perplexity Computer?", answer: "Computer is Perplexity's agentic workspace for multi-step research and tasks involving the web, files and connected apps. Access and connectors depend on the account." }
+    ]
+  },
   "google-veo": {
     seoTitle: "Google Veo — AI Video Generation with Audio | Anjal AI",
     overview: "Google Veo is Google's generative video model family, available through creative experiences such as Google Flow and Gemini as well as supported developer platforms. Google's current Veo materials describe text-to-video and image-to-video generation, synchronized audio and video, realistic motion and physics, and creative controls for shaping scenes. Flow provides a workspace for assembling clips and stories, while model and feature availability can differ across subscriptions and interfaces. Veo is best understood as a model family accessed through Google's products, not as one standalone editing application.",
@@ -1178,6 +1193,8 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "perplexity": "Explore Perplexity AI for cited web search, Pro Search, Deep Research, Computer workflows and developer APIs.",
+  "perplexity-ai": "Perplexity AI is the same product as the primary Perplexity listing; this legacy URL is consolidated there.",
   "google-veo": "Explore Google Veo for text-to-video, image-to-video, audio-video generation and cinematic creative workflows.",
   "heygen": "Explore HeyGen for AI avatar videos, script-to-video creation, voice cloning and multilingual video translation.",
   "synthesia": "Explore Synthesia for AI presenter videos, business training, localization, voiceovers and video APIs.",
@@ -1273,8 +1290,8 @@ for (const tool of catalog) {
   const category = categoryForTool(tool);
   const categoryName = categoryNames[category] || "Other";
   const categoryToolLabel = categoryToolLabels[category] || categoryName;
-  const canonical = `${origin}/tool/${tool.slug}`;
-  const profile = curatedToolProfiles[tool.slug] || (tool.name.toLowerCase() === "chatgpt" ? curatedToolProfiles.chatgpt : null);
+  const canonical = tool.slug === "perplexity-ai" ? `${origin}/tool/perplexity` : `${origin}/tool/${tool.slug}`;
+  const profile = curatedToolProfiles[tool.slug] || (tool.slug === "perplexity-ai" ? curatedToolProfiles.perplexity : null) || (tool.name.toLowerCase() === "chatgpt" ? curatedToolProfiles.chatgpt : null);
   const rawTitle = `${tool.name} — ${categoryToolLabel} Tool | Anjal AI`;
   const title = titleOverrides[tool.slug] || profile?.seoTitle || (tool.slug === "perplexity" ? "Perplexity AI: Features, Uses & Free Search | Anjal AI" : rawTitle.length <= 60 ? rawTitle : `${tool.name} — AI Tool | Anjal AI`);
   const description = listingDescriptions[tool.slug] || profileDescriptions[tool.slug] || (tool.slug === "perplexity" ? "Explore Perplexity AI for cited web research, source checking and follow-up questions. Compare use cases, limitations and official plan details." : `${tool.name} is an AI tool listed in Anjal AI under ${categoryName}. Explore its official website, category and directory information.`);
