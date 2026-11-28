@@ -694,6 +694,84 @@ const curatedToolProfiles = {
 };
 
 Object.assign(curatedToolProfiles, {
+  "ideogram": {
+    seoTitle: "Ideogram AI — Image Generation & Design Tools | Anjal AI",
+    overview: "Ideogram is an AI image and design platform for creating visuals from text prompts and reference images, then refining them with editing tools. Its official documentation highlights text rendering for posters and graphics, image generation, reference-guided editing, inpainting, transparent backgrounds, editable text layers and upscaling. Studio supports layered design work, while APIs and integrations provide options for developers and repeatable production workflows. The platform also offers video creation tools, so users should select the correct image or video workflow before generating.",
+    bestFor: ["Creating posters, thumbnails and graphics that include readable text", "Generating logos, illustrations and social media visuals", "Editing images with references, masks and inpainting", "Preparing transparent cutouts and layered designs", "Running repeatable or batch image-generation workflows"],
+    workflow: ["Start with a clear prompt that names the subject, composition, style and any exact wording.", "Choose an image model or Auto mode and check the displayed credit cost before generating.", "Use reference images when identity, layout or visual continuity matters.", "Refine selected areas with masks, Studio layers or background tools instead of restarting.", "Review text spelling, image rights and output dimensions before publishing or printing."],
+    considerations: ["Readable text generation is a strength, but every word and letter should still be proofread.", "Model choices, credits, free access and feature limits can change by account and plan.", "Reference images and generated outputs should be checked for permissions and brand or likeness rights.", "API usage and batch workflows may have separate billing and technical limits."],
+    sourceLabel: "Ideogram official documentation and feature guide",
+    sourceUrl: "https://docs.ideogram.ai/",
+    faq: [
+      { question: "Can Ideogram generate images with text?", answer: "Yes. Ideogram documents text rendering for graphics such as posters and packaging, alongside editable text layers in its Studio workflow. Proofread the final output before use." },
+      { question: "Can I edit an existing image in Ideogram?", answer: "Yes. Supported workflows include reference-image editing, masks and inpainting, transparent-background editing, and layered Studio tools." }
+    ]
+  },
+  "adobe-firefly": {
+    seoTitle: "Adobe Firefly — AI Image, Video & Audio Studio | Anjal AI",
+    overview: "Adobe Firefly is Adobe's generative AI creative studio for producing and editing images, video, audio and vector graphics. Adobe's current product information describes text-to-image generation, video generation and image-to-video, generative editing such as removing objects and expanding images, speech and audio tools, and design workflows that span raster, vector, motion and print. Firefly also brings Adobe and partner models into a connected creative workspace. It is useful for creators who want to move from concept generation to refinements and production assets without switching between many separate tools.",
+    bestFor: ["Generating and refining campaign images and social media assets", "Creating short video clips and B-roll from prompts or still images", "Removing objects, expanding scenes and adjusting existing visuals", "Exploring vector, print and brand-design concepts", "Combining AI generation with established Adobe creative workflows"],
+    workflow: ["Choose the output type first: image, video, audio or design.", "Write a prompt describing subject, composition, style, lighting and intended format.", "Generate options, then refine with the relevant editing controls such as remove, expand or upscale.", "For a multi-format project, keep source assets and versions organized as you move between workflows.", "Before commercial release, review the selected model, content credentials, usage terms and any partner-model conditions."],
+    considerations: ["Firefly includes multiple Adobe and partner models, so capabilities and terms can differ by model.", "Generative outputs may need manual review for typography, anatomy, factual details and brand consistency.", "Commercial-use suitability is not a blanket guarantee for every asset or every partner model; check the applicable terms.", "Generation allowances and premium features depend on account, region and plan."],
+    sourceLabel: "Adobe official Firefly product overview",
+    sourceUrl: "https://www.adobe.com/in/sensei/generative-ai/firefly.html",
+    faq: [
+      { question: "What can Adobe Firefly generate?", answer: "Adobe describes image, video, audio and vector generation, plus editing tools such as object removal, image expansion and upscaling." },
+      { question: "Is Adobe Firefly suitable for commercial creative work?", answer: "Adobe positions its Firefly models for commercially oriented creative workflows, but users should check the terms for the exact model and asset, especially when partner models are involved." }
+    ]
+  },
+  "leonardo-ai": {
+    seoTitle: "Leonardo AI — Image Generator & Creative Canvas | Anjal AI",
+    overview: "Leonardo AI is a creative platform for generating, editing and refining images, with additional video and motion workflows. Its current model catalogue includes Leonardo's own image models as well as supported third-party models. The platform combines text-to-image and image-to-image generation with reference guidance, Canvas and inpainting, upscaling, presets, personal models and workflow tools such as Blueprints. This makes it useful for creators who want to explore visual directions, keep a consistent look and refine an asset inside one workspace rather than relying on a single prompt-and-download step.",
+    bestFor: ["Creating concept art, illustrations, product visuals and marketing images", "Transforming existing images or sketches into new visual styles", "Refining selected areas with Canvas and inpainting tools", "Maintaining consistent characters, styles or brand elements", "Exploring different image models and repeatable creative workflows"],
+    workflow: ["Choose a text-to-image or image-to-image starting point and select Auto or a specific model.", "Describe the subject, style, composition and details that must remain consistent.", "Use image guidance or references when continuity is important across outputs.", "Open the Canvas or editor tools to inpaint, expand or refine specific areas.", "Upscale and inspect the final image, then check the current plan and usage terms before commercial use."],
+    considerations: ["Model access, generation tokens, private generations and queue limits vary by plan.", "The platform includes third-party models whose capabilities and terms may differ from Leonardo's own models.", "AI results can contain visual errors; inspect faces, hands, text, logos and product details.", "Commercial usage and ownership terms should be checked against the current terms for the relevant account and model."],
+    sourceLabel: "Leonardo official image generator and model catalogue",
+    sourceUrl: "https://leonardo.ai/ai-image-generator",
+    faq: [
+      { question: "Can Leonardo AI edit existing images?", answer: "Yes. Leonardo describes image-to-image workflows, reference guidance and editor tools such as Canvas and inpainting for targeted refinements." },
+      { question: "Does Leonardo AI include different image models?", answer: "Yes. Its model catalogue includes Leonardo models and supported third-party models. Access and usage allowances depend on the plan." }
+    ]
+  },
+  "stable-diffusion": {
+    seoTitle: "Stable Diffusion — Open Image Models & AI Art | Anjal AI",
+    overview: "Stable Diffusion is a family of generative image models developed by Stability AI, rather than one single web application. The Stable Diffusion family includes releases such as Stable Diffusion 3.5 and SDXL, with options for hosted generation, API integration and self-hosted workflows. Depending on the model and interface, users can generate images from text, customize model behavior and use editing workflows such as inpainting or outpainting. Developers and creators value the ecosystem of interfaces, extensions and community fine-tunes, but each model release has its own technical requirements and license.",
+    bestFor: ["Generating images from detailed text prompts", "Running image generation on compatible local hardware", "Building custom image-generation applications with APIs", "Experimenting with fine-tuned models and community workflows", "Integrating image generation into repeatable creative pipelines"],
+    workflow: ["Identify the exact Stable Diffusion model and version you intend to use.", "Choose a hosted interface, Stability AI API or self-hosted setup based on your hardware and privacy needs.", "Read the model card and license before downloading, fine-tuning or deploying it.", "Set the prompt, dimensions, sampler or workflow parameters supported by the chosen interface.", "Review outputs and test performance, safety and licensing before using the model in a production application."],
+    considerations: ["Stable Diffusion refers to multiple model generations and variants; features and requirements are not identical.", "Some releases require substantial GPU memory or setup knowledge when self-hosted.", "Licenses differ by model and may include commercial-use thresholds or restrictions; never assume every checkpoint shares one license.", "Community checkpoints and extensions can introduce separate security, provenance and usage risks."],
+    sourceLabel: "Stability AI official Stable Diffusion model and license pages",
+    sourceUrl: "https://stability.ai/stable-image",
+    faq: [
+      { question: "Is Stable Diffusion an app or a model?", answer: "Stable Diffusion is a family of image-generation models. People use it through hosted services, APIs, desktop interfaces and self-hosted setups." },
+      { question: "Can Stable Diffusion run locally?", answer: "Some Stable Diffusion releases can be run locally on compatible hardware using supported software. Check the exact model's requirements and license before installation." }
+    ]
+  },
+  "flux": {
+    seoTitle: "FLUX AI — Image Generation & Editing Models | Anjal AI",
+    overview: "FLUX is a family of image-generation and editing models from Black Forest Labs. The current FLUX model range includes hosted models for production use and open-weight releases with different capabilities and licenses. Official materials describe text-to-image generation, single- and multi-reference image editing, and task-specific tools for operations such as filling, erasing, extending and upscaling. Developers can explore the hosted playground and APIs, while eligible open-weight models can be deployed on supported infrastructure. Model choice matters because speed, quality, editing features and commercial permissions vary.",
+    bestFor: ["Generating images from detailed text prompts", "Editing images with one or more visual references", "Building image-generation features into apps through APIs", "Running eligible open-weight models on supported hardware", "Creating controlled edits, variations and production image assets"],
+    workflow: ["Choose a FLUX model based on whether you need speed, image quality, editing or local deployment.", "Check the model's current documentation, input limits and license before starting.", "Write a prompt with the subject, composition, visual style and required details.", "For editing, attach the relevant reference images and describe what should change and what must stay fixed.", "Evaluate outputs and latency, then confirm API billing or self-hosting requirements before production use."],
+    considerations: ["FLUX is a model family; features, speed and quality differ between model versions.", "Open weights do not mean every model has the same license or unrestricted commercial use.", "Hosted API use may involve credits, rate limits and service availability.", "Review generated images for text, logos, identity consistency and other details that need precision."],
+    sourceLabel: "Black Forest Labs official FLUX models and documentation",
+    sourceUrl: "https://bfl.ai/models/",
+    faq: [
+      { question: "What is FLUX AI?", answer: "FLUX is Black Forest Labs' family of image-generation and editing models, available through hosted services and selected open-weight releases." },
+      { question: "Can FLUX edit existing images?", answer: "Yes. Black Forest Labs documents reference-based editing and task-specific image tools. Supported inputs and controls depend on the selected model." }
+    ]
+  },
+  "recraft": {
+    seoTitle: "Recraft AI — Image, Vector & Design Generator | Anjal AI",
+    overview: "Recraft is an AI visual-design platform built for designers, illustrators and marketers. Its product information highlights image generation and editing alongside vector graphics, icons, mockups, upscaling, background removal and image vectorization. A distinctive workflow is generating editable vector artwork, which can be useful for logos, icons and scalable illustrations that need further design work. Recraft also supports consistent visual styles and design-focused composition controls, making it suitable for creating a family of assets rather than isolated images.",
+    bestFor: ["Creating editable vector graphics, icons and illustrations", "Designing logos, brand assets and marketing visuals", "Generating product mockups and T-shirt graphics", "Keeping a consistent visual style across multiple assets", "Editing, upscaling or vectorizing existing images"],
+    workflow: ["Choose whether the deliverable should be a raster image, vector, mockup or edited asset.", "Describe the subject, layout, colors, style and any text that must appear.", "Generate several directions and refine the strongest composition.", "Use vector generation or vectorization when you need scalable artwork, then inspect paths and layers in a design editor.", "Export the required format and verify typography, colors, licensing and print specifications before delivery."],
+    considerations: ["Vector output should still be inspected for path quality, layer structure and small-detail issues.", "AI-generated lettering may need correction before it is used in a logo or printed design.", "Plan limits, available models and export formats can change.", "Check the current terms and any third-party model conditions before commercial use."],
+    sourceLabel: "Recraft official product overview",
+    sourceUrl: "https://www.recraft.ai/about",
+    faq: [
+      { question: "Can Recraft generate vector graphics?", answer: "Yes. Recraft describes AI vector generation and vectorization workflows for editable graphics such as logos, icons and illustrations." },
+      { question: "Who is Recraft designed for?", answer: "Recraft positions its platform for professional designers, illustrators and marketers who need to create and refine visual assets." }
+    ]
+  },
   "mistral-le-chat": {
     seoTitle: "Mistral Vibe (Le Chat) — AI Assistant | Anjal AI",
     overview: "Mistral's Le Chat has evolved into the Vibe product family: Vibe for work is the AI chat assistant, while Vibe for code is the coding agent. Mistral describes Vibe as a workspace for asking questions, searching the web, creating content and working with connected tools. Depending on the surface and plan, users can also work with documents, use voice input, connect services and delegate coding tasks. The existing Le Chat name may still appear in older links, help material or app listings while the product transition rolls out.",
@@ -931,6 +1009,12 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "ideogram": "Explore Ideogram AI for text-rich images, posters, reference editing, transparent assets and design workflows.",
+  "adobe-firefly": "Explore Adobe Firefly for AI image, video, audio and vector creation with integrated creative editing tools.",
+  "leonardo-ai": "Explore Leonardo AI for image generation, reference guidance, Canvas editing, upscaling and creative workflows.",
+  "stable-diffusion": "Explore Stable Diffusion models for text-to-image generation, self-hosting, APIs and customizable AI art workflows.",
+  "flux": "Explore Black Forest Labs FLUX models for text-to-image generation, reference editing and developer APIs.",
+  "recraft": "Explore Recraft AI for editable vector graphics, image generation, mockups, icons and brand design assets.",
   "mistral-le-chat": "Explore Mistral Vibe, formerly Le Chat, for AI chat, web search, productivity and coding-agent workflows.",
   "character-ai": "Explore Character.AI to create fictional AI characters, design greetings and build interactive role-play chats.",
   "kimi": "Explore Kimi AI for web-connected search, deep research, document analysis and multi-step agent workflows.",
