@@ -113,7 +113,20 @@ const categories = [...new Set(catalog.map(x => mapCategory(x.category)))];
 const homeTitle = "Anjal AI — 1,000 AI Tools & 5,000 Prompts";
 const homeDescription = "Explore 1,000 AI tools and 5,000 ready-to-use prompts for writing, coding, design, research, education and productivity. Find the right tool or prompt.";
 const homeCategoryLinks = categories.map(category => `<li><a href="/category/${category}">${escapeHtml(categoryNames[category] || "Other")}</a></li>`).join("");
-const homeToolLinks = catalog.slice(0, 24).map(tool => `<li><a href="/tool/${encodeURIComponent(tool.slug)}">${escapeHtml(tool.name)}</a></li>`).join("");
+const featuredToolSlugs = [
+  "chatgpt", "claude", "google-gemini", "perplexity", "midjourney", "cursor",
+  "github-copilot", "elevenlabs", "canva-ai", "suno", "runway", "make",
+  "adobe-firefly", "ideogram", "google-veo", "heygen", "synthesia", "pika",
+  "kling-ai", "luma-dream-machine", "descript", "chatpdf", "notebooklm",
+  "deepseek", "microsoft-copilot", "poe", "openrouter", "mistral-le-chat",
+  "groq", "manus", "stable-diffusion", "flux", "recraft", "aiva",
+  "soundraw", "mubert", "humata", "askyourpdf", "pdf-ai", "documind", "doclime"
+];
+const featuredTools = featuredToolSlugs.map(slug => catalog.find(tool => tool.slug === slug)).filter(Boolean);
+if (featuredTools.length !== featuredToolSlugs.length) {
+  throw new Error("Homepage featured tool links include a missing catalog slug");
+}
+const homeToolLinks = featuredTools.map(tool => `<li><a href="/tool/${encodeURIComponent(tool.slug)}">${escapeHtml(tool.name)}</a></li>`).join("");
 const homeBody = `<main>
 <header>
 <h1>Find the right AI tool or prompt</h1>
