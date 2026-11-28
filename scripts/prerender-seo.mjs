@@ -118,7 +118,7 @@ const homeBody = `<main>
 <header>
 <h1>Find the right AI tool and ready-to-use prompt</h1>
 <p>Anjal AI is an independent directory for discovering AI software and practical prompt templates. Explore tools for research, writing, coding, design, education, marketing, image and video creation, audio and everyday productivity. Start with the task you want to complete, compare relevant options, and use the provider's official website to confirm current features, pricing and terms.</p>
-<p><a href="/finder">Find an AI tool</a> · <a href="/prompts">Browse the free AI prompt library</a></p>
+<p><a href="/finder">Find an AI tool</a> · <a href="/prompts">Browse the Prompt Finder</a></p>
 </header>
 <section>
 <h2>Explore AI tool categories</h2>
@@ -1560,15 +1560,15 @@ const { prompts } = await import(pathToFileURL(promptManifestPath).href);
 const curatedPrompts = prompts.filter(prompt => !prompt.command.startsWith("/prompt-"));
 
 // Give the prompt-library hub its own crawlable content and internal links.
-const promptHubTitle = "Free AI Prompt Library | Copy-Ready Prompts | Anjal AI";
-const promptHubDescription = "Browse free copy-ready AI prompts for writing, coding, images, productivity, education and more. Customize templates for your favorite AI tools.";
+const promptHubTitle = "AI Prompt Finder — 5,000 Ready-to-Use Prompts | Anjal AI";
+const promptHubDescription = "Find and copy 5,000 ready-to-use AI prompts for image editing, video, writing, coding, study, design, business and research. Search by task and category.";
 const promptCategories = [...new Set(curatedPrompts.map(prompt => prompt.category))].sort();
 const promptCategoryList = promptCategories.map(category => `<li>${escapeHtml(category)}</li>`).join("");
 const promptHubLinks = curatedPrompts.map(prompt => {
   const slug = prompt.command.replace(/^\//, "").toLowerCase();
   return `<li><a href="/prompt/${encodeURIComponent(slug)}">${escapeHtml(prompt.title)} Prompt</a> — ${escapeHtml(prompt.description)}</li>`;
 }).join("");
-const promptHubBody = `<main><nav><a href="/">Anjal AI</a> → <strong>AI Prompt Library</strong></nav><h1>Free AI Prompt Library</h1><p>Find practical, copy-ready prompts for image editing, video creation, writing, coding, education, business and productivity. Choose a prompt, replace its placeholders with your details, and adapt the result to your preferred AI assistant.</p><section><h2>Browse prompt categories</h2><ul>${promptCategoryList}</ul></section><section><h2>Copy-ready AI prompts</h2><ul>${promptHubLinks}</ul></section><p>New to AI prompts? Start with a clear goal, provide useful context, and review generated results before using them.</p></main>`;
+const promptHubBody = `<main><nav><a href="/">Anjal AI</a> → <strong>Prompt Finder</strong></nav><h1>AI Prompt Finder — 5,000 Copy-Ready Prompts</h1><p>Search 5,000 practical AI prompts for image editing, video creation, writing, coding, education, business and productivity. Choose a prompt, replace its placeholders with your details, and adapt the result to your preferred AI assistant.</p><section><h2>Browse prompt categories</h2><ul>${promptCategoryList}</ul></section><section><h2>Copy-ready AI prompts</h2><ul>${promptHubLinks}</ul></section><p>New to AI prompts? Start with a clear goal, provide useful context, and review generated results before using them.</p></main>`;
 const promptHubJsonLd = {"@context":"https://schema.org","@type":"CollectionPage",name:promptHubTitle,description:promptHubDescription,url:`${origin}/prompts`,isPartOf:{"@type":"WebSite",name:"Anjal AI",url:`${origin}/`}};
 const promptHubOut = path.join(dist, "prompts", "index.html");
 fs.mkdirSync(path.dirname(promptHubOut), { recursive: true });
@@ -1582,13 +1582,13 @@ for (const prompt of curatedPrompts) {
   const related = curatedPrompts.filter(item => item.command !== prompt.command && item.category === prompt.category).slice(0, 5);
   const relatedLinks = related.map(item => `<li><a href="/prompt/${encodeURIComponent(item.command.replace(/^\//, ""))}">${escapeHtml(item.title)}</a></li>`).join("");
   const tags = prompt.tags.map(tag => `<li>${escapeHtml(tag)}</li>`).join("");
-  const body = `<main><nav><a href="/">Anjal AI</a> → <a href="/prompts">AI Prompt Library</a> → <strong>${escapeHtml(prompt.title)}</strong></nav><h1>${escapeHtml(prompt.title)} Prompt</h1><p>${escapeHtml(description)}</p><p><strong>Category:</strong> ${escapeHtml(prompt.category)}</p>
+  const body = `<main><nav><a href="/">Anjal AI</a> → <a href="/prompts">AI Prompt Finder</a> → <strong>${escapeHtml(prompt.title)}</strong></nav><h1>${escapeHtml(prompt.title)} Prompt</h1><p>${escapeHtml(description)}</p><p><strong>Category:</strong> ${escapeHtml(prompt.category)}</p>
 <h2>What this AI prompt does</h2><p>${escapeHtml(prompt.description)} Use it as a starting point, replace bracketed placeholders with your own details, and review the AI response before publishing or relying on it.</p>
 <h2>How to customize this ${escapeHtml(prompt.category.toLowerCase())} prompt</h2><ol><li>Replace every bracketed placeholder with specific information about your task, audience, source material or desired result.</li><li>Add relevant context such as your goal, experience level, preferred tone, format, length and any constraints the output must follow.</li><li>Keep instructions that protect important details, and remove any direction that does not apply to your use case.</li><li>Run the prompt once, inspect the result, then refine one instruction at a time if the answer is too broad, incomplete or inaccurate.</li></ol>
 <h2>Copy-ready prompt</h2><pre>${escapeHtml(prompt.prompt)}</pre>
 <h2>Tips for better results</h2><ul><li><strong>Be specific:</strong> replace vague requests with concrete requirements and examples.</li><li><strong>Set boundaries:</strong> state what must stay unchanged, what should be avoided and what information the AI must not invent.</li><li><strong>Choose an output format:</strong> ask for steps, a table, a checklist, a draft or another structure that is easy to review.</li><li><strong>Verify important details:</strong> check facts, names, figures, permissions and final quality before using the output.</li><li><strong>Protect private information:</strong> do not paste passwords, confidential records or personal data into an AI service unless you understand and accept its data practices.</li></ul>
 <h2>Related topics</h2><ul>${tags}</ul><h2>Related AI prompts</h2><ul>${relatedLinks}</ul><p>Explore more ideas in the <a href="/prompts">free AI prompt library</a>, or use the <a href="/finder">AI tool finder</a> to discover software for your workflow.</p></main>`;
-  const jsonLd = {"@context":"https://schema.org","@type":"CreativeWork",name:prompt.title,description,url:canonical,genre:prompt.category,keywords:prompt.tags.join(", "),isPartOf:{"@type":"CollectionPage",name:"AI Prompt Library",url:`${origin}/prompts`}};
+  const jsonLd = {"@context":"https://schema.org","@type":"CreativeWork",name:prompt.title,description,url:canonical,genre:prompt.category,keywords:prompt.tags.join(", "),isPartOf:{"@type":"CollectionPage",name:"AI Prompt Finder",url:`${origin}/prompts`}};
   const out = path.join(dist, "prompt", slug, "index.html");
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, render({title,description,canonical,body,jsonLd}));
