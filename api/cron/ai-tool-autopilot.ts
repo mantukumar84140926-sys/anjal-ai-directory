@@ -8,6 +8,8 @@ type ApiResponse = {
   setHeader(name: string, value: string): void;
 };
 
+export const config = { maxDuration: 120 };
+
 const SUPABASE_FUNCTIONS_URL =
   "https://fqxxsibgrzbkncyymjqk.supabase.co/functions/v1";
 
