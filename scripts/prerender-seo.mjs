@@ -300,6 +300,7 @@ const curatedToolProfiles = {
     ]
   },
   poe: {
+    seoTitle: "Poe AI — Multi-Model Chatbots & Bots | Anjal AI",
     overview: "Poe is a platform for using a range of AI bots in one place. Its help centre describes bots powered by different third-party model providers, alongside image, video and audio tools and user-created bots. Poe also lets people create custom bots, including prompt-based bots and API-connected bots, so the experience can be adapted to a particular task.",
     bestFor: ["Trying different AI models through one interface", "Comparing how multiple bots respond to the same question", "Exploring specialist bots for writing, learning, research or creative tasks", "Creating and sharing a custom prompt bot or an API-backed bot"],
     workflow: ["Open the bot directory and choose a bot suited to the task rather than assuming all bots behave alike.", "Give the bot the same clear context and constraints you would provide any AI assistant.", "For comparisons, ask several bots the same question and check their answers against reliable sources.", "Review the point cost shown for a bot before using it repeatedly, especially for image or other media generation.", "If building a custom bot, define its purpose, instructions and boundaries, then test it with realistic prompts."],
@@ -312,6 +313,7 @@ const curatedToolProfiles = {
     ]
   },
   grok: {
+    seoTitle: "Grok AI — xAI Assistant, Search & Creation | Anjal AI",
     overview: "Grok is a conversational AI assistant from xAI for chat, search, reasoning and content creation. Its official product information describes web and X search, voice conversations, coding assistance, file and image understanding, and image or video generation. Which capabilities and usage limits are available can depend on the account, plan, region and current product release.",
     bestFor: ["Exploring current topics with web search and X-related context", "Drafting, summarizing and brainstorming through conversational follow-ups", "Getting explanations or assistance with code", "Working with supported files, images and creative-generation features"],
     workflow: ["Choose whether the task needs current search, deeper reasoning, coding help or creative generation.", "State the goal, relevant context, date range and preferred answer format.", "For current events or factual research, open the cited sources and verify key claims independently.", "For code, test the suggested changes in a safe environment before using them.", "Review generated images, video and text for accuracy, rights and suitability before publishing."],
@@ -324,6 +326,7 @@ const curatedToolProfiles = {
     ]
   },
   "microsoft-copilot": {
+    seoTitle: "Microsoft Copilot — AI Assistant & 365 Tools | Anjal AI",
     overview: "Microsoft Copilot is an AI assistant for asking questions, drafting and rewriting content, summarizing information and working with supported Microsoft experiences. Microsoft's Copilot Chat information describes web-grounded chat and features such as voice, read-aloud, dictation and chat history. A Microsoft 365 Copilot licence adds deeper integration with apps such as Word, Excel, PowerPoint, Outlook and Teams, depending on the plan and organization setup.",
     bestFor: ["Getting help with everyday questions, explanations and brainstorming", "Rewriting text for clarity, tone or a specific audience", "Summarizing supported documents, PDFs, webpages or conversations", "Working with Microsoft 365 apps and organizational content when the right licence is available"],
     workflow: ["Sign in with the account type appropriate for personal, school or work use.", "Describe the task and specify the audience, tone, length and output format.", "When using web-grounded answers, open sources and verify important details.", "For Microsoft 365 work, confirm which apps and features are included in your organization's licence.", "Review drafts, summaries and generated files before sharing or relying on them."],
@@ -1198,6 +1201,9 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "poe": "Explore Poe AI to compare multiple models, use specialist bots and create custom AI chatbots.",
+  "grok": "Explore Grok AI from xAI for conversational assistance, web and X search, coding and creative tools.",
+  "microsoft-copilot": "Explore Microsoft Copilot for AI chat, web-grounded answers and supported Microsoft 365 workflows.",
   "make": "Explore Make.com for visual workflow automation, app integrations, AI-powered scenarios and business process orchestration.",
   "perplexity": "Explore Perplexity AI for cited web search, Pro Search, Deep Research, Computer workflows and developer APIs.",
   "perplexity-ai": "Perplexity AI is the same product as the primary Perplexity listing; this legacy URL is consolidated there.",
