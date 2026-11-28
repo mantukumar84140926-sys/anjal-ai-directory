@@ -694,6 +694,84 @@ const curatedToolProfiles = {
 };
 
 Object.assign(curatedToolProfiles, {
+  "mistral-le-chat": {
+    seoTitle: "Mistral Vibe (Le Chat) — AI Assistant | Anjal AI",
+    overview: "Mistral's Le Chat has evolved into the Vibe product family: Vibe for work is the AI chat assistant, while Vibe for code is the coding agent. Mistral describes Vibe as a workspace for asking questions, searching the web, creating content and working with connected tools. Depending on the surface and plan, users can also work with documents, use voice input, connect services and delegate coding tasks. The existing Le Chat name may still appear in older links, help material or app listings while the product transition rolls out.",
+    bestFor: ["Getting answers and explanations from an AI assistant", "Searching the web and summarizing information with source links", "Drafting, rewriting and translating everyday content", "Working with connected productivity services where available", "Moving from general AI chat into coding-agent workflows"],
+    workflow: ["Open the current Mistral chat or Vibe experience and check which features are available to your account.", "Describe the goal, audience and desired format, and attach only relevant files.", "For current facts, request web research and open the cited sources to verify them.", "Use connected tools only after reviewing the permissions and data they can access.", "For code tasks, inspect proposed file changes and commands, then run your own tests."],
+    considerations: ["Mistral is transitioning product naming from Le Chat to Vibe; feature names and entry points may change.", "Availability of agents, connectors and long-running tasks depends on plan and product surface.", "AI answers can be inaccurate; verify important claims and generated code.", "Review connected-app permissions and data handling before sharing sensitive information."],
+    sourceLabel: "Mistral official Vibe product overview",
+    sourceUrl: "https://mistral.ai/products/vibe/",
+    faq: [
+      { question: "Is Mistral Le Chat still called Le Chat?", answer: "Mistral's current product information describes Vibe for work as its AI chat assistant, formerly Le Chat, and Vibe for code as its coding agent. Older links and references may still use Le Chat." },
+      { question: "What can Mistral Vibe do?", answer: "Mistral describes chat and coding-agent workflows, with web search, task assistance and integrations. Exact features depend on the plan and product surface." }
+    ]
+  },
+  "character-ai": {
+    seoTitle: "Character.AI — Create Characters & AI Chats | Anjal AI",
+    overview: "Character.AI is a platform for conversations with user-created AI characters. Its character-creation guide explains how creators can set a character name, avatar, greeting, tags and visibility, then publish it for others to discover and chat with. Characters can be built around fictional personalities, role-play scenarios, learning exercises or interactive storytelling. The experience is designed for conversation and entertainment rather than as a source of verified factual advice.",
+    bestFor: ["Creating fictional characters with distinct personalities and greetings", "Interactive storytelling and role-play conversations", "Exploring community-created characters and scenarios", "Practicing dialogue, language or interview-style conversations", "Building a recurring character experience with tags and a recognizable profile"],
+    workflow: ["Choose a clear character concept, audience and intended conversation style.", "Write a specific description and greeting that establish the character's role and scenario.", "Add an avatar, tags and visibility settings, then preview the character before publishing.", "Test conversations with varied prompts and refine instructions where the character loses consistency.", "Review current platform rules and age-related safety settings before sharing a character."],
+    considerations: ["AI characters can invent facts and should not be treated as authoritative sources.", "Conversation quality and character consistency vary with prompts and model behavior.", "Platform safety rules, age requirements and feature availability can change.", "Avoid entering personal, confidential or sensitive information into role-play chats."],
+    sourceLabel: "Character.AI official character creation quickstart",
+    sourceUrl: "https://support.character.ai/hc/en-us/articles/50608869548699-2-Creating-a-Character-Quickstart-Guide-%CF%89",
+    faq: [
+      { question: "Can I create my own AI character?", answer: "Character.AI's quickstart describes creating a character by setting a name, avatar, greeting, tags and visibility, then publishing it." },
+      { question: "Is Character.AI intended for factual research?", answer: "Its core experience is character-based conversation and role-play. Verify factual claims independently rather than relying on a fictional character's responses." }
+    ]
+  },
+  "kimi": {
+    seoTitle: "Kimi AI — Web Search, Deep Research & AI Agents | Anjal AI",
+    overview: "Kimi is an AI assistant developed by Moonshot AI. Its current help materials describe web-connected search, deep thinking, multimodal document understanding and agent workflows for tasks such as research, document creation, spreadsheets and website building. Kimi can retrieve web sources, analyze supported files and use specialized tools in supported modes. Model choices, agent features, file limits and usage credits vary by product surface and account.",
+    bestFor: ["Researching current topics with web search and linked sources", "Summarizing long documents and supported office files", "Planning multi-step tasks with an AI agent", "Creating drafts, presentations and spreadsheet-style outputs", "Analyzing images, videos or charts in supported multimodal workflows"],
+    workflow: ["Choose regular chat, web-connected search or an agent mode based on the task.", "Provide a focused question and attach only the documents needed.", "For research, ask for source links and verify important claims in the original material.", "Break complex work into milestones and inspect generated documents or actions at each stage.", "Check the selected model, credits, file limits and privacy settings before larger tasks."],
+    considerations: ["Search and agent capabilities depend on the selected model, mode and account.", "Generated summaries and reports can omit context or misread source material.", "Credit usage, file limits and feature availability may change over time.", "Review any generated code, spreadsheet formulas or external actions before using the result."],
+    sourceLabel: "Kimi official overview and agentic search help",
+    sourceUrl: "https://www.kimi.ai/help/getting-started/overview",
+    faq: [
+      { question: "Can Kimi search the web?", answer: "Kimi's official help describes web-connected and agentic search that can retrieve current information and provide source links for verification." },
+      { question: "Can Kimi work with documents?", answer: "Kimi's help materials describe support for common office files and multimodal inputs. Check the current interface for supported formats and per-file limits." }
+    ]
+  },
+  "elicit": {
+    seoTitle: "Elicit AI — Research Agent & Literature Reviews | Anjal AI",
+    overview: "Elicit is an AI research assistant focused on academic literature and evidence synthesis. Its current help center describes a Research Agent for flexible research questions, Research Reports for structured topic overviews and a Systematic Review workflow for more controlled screening and data extraction. Elicit's documented corpus includes academic papers and clinical-trial records, and sessions can combine search results with user-uploaded documents. Systematic Review access and usage limits depend on the subscription plan.",
+    bestFor: ["Finding academic papers relevant to a research question", "Summarizing and comparing findings across studies", "Extracting structured details from research papers", "Preparing literature reviews and evidence tables", "Running a documented systematic-review workflow with explicit screening criteria"],
+    workflow: ["Turn the topic into a focused research question and define the population, intervention or concepts of interest.", "Choose a Research Agent session, Research Report or Systematic Review according to the level of control needed.", "Review the papers found and set clear inclusion and exclusion criteria.", "Check extracted methods, sample sizes and results against the original papers.", "Export the report and citations, then document limitations and missing evidence."],
+    considerations: ["AI extraction can misread methods, outcomes or statistical details; verify against each paper.", "Systematic Review workflows are limited to eligible paid plans and usage allowances.", "Coverage depends on the databases, accessible full text and search strategy.", "A generated literature review is a research aid, not a substitute for expert appraisal or a registered protocol."],
+    sourceLabel: "Elicit official workflow guide",
+    sourceUrl: "https://support.elicit.com/en/articles/14757543-getting-started-with-elicit-which-workflow-should-i-use",
+    faq: [
+      { question: "What is Elicit used for?", answer: "Elicit helps researchers search academic literature, summarize and extract information from papers, and prepare research reports or systematic reviews." },
+      { question: "Does Elicit support systematic reviews?", answer: "Yes. Its guided Systematic Review workflow covers gathering papers, screening, data extraction and report generation, with availability depending on plan." }
+    ]
+  },
+  "consensus": {
+    seoTitle: "Consensus AI — Search Scientific Research & Evidence | Anjal AI",
+    overview: "Consensus is an academic search and research platform that uses scholarly papers to answer research questions. Its help center describes semantic and keyword retrieval, AI summaries with citations, study comparisons, structured evidence tables and a Research Agent for multi-step searches. The Deep Review workflow can break a question into sub-questions, screen papers and synthesize a longer report. Consensus is designed to make research easier to explore, but users should still inspect the cited studies and assess their quality.",
+    bestFor: ["Searching peer-reviewed research using natural-language questions", "Finding papers and following citations to related studies", "Comparing methods, populations, sample sizes and outcomes", "Getting citation-backed summaries of evidence", "Preparing a deeper literature review with structured findings"],
+    workflow: ["Write a research question that specifies the population, topic, intervention or outcome.", "Choose a standard paper search, Pro analysis or Deep Review based on the depth required.", "Apply filters such as recency, study type, sample size or journal quality when relevant.", "Open cited papers and compare methods, limitations and conflicting findings.", "Export useful references and record the search scope and date for reproducibility."],
+    considerations: ["A citation-backed AI summary can still overstate or misinterpret a paper's findings.", "Search coverage and full-text availability vary by database and publication.", "Deep Review and other advanced workflows use plan-based allowances.", "Do not treat a consensus indicator as a substitute for evaluating study design, bias or clinical guidance."],
+    sourceLabel: "Consensus official research and Deep Review documentation",
+    sourceUrl: "https://help.consensus.app/en/articles/9922673-how-consensus-works",
+    faq: [
+      { question: "What does Consensus AI do?", answer: "Consensus searches scholarly literature and provides paper results, citation-backed summaries, study comparisons and research workflows." },
+      { question: "Can Consensus create a literature review?", answer: "Its Deep Review workflow performs multi-step searches and synthesizes relevant papers into a structured report. Review the cited studies before drawing conclusions." }
+    ]
+  },
+  "qwen": {
+    seoTitle: "Qwen AI — Multimodal Assistant & Open Models | Anjal AI",
+    overview: "Qwen is Alibaba's family of language and multimodal AI models, with chat experiences, developer APIs and open-weight releases. Alibaba's current materials describe capabilities across text generation, coding, reasoning, image and video understanding, audio, structured data and tool use. Qwen models can be accessed through the Qwen chat experience or integrated into applications through supported developer platforms. The available model, deployment method, license and features differ across releases.",
+    bestFor: ["Chatting, drafting, summarizing and translating text", "Analyzing supported images, videos and documents", "Coding, mathematics and structured-data tasks", "Building applications with model APIs and tool calling", "Evaluating open-weight models for local or customized deployment"],
+    workflow: ["Choose the Qwen chat product, API or model release that matches your task.", "Check the model card or official documentation for supported inputs, context limits and license.", "Provide clear instructions and representative examples for the desired output.", "For multimodal work, verify extracted information against the original image, video or document.", "For application deployment, evaluate quality, latency, security, cost and license obligations before launch."],
+    considerations: ["Qwen is a model family, not one fixed model; capabilities differ across versions and sizes.", "Some releases are open-weight while others are accessed through hosted services or APIs.", "Model outputs can be incorrect, biased or unsafe without suitable evaluation and controls.", "Review each model's license, data handling and deployment terms before commercial use."],
+    sourceLabel: "Alibaba official Qwen overview and Model Studio documentation",
+    sourceUrl: "https://www.alibabagroup.com/en-US/ai-governance/qwen",
+    faq: [
+      { question: "What is Qwen AI?", answer: "Qwen is Alibaba's family of language and multimodal models used for chat, content generation, reasoning, coding and other AI tasks." },
+      { question: "Can developers use Qwen in their own apps?", answer: "Alibaba provides Qwen access through official APIs and open-weight model releases. Check the exact model's availability, license and deployment requirements." }
+    ]
+  },
   "notebooklm": {
     seoTitle: "NotebookLM — AI Research, Notes & Audio Overviews | Anjal AI",
     overview: "NotebookLM is Google's AI research and learning assistant for working with a collection of sources you choose. Google's Gemini Notebook help materials describe support for sources such as Google Docs, Slides, PDFs, text and Markdown files, web pages, public YouTube URLs and audio. You can ask questions grounded in those materials, organize notes and create Audio Overviews that turn source material into a listenable discussion. Product naming and feature access may differ between consumer and Workspace experiences.",
@@ -853,6 +931,12 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "mistral-le-chat": "Explore Mistral Vibe, formerly Le Chat, for AI chat, web search, productivity and coding-agent workflows.",
+  "character-ai": "Explore Character.AI to create fictional AI characters, design greetings and build interactive role-play chats.",
+  "kimi": "Explore Kimi AI for web-connected search, deep research, document analysis and multi-step agent workflows.",
+  "elicit": "Explore Elicit's AI Research Agent for academic paper search, evidence extraction and literature review workflows.",
+  "consensus": "Explore Consensus AI for scholarly search, citation-backed answers, study comparisons and Deep Reviews.",
+  "qwen": "Explore Alibaba Qwen for multimodal AI chat, coding, reasoning, open models and developer APIs.",
   "notebooklm": "Explore NotebookLM for source-grounded research, document summaries, study notes and AI Audio Overviews.",
   "google-gemini": "Explore Google Gemini for AI assistance, research, file analysis and creating or editing documents and PDFs.",
   "meta-ai": "Explore Meta AI for chat, writing, image creation, deeper research and assistance across supported Meta apps.",
