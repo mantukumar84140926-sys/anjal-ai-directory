@@ -42,7 +42,7 @@ export const toolProfiles: Record<string, ToolProfile> = {
     ]
   },
   make: {
-    seoTitle: "Make — Visual Workflow Automation & AI | Anjal AI",
+    seoTitle: "Make.com — Workflow Automation & AI | Anjal AI",
     seoDescription: "Explore Make.com for visual workflow automation, app integrations, AI-powered scenarios and business process orchestration.",
     overview: "Make is a visual automation platform for connecting apps, data sources and AI models into repeatable workflows. Users can build scenarios with a drag-and-drop canvas, describe an automation in natural language, or start from an AI chat and refine the result visually. It is designed for individuals and teams that want to coordinate work across connected services without writing every integration from scratch.",
     bestFor: [
