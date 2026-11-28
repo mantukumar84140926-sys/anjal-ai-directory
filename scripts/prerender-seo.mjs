@@ -702,6 +702,84 @@ const curatedToolProfiles = {
 };
 
 Object.assign(curatedToolProfiles, {
+  "chatpdf": {
+    seoTitle: "ChatPDF — AI PDF Chat, Summary & Citations | Anjal AI",
+    overview: "ChatPDF is a document assistant for asking questions about PDFs and other supported files. It can summarize papers and reports, explain sections, translate document content and return answers with references that link back to the relevant pages. Users can organize files into folders and chat across multiple documents in one conversation, which is useful for comparing research papers, contracts or study materials. A side-by-side reader keeps the document visible while the conversation runs. ChatPDF is designed to help people navigate source material faster, not to replace reading or professional review of important documents.",
+    bestFor: ["Asking questions about research papers, reports and textbooks", "Summarizing long PDFs and locating specific details", "Comparing information across multiple documents in a folder", "Translating document content and asking questions in different languages", "Checking AI answers against linked page references"],
+    workflow: ["Upload a document or create a folder for a related set of files.", "Ask a focused question and specify the section, date range or evidence you need.", "Use the page references to open the original text and verify the answer.", "For comparisons, ask the same structured questions across the documents and keep each source distinct.", "Remove files you no longer need and review sharing permissions before creating shared links."],
+    considerations: ["Citations make checking easier but do not guarantee that a summary captures every qualification or exception.", "Tables, scanned pages, complex layouts and poor-quality OCR can affect extraction accuracy.", "Free and paid plans have different daily document, storage and usage allowances.", "Uploaded files may contain sensitive information; review the service's current privacy and deletion controls before uploading confidential documents."],
+    sourceLabel: "ChatPDF official product and FAQ",
+    sourceUrl: "https://www.chatpdf.com/",
+    faq: [
+      { question: "Can ChatPDF answer questions across multiple PDFs?", answer: "Yes. ChatPDF describes folders and multi-file chats that let users ask questions across a set of uploaded documents." },
+      { question: "Does ChatPDF show citations?", answer: "Yes. Its product information describes references that link answers to relevant parts of the source document so users can verify the context." }
+    ]
+  },
+  "askyourpdf": {
+    seoTitle: "AskYourPDF — AI PDF Reader & Document Chat | Anjal AI",
+    overview: "AskYourPDF is an AI document platform for reading, summarizing and extracting information from PDFs and other supported file types. Its document chat returns answers with references to the relevant page or paragraph, while multi-document workflows let users compare files and build a searchable knowledge base. The platform also describes OCR for scanned PDFs, table and chart analysis, data extraction, multilingual chat, PDF form filling, podcast-style audio and a website chatbot trained on approved content. Developer APIs and integrations extend document workflows into other applications.",
+    bestFor: ["Getting cited answers from research papers, contracts and business documents", "Summarizing and comparing multiple PDFs in a knowledge base", "Extracting structured information from tables, charts and reports", "Reading scanned documents with OCR on supported plans", "Building document chatbots or PDF workflows into other applications"],
+    workflow: ["Upload a document or connect an approved knowledge base of related files.", "Ask a precise question and specify whether you need a summary, clause, table or structured fields.", "Open the returned citations and confirm that each answer matches the source page.", "For extraction, define the output fields and check the results before exporting to a spreadsheet or database.", "For website or API use, test permissions, access boundaries and failure cases with non-sensitive sample files."],
+    considerations: ["OCR, page limits, multi-document chat and advanced extraction depend on the selected plan.", "AI may miss footnotes, table structure, legal qualifications or context across distant pages; verify critical results.", "Document uploads and website chatbots can expose private material if access rules are misconfigured.", "Do not treat a generated legal, financial or academic summary as professional advice or a substitute for the original source."],
+    sourceLabel: "AskYourPDF official product and document-chat guide",
+    sourceUrl: "https://askyourpdf.com/",
+    faq: [
+      { question: "Can AskYourPDF chat with more than one document?", answer: "Yes. AskYourPDF describes multi-document chat and knowledge bases for asking questions across a group of uploaded files." },
+      { question: "Does AskYourPDF support scanned PDFs?", answer: "It describes OCR support for scanned PDFs on eligible plans. Check the current plan limits and supported file sizes before uploading." }
+    ]
+  },
+  "humata": {
+    seoTitle: "Humata AI — PDF Assistant & Document Knowledge Base | Anjal AI",
+    overview: "Humata is an AI assistant for asking questions across uploaded files and shared document libraries. It is positioned as a knowledge-base tool for teams that need to summarize technical papers, compare documents and find answers without manually searching every page. Humata highlights cited links into source files, document embedding for websites and shared team spaces with access controls. This makes it useful for research groups and organizations that want a conversational layer over manuals, reports, policies or other internal documents.",
+    bestFor: ["Summarizing and comparing research papers and long reports", "Finding answers across a collection of uploaded documents", "Creating a searchable knowledge base for a team", "Embedding document Q&A on an internal or public webpage", "Tracing answers back to citations in source files"],
+    workflow: ["Create a workspace and upload a small, clearly organized set of documents.", "Ask a question that specifies the information you need and the source scope.", "Open the citations and compare the response with the original document text.", "Organize files into folders or team spaces and configure access for the intended users.", "For embedded or shared knowledge bases, test what unauthenticated and different-role users can access."],
+    considerations: ["Document answers can omit caveats or misread tables, charts and scanned pages; verify important details in the source.", "OCR, response personalization, permissions and other team features vary by plan.", "Shared libraries and embeds need careful access control to prevent unintended disclosure.", "Humata's page and answer allowances are plan-dependent and may change."],
+    sourceLabel: "Humata official product and security overview",
+    sourceUrl: "https://www.humata.ai/",
+    faq: [
+      { question: "What is Humata AI used for?", answer: "Humata helps users ask questions across uploaded documents, summarize files, compare information and retrieve answers with source citations." },
+      { question: "Can teams share a Humata knowledge base?", answer: "Humata describes shared team document spaces and embedded document Q&A. Available access controls depend on the plan and workspace configuration." }
+    ]
+  },
+  "pdf-ai": {
+    seoTitle: "PDF.ai — AI PDF Chat, Extraction & Document API | Anjal AI",
+    overview: "PDF.ai is a document AI platform for chatting with PDFs, summarizing files and building document-processing workflows. Its consumer interface lets users ask questions about uploaded files and, in supported workflows, query multiple documents together. For developers, PDF.ai documents APIs for parsing documents into Markdown or JSON, extracting structured fields, splitting files and asking questions against parsed documents. This makes it useful for both individual document review and applications that need to turn PDF content into searchable or structured data.",
+    bestFor: ["Asking questions and generating summaries from PDF files", "Searching across a collection of uploaded documents", "Extracting structured fields into JSON for downstream workflows", "Parsing PDFs with OCR and supported visual-model processing", "Integrating document Q&A into a product through APIs"],
+    workflow: ["Choose the browser interface for a one-off document or the API for an automated workflow.", "Upload the PDF and confirm that the correct document ID or parsed document set is being queried.", "Ask a focused question and request page references or structured fields where available.", "For extraction, define a schema and validate returned values against the original pages.", "Delete test documents and API credentials when no longer required, and review the service's data-handling terms."],
+    considerations: ["PDF.ai has separate API generations and endpoints; follow the documentation for the version being integrated.", "OCR and structured extraction can fail on low-quality scans, unusual tables or handwritten content.", "API credits, model choices, file limits and chat features can differ from the browser plan.", "Treat extracted legal, financial or compliance fields as drafts until checked against the original document."],
+    sourceLabel: "PDF.ai official product and API documentation",
+    sourceUrl: "https://api.pdf.ai/",
+    faq: [
+      { question: "Can PDF.ai extract structured data from a PDF?", answer: "Yes. Its API documentation describes parsing, extraction, splitting and question-answering endpoints, including structured JSON extraction." },
+      { question: "Can developers integrate PDF.ai into an application?", answer: "Yes. PDF.ai provides APIs for uploading, parsing and querying documents, with version-specific endpoints and usage limits." }
+    ]
+  },
+  "documind": {
+    seoTitle: "Documind — AI PDF Chat & Document Knowledge Base | Anjal AI",
+    overview: "Documind is an AI document assistant for chatting with PDFs, reviewing multiple files and turning document collections into a searchable knowledge base. Its product information describes cited answers, bulk document uploads, multilingual chat, summaries and content generation, plus the ability to create a chatbot trained on selected documents and share or embed it on a website. The Documind site also offers focused document utilities such as PDF summaries, question generation, notes and text extraction. This makes it useful for students, researchers and teams that need to retrieve information from their own files.",
+    bestFor: ["Asking questions across multiple PDFs and document collections", "Summarizing reports, textbooks and research papers", "Creating a chatbot trained on a selected set of documents", "Generating structured notes and questions from study materials", "Embedding document-based answers into a website or team workflow"],
+    workflow: ["Upload a small, relevant set of documents and organize them by topic or audience.", "Ask questions that make the expected source and output format clear.", "Check citations and compare the response with the original document pages.", "If creating a shared chatbot, test the public link and embed permissions before publishing.", "For study notes or question generation, review factual accuracy and adjust the output to match the learning objective."],
+    considerations: ["Document Q&A and summaries can miss nuance, table details or qualifications; verify important claims.", "Bulk upload, API access, file-size limits and team features depend on the plan.", "A public chatbot may reveal information from every document included in its knowledge base; keep sensitive files separate.", "The Documind name is also used by other services; confirm the official domain and product before signing in or uploading files."],
+    sourceLabel: "Documind official product overview",
+    sourceUrl: "https://www.documind.chat/",
+    faq: [
+      { question: "Can Documind chat with multiple PDFs?", answer: "Yes. Documind describes bulk document upload and conversations across several PDFs, with answers linked to source documents." },
+      { question: "Can I create a chatbot from my documents?", answer: "Documind describes creating a shareable chatbot trained on uploaded documents, with options to embed it on a website." }
+    ]
+  },
+  "doclime": {
+    seoTitle: "DocLime — AI PDF Chat & Document Research | Anjal AI",
+    overview: "DocLime is an AI document assistant focused on chatting with PDFs and understanding research papers, textbooks and legal documents. Its product information describes a conversational interface that analyzes uploaded files, answers questions with references and keeps the source document available in a PDF viewer. Users can navigate pages, search content and take notes while working through a document. This makes DocLime useful for readers who want to ask follow-up questions about a source while retaining a place to review and organize their own notes.",
+    bestFor: ["Asking questions about research papers, textbooks and legal documents", "Finding specific facts or explanations inside a PDF", "Reading and navigating documents alongside an AI chat", "Summarizing source material before deeper manual review", "Taking notes while researching a long document"],
+    workflow: ["Upload the PDF you want to understand and wait for the document analysis to finish.", "Ask one specific question at a time, naming the chapter, topic or concept if known.", "Check the answer against the relevant page in the PDF viewer.", "Use the notes area to record verified facts, questions and quotations with page references.", "Review the original document before using extracted information in an assignment, report or decision."],
+    considerations: ["AI summaries may omit exceptions, footnotes or important context; verify against the original PDF.", "Scanned pages, complex tables and low-quality source files can reduce extraction accuracy.", "The product's current feature set, upload limits and availability should be checked on its official site.", "Avoid uploading confidential or copyrighted documents unless you have permission and understand the provider's data policies."],
+    sourceLabel: "DocLime official product overview",
+    sourceUrl: "https://doclime.com/",
+    faq: [
+      { question: "What does DocLime do?", answer: "DocLime provides an AI chat interface for asking questions about uploaded PDFs, with a document viewer and note-taking workflow." },
+      { question: "Can DocLime help with research papers?", answer: "Yes. Its product information specifically describes using the service to understand research papers and other long documents through contextual Q&A." }
+    ]
+  },
   "descript": {
     seoTitle: "Descript — AI Audio & Video Editor | Anjal AI",
     overview: "Descript is an audio and video production editor built around transcription and text-based editing. Creators can record a screen, camera or remote interview, import existing media, edit the transcript to change the recording, remove filler words and retakes, improve speech, add captions and export clips. Its Underlord AI co-editor can help with editing tasks, while tools for voice regeneration, studio sound and visual refinement support a broader production workflow. Descript is useful for podcasts, interviews, tutorials, screen recordings and social clips where spoken content is the main structure.",
@@ -1279,6 +1357,12 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "chatpdf": "Explore ChatPDF for cited PDF answers, document summaries, multi-file chats and multilingual reading.",
+  "askyourpdf": "Explore AskYourPDF for cited document chat, OCR, multi-PDF research, data extraction and PDF workflows.",
+  "humata": "Explore Humata AI for cited document Q&A, research summaries and shared team knowledge bases.",
+  "pdf-ai": "Explore PDF.ai for PDF chat, structured extraction, OCR parsing and developer document APIs.",
+  "documind": "Explore Documind for multi-PDF chat, document summaries, study notes and shareable knowledge-base chatbots.",
+  "doclime": "Explore DocLime for AI PDF chat, research-paper Q&A, document navigation and note-taking.",
   "descript": "Explore Descript for transcript-based audio and video editing, recording, speech cleanup and AI-assisted production.",
   "adobe-podcast": "Explore Adobe Podcast for AI speech enhancement, podcast recording, transcription and browser-based audio editing.",
   "aiva": "Explore AIVA for AI music composition, customizable styles, audio and MIDI references, and plan-based licensing.",
