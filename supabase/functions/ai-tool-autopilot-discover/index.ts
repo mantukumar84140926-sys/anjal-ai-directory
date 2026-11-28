@@ -82,7 +82,7 @@ Deno.serve(async (req: Request) => {
   });
   const runStarted = new Date().toISOString();
   const runInsert = await supabase.from("ai_tool_discovery_runs").insert({
-    status: "running", started_at: runStarted, source_count: DEFAULT_FEEDS.length,
+    status: "running", run_started_at: runStarted, sources_checked: DEFAULT_FEEDS.length,
   }).select("id").single();
   const runId = runInsert.data?.id ?? null;
 
@@ -100,7 +100,7 @@ Deno.serve(async (req: Request) => {
         const slugBase = entry.title.toLowerCase().normalize("NFKD")
           .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 70);
         if (!slugBase) continue;
-        const { error } = await supabase.from("ai_tool_discoveries").upsert({
+        const { error } = await supabase.from("ai_tool_discoveries").insert({
           name: entry.title,
           slug: slugBase,
           official_url: url.toString(),
