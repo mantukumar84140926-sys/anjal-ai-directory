@@ -694,6 +694,84 @@ const curatedToolProfiles = {
 };
 
 Object.assign(curatedToolProfiles, {
+  "groq": {
+    seoTitle: "GroqCloud — Fast AI Inference & Model APIs | Anjal AI",
+    overview: "GroqCloud is a hosted AI inference platform for developers who want to run supported language, speech and vision models through APIs. The official console provides a model catalogue, API reference, quickstarts, SDK examples and integrations with common AI development frameworks. Its API is designed to work with familiar OpenAI-compatible client patterns, although compatibility is not identical for every feature. GroqCloud is not a general-purpose model directory or a place to run every public model: developers select from the provider's currently supported production and preview models, each with its own limits and lifecycle.",
+    bestFor: ["Adding fast hosted language-model inference to an application", "Prototyping chat, reasoning and tool-calling workflows", "Building speech-to-text features with supported audio models", "Connecting model APIs to frameworks such as AI SDK and LangChain", "Testing different supported models before production deployment"],
+    workflow: ["Create a GroqCloud account and generate an API key in the console.", "Store the key in a server-side environment variable; never expose it in browser code or a public repository.", "Choose a production model from the current model catalogue and review its context, modality and rate limits.", "Use the quickstart or an official SDK to send a small test request.", "Measure output quality, latency, throughput and cost with representative inputs before switching production traffic."],
+    considerations: ["The supported model list changes; preview models can be removed and should not be relied on for production.", "API limits and pricing vary by model and account tier.", "OpenAI-compatible request formats do not guarantee support for every OpenAI parameter or endpoint.", "Inputs and outputs are processed by the selected model provider; review model-specific terms and data handling before sending sensitive content."],
+    sourceLabel: "Groq official API quickstart and supported models",
+    sourceUrl: "https://console.groq.com/docs/quickstart",
+    faq: [
+      { question: "What is GroqCloud used for?", answer: "GroqCloud provides hosted inference APIs for supported language, speech and other models, so developers can add model capabilities to their own applications." },
+      { question: "Can I use the OpenAI SDK with Groq?", answer: "Groq documents an OpenAI-compatible API base URL and SDK examples. Check its compatibility guide because not every endpoint or parameter is necessarily supported." }
+    ]
+  },
+  "meta-llama": {
+    seoTitle: "Meta Llama — Open AI Models & Developer Resources | Anjal AI",
+    overview: "Meta Llama is a family of large language and multimodal models that developers can access through model downloads, supported hosting partners and related developer resources. The official Llama site provides model cards, setup and deployment guides, prompting and fine-tuning material, safety resources, and the license and acceptable-use terms for each release. Different generations and sizes target different hardware and application needs; newer releases may add image understanding or other modalities. Llama is a model ecosystem, not one single hosted chatbot, so users choose how and where to run a particular checkpoint.",
+    bestFor: ["Building chat assistants and language applications with Llama models", "Evaluating open-weight models for self-hosted or partner-hosted inference", "Adapting models with fine-tuning, quantization or prompting", "Developing multimodal applications with supported vision models", "Creating private or specialized AI systems with deployment control"],
+    workflow: ["Choose a specific Llama generation and model size based on task, hardware and context requirements.", "Read that model's model card, license and acceptable-use policy before downloading or deploying it.", "Select a supported hosting partner or prepare compatible local infrastructure.", "Use the official prompting and integration guidance, then evaluate quality and safety on representative tasks.", "Monitor version updates, model provenance and deployment performance after release."],
+    considerations: ["Llama is a family of releases; capabilities, context windows, modalities and hardware needs vary.", "The term open-weight does not mean every model has an unrestricted open-source license.", "Each generation has its own license and acceptable-use policy, which may impose conditions on distribution or commercial use.", "Self-hosting requires infrastructure, security, monitoring and responsible-use safeguards."],
+    sourceLabel: "Meta official Llama developer portal",
+    sourceUrl: "https://www.llama.com/",
+    faq: [
+      { question: "Is Meta Llama a chatbot?", answer: "Llama is a family of AI models. Developers and providers use these models to power chatbots, assistants and other applications." },
+      { question: "Can I run Llama models myself?", answer: "Many Llama releases are available as downloadable model weights or through hosting partners. Check the exact model's requirements, license and access conditions." }
+    ]
+  },
+  "cohere": {
+    seoTitle: "Cohere AI — Enterprise Models, RAG & Search | Anjal AI",
+    overview: "Cohere builds AI models and platform services for enterprise applications. Its product family includes Command models for chat, generation, tool use and retrieval-augmented generation; Embed models for semantic search and classification; Rerank models for improving the relevance order of search results; and document parsing capabilities for extracting structured information. Developers can access models through Cohere's hosted API or explore deployment options for enterprise environments. Cohere is especially relevant when an application needs more than text generation, such as retrieval pipelines that find and rank useful information from company documents.",
+    bestFor: ["Building enterprise chat assistants and RAG applications", "Improving search with semantic embeddings and reranking", "Extracting structured information from documents and PDFs", "Creating multilingual search and knowledge workflows", "Integrating language models into business applications through APIs"],
+    workflow: ["Map the task to the right capability: Command for generation, Embed for vector representations, Rerank for relevance ordering or Parse for document extraction.", "Review the current model documentation, supported languages, input limits and deployment options.", "Prepare a representative document set and a small evaluation query set.", "Build retrieval, generation and citation checks as separate stages, and measure whether results are grounded in source documents.", "Review data residency, access controls and deployment requirements before connecting private enterprise content."],
+    considerations: ["Cohere's models are specialized; one model endpoint does not replace the full retrieval and application architecture.", "Reranking improves ordering of retrieved results but cannot recover documents that the initial search never found.", "Model versions, context limits and API availability change; check the current documentation.", "Enterprise deployments and data-handling options depend on the selected product and contract."],
+    sourceLabel: "Cohere official platform and model documentation",
+    sourceUrl: "https://docs.cohere.com/docs/the-cohere-platform",
+    faq: [
+      { question: "What is Cohere used for?", answer: "Cohere provides language models and retrieval components for enterprise chat, RAG, semantic search, classification, reranking and document workflows." },
+      { question: "What is Cohere Rerank?", answer: "Rerank scores and reorders a set of documents by relevance to a query, helping search and RAG systems select more useful context." }
+    ]
+  },
+  "amazon-q": {
+    seoTitle: "Amazon Q — AWS AI Assistant for Work & Coding | Anjal AI",
+    overview: "Amazon Q is AWS's family of generative AI assistants for business and software-development workflows. Amazon Q Business is designed to help employees find and use information across connected enterprise content, subject to organizational permissions. Amazon Q Developer focuses on software work: it can explain code, suggest changes, generate tests, help diagnose issues and assist with AWS resources through supported IDE, command-line and console experiences. These products use AWS identity and governance controls, so setup and available features depend on the organization's AWS environment and subscription.",
+    bestFor: ["Asking questions across connected company knowledge in Amazon Q Business", "Getting code explanations, suggestions and test-generation help", "Planning and reviewing multi-file software changes", "Troubleshooting AWS services and cloud-development tasks", "Working with enterprise identity, access and governance controls"],
+    workflow: ["Identify whether the task belongs in Amazon Q Business or Amazon Q Developer.", "Sign in through the organization's approved AWS identity and check which data sources or developer tools are enabled.", "Ask a specific question and provide only the context needed for the task.", "For code changes, inspect the proposed plan and diff, run tests and review security implications before accepting.", "Check AWS service notices and current documentation before standardizing on a particular IDE plugin or workflow."],
+    considerations: ["Amazon Q Business and Amazon Q Developer are distinct products with different use cases and permissions.", "AWS has announced that support for Amazon Q Developer IDE plugins will end on April 30, 2027; organizations should review AWS's migration guidance before adopting those plugins for long-term workflows.", "Responses and code suggestions can be incorrect; review outputs and run tests.", "Access to enterprise data is governed by connected data sources, identity configuration and organizational permissions."],
+    sourceLabel: "AWS official Amazon Q documentation and lifecycle notice",
+    sourceUrl: "https://aws.amazon.com/documentation-overview/q-developer/",
+    faq: [
+      { question: "What is the difference between Amazon Q Business and Developer?", answer: "Amazon Q Business helps users work with enterprise information, while Amazon Q Developer focuses on software development and AWS-related engineering tasks." },
+      { question: "Is Amazon Q Developer IDE support changing?", answer: "AWS currently lists April 30, 2027 as the end-of-support date for Amazon Q Developer IDE plugins. Check AWS's current migration guidance before planning a long-term IDE workflow." }
+    ]
+  },
+  "ibm-watsonx": {
+    seoTitle: "IBM watsonx — Enterprise AI Platform & Models | Anjal AI",
+    overview: "IBM watsonx is an enterprise AI and data platform made up of connected products for building AI applications, governing models and managing data. watsonx.ai provides tools to build, customize, evaluate and deploy AI applications and models. watsonx.governance focuses on AI risk management, oversight and compliance workflows, while watsonx.data supports data infrastructure for analytics and AI. The platform is aimed at organizations that need to connect generative AI with enterprise knowledge, existing systems and governance processes rather than simply use a consumer chat assistant.",
+    bestFor: ["Building and deploying enterprise generative AI applications", "Experimenting with foundation models and retrieval workflows", "Connecting AI applications to enterprise data", "Evaluating model behavior and managing AI governance", "Planning hybrid or controlled enterprise AI deployments"],
+    workflow: ["Identify the business process and data sources the AI solution must support.", "Choose the relevant watsonx product: watsonx.ai for AI application development, watsonx.governance for oversight or watsonx.data for data management.", "Evaluate available foundation models and retrieval approaches against real business tasks.", "Set up access controls, evaluation criteria and governance checks before connecting sensitive information.", "Pilot the workflow with a limited user group, monitor performance and document operational responsibilities."],
+    considerations: ["watsonx is a product family; capabilities and pricing differ by service, region and deployment model.", "Enterprise deployment may require architecture, security, data and governance planning.", "AI-generated answers and model evaluations need human review for high-impact decisions.", "Check current IBM service documentation for regional availability, integrations and contractual data-handling terms."],
+    sourceLabel: "IBM official watsonx platform overview",
+    sourceUrl: "https://cloud.ibm.com/watsonx/overview",
+    faq: [
+      { question: "What is IBM watsonx used for?", answer: "IBM watsonx provides enterprise tools for building AI applications, working with data and governing AI models and workflows." },
+      { question: "Is watsonx a single AI model?", answer: "No. watsonx is a platform family that includes AI application development, governance and data products, with access to multiple models and deployment options." }
+    ]
+  },
+  "manus": {
+    seoTitle: "Manus AI — Autonomous Agent for Research & Work | Anjal AI",
+    overview: "Manus is an AI agent platform designed to carry out multi-step digital work rather than only answer a single chat prompt. Its current feature catalogue includes web research, browser operation, cloud-computer tasks, recurring automations, app and website creation, slides, design and media workflows, plus integrations with services such as GitHub, Google Drive, Gmail and project-management tools. The platform organizes work around projects and agent skills so users can provide context and delegate a task. Because an agent may browse, create files or interact with connected services, its permissions and intermediate actions should be reviewed.",
+    bestFor: ["Delegating multi-step web research and information gathering", "Creating drafts, slides, websites and other digital deliverables", "Automating repeatable tasks across connected apps", "Working with browser and cloud-computer workflows", "Keeping project context and reusable task skills organized"],
+    workflow: ["Describe the outcome, audience, constraints and definition of done in one clear task brief.", "Attach or connect only the files and apps required for the work.", "Break high-impact work into milestones and ask Manus to report its plan before taking consequential actions.", "Review sources, generated files and any browser or connected-app actions as the task progresses.", "Verify the final deliverable and revoke or narrow integrations that are no longer needed."],
+    considerations: ["Agent results can be incomplete or incorrect; verify research, calculations, files and generated code.", "Connected apps and browser actions can expose or modify data, so review permissions and approval settings.", "Usage limits, model choices and feature access vary by plan and can change.", "Do not delegate payments, publishing, account changes or other consequential actions without reviewing the exact action and its effects."],
+    sourceLabel: "Manus official feature catalogue",
+    sourceUrl: "https://www.manus.im/features",
+    faq: [
+      { question: "What makes Manus different from a chatbot?", answer: "Manus is designed for multi-step agent workflows such as research, browser tasks, creating deliverables and automating work across connected services." },
+      { question: "Can Manus connect to other apps?", answer: "Its feature catalogue lists integrations including GitHub, Google Drive, Gmail and other services. Available connections and permissions depend on the account and setup." }
+    ]
+  },
   "ideogram": {
     seoTitle: "Ideogram AI — Image Generation & Design Tools | Anjal AI",
     overview: "Ideogram is an AI image and design platform for creating visuals from text prompts and reference images, then refining them with editing tools. Its official documentation highlights text rendering for posters and graphics, image generation, reference-guided editing, inpainting, transparent backgrounds, editable text layers and upscaling. Studio supports layered design work, while APIs and integrations provide options for developers and repeatable production workflows. The platform also offers video creation tools, so users should select the correct image or video workflow before generating.",
@@ -1009,6 +1087,12 @@ Object.assign(curatedToolProfiles, {
 });
 
 const profileDescriptions = {
+  "groq": "Explore GroqCloud for hosted AI inference, supported models, developer APIs and fast application workflows.",
+  "meta-llama": "Explore Meta Llama models, developer guides, deployment options, model cards and license information.",
+  "cohere": "Explore Cohere AI models for enterprise chat, retrieval-augmented generation, embeddings, reranking and document parsing.",
+  "amazon-q": "Explore Amazon Q Business and Developer for enterprise knowledge, software development and AWS workflows.",
+  "ibm-watsonx": "Explore IBM watsonx for enterprise AI application development, data workflows and model governance.",
+  "manus": "Explore Manus AI for multi-step research, browser tasks, app creation, automations and connected workflows.",
   "ideogram": "Explore Ideogram AI for text-rich images, posters, reference editing, transparent assets and design workflows.",
   "adobe-firefly": "Explore Adobe Firefly for AI image, video, audio and vector creation with integrated creative editing tools.",
   "leonardo-ai": "Explore Leonardo AI for image generation, reference guidance, Canvas editing, upscaling and creative workflows.",
