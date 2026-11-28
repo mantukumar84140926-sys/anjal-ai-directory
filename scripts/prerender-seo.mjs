@@ -734,7 +734,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "pika": {
-    seoTitle: "Pika AI — Video Generator, Editing & Creative Studio | Anjal AI",
+    seoTitle: "Pika AI — Video Generator & Creative Studio | Anjal AI",
     overview: "Pika is an AI creative platform for generating and editing videos, images and sound. Its workspace combines Video Studio with focused apps for extending footage, changing colors and lighting, editing images, creating product shots and building reusable characters. Pika also offers model and app choices for workflows such as text-to-video, image-to-video, keyframe animation, effects and soundtrack generation. The platform has expanded beyond a single video model, so users should select the specific app and model that match the intended result.",
     bestFor: ["Creating short social videos from prompts or reference images", "Animating between still images with ordered keyframes", "Applying creative effects or modifying objects in existing clips", "Building reusable characters and product visuals", "Adding generated sound, speech or music to a video workflow"],
     workflow: ["Choose Video Studio or a focused app such as Pikaframes, Extend Video, Color Grade or Pika Soundtrack.", "Add a concise prompt and upload only reference media you have rights to use.", "Select a model and inspect its supported duration, resolution and credit cost.", "Generate a draft, then refine motion, timing, visual consistency and sound in the relevant tools.", "Review the final clip and confirm the subscription's commercial-use terms before using it for a client or business."],
@@ -760,7 +760,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "luma-dream-machine": {
-    seoTitle: "Luma AI — Ray Video Generation & Creative Workflows | Anjal AI",
+    seoTitle: "Luma AI — Ray Video Generation & Editing | Anjal AI",
     overview: "Luma is a multimodal creative platform whose current video model family is Ray. Luma's official product information identifies Ray3.2 as its current video model and describes text-to-video, image-to-video, video modification and reframing workflows. Ray3.2 adds multi-keyframe direction, motion and performance tracking, and production-oriented HDR and EXR outputs for professional post-production. The consumer creative workspace and developer API provide different ways to access the models, with credits and available features varying by product and plan. Dream Machine is an older product name and should not be confused with the current Ray model family.",
     bestFor: ["Creating directed video clips from text or image references", "Controlling action and camera progression with multiple keyframes", "Modifying existing footage while retaining parts of the original performance", "Reframing clips for different aspect ratios and delivery formats", "Producing HDR and EXR assets for professional color grading and VFX pipelines"],
     workflow: ["Open the current Luma creative workspace or API and choose the Ray model available to your account.", "Plan the shot with a clear action, camera direction, subject continuity and desired ending.", "Use keyframes or reference footage to guide important moments and transformations.", "For existing footage, choose a modification or reframing workflow and specify what must remain unchanged.", "Review the clip in an editing application and confirm output format, credits and license before delivery."],
@@ -773,7 +773,7 @@ Object.assign(curatedToolProfiles, {
     ]
   },
   "sora": {
-    seoTitle: "Sora AI Discontinued — Official Status & Alternatives | Anjal AI",
+    seoTitle: "Sora Discontinued — Status & Alternatives | Anjal AI",
     overview: "Sora was OpenAI's video-generation product for creating clips from text and visual inputs. It is no longer available: OpenAI's official discontinuation notice states that the Sora web and app experiences ended on April 26, 2026, and the Sora API ended on September 24, 2026. This Anjal AI page is retained as a status reference, not as a recommendation to sign up or generate new videos with Sora. Creators looking for current video-generation workflows can compare active alternatives such as Google Veo, Kling AI, Pika and Luma.",
     bestFor: ["Checking the official discontinuation status of Sora", "Understanding the dates when Sora web, app and API access ended", "Finding current video-generation alternatives in the Anjal AI directory", "Reviewing OpenAI's guidance for exporting existing Sora content"],
     workflow: ["Read OpenAI's official discontinuation notice before following older Sora tutorials or links.", "If you previously created Sora content, follow the official export instructions while the export option is available.", "For new video projects, compare current tools such as Google Veo, Kling AI, Pika and Luma.", "Check each alternative's current model, access, credit limits and commercial terms before starting.", "Treat older Sora feature guides and API examples as historical rather than current instructions."],
