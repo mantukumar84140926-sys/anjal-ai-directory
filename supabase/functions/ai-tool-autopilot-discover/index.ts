@@ -158,7 +158,7 @@ Deno.serve(async (req: Request) => {
           continue;
         }
 
-        const { data, error } = await supabase.from("ai_tool_discoveries").insert({
+        const { data, error } = await supabase.from("ai_tool_discoveries").upsert({
           name: entry.title,
           slug,
           official_url: url.toString(),
